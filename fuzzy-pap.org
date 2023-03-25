@@ -1,0 +1,52 @@
+# Theorems/Lemmas/Definition headers
+#+LATEX_HEADER: \theoremstyle{definition}
+#+LATEX_HEADER: \newtheorem{definition}{Definition}[section]
+
+* Preliminaries
+
+** Mixed Interger Linear Program
+A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
+set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
+constraints [[cite:&chen-2010-applied]]. Given an objective function $J$, decision variables (i.e. variables of
+optimization) $x_j \in \mathbb{R}$ and $y_k = \in \mathbb{Z}^+$, and input parameters $c_j, d_k, a_{ij}, g_{ik}, b_i \in \mathbb{R}$, a MILP has the
+mathematical structure represented in autoref:eq:milp-structure [[cite:&chen-2010-applied]].
+
+#+name: eq:milp-structure
+\begin{equation}
+\begin{array}{lll}
+\text{Maximize}   & J = \sum_j c_j x_j + \sum_k d_k y_k            &                 \\
+\text{subject to} & \sum_j a_{ij} x_j + \sum_k g_{ik} y_k  \le b_i & (i = 1,2,...,m) \\
+                  & x_j \ge 0                                      & (j = 1,2,...,n) \\
+                  & y_k \in \mathbb{Z^+}0                          & (k = 1,2,...,n) \\
+\end{array}
+\end{equation}
+
+This formulation of the MILP is also referred to as crisp. By this it is meant that each variable in the formulation
+acts as an injective mapping to its number representation. In other words, no values on the formulation are fuzzy
+[[cite:&kaur-2016-introd-fuzzy]].
+
+** Fuzzy Sets and LR Fuzzy Numbers
+This section introduces the notion of fuzzy numbers and some basic definitions. Let's begin with what a fuzzy number is
+not. A classical (crisp) set is defined as a collection of elements $x \in X$. Each element either belongs in the set, or
+it does not [[cite:&zimmermann-2001-fuzzy-set]]. For a fuzzy set, what is known as the characteristic functions applies
+various degrees of membership for elements of a given set [[cite:&zimmermann-2001-fuzzy-set]].
+
+#+begin_src latex
+  \begin{definition}
+  Let $X$ be a collection of objects denoted generically by $x$, then a fuzzy set $\tilde{A}$ in $X$ is a set of ordered
+  pairs
+
+  \begin{equation}
+  \tilde{A} = \{(x, \mu_{\tilde{A}}(x))| x\in X\}
+  \end{equation}
+
+  \noindent
+  $\mu_{\tilde{A}}$ is called the membership function where $\mu_{\tilde{A}}$ is the mapping $\mu_{\tilde{A}} : X
+  \rightarrow [0,1]$; which assigns a real number to the interval $[0,1]$. The value of $\mu_{\tilde{A}}$ represents the
+  degree of membership of $x$ in $\tilde{A}$.
+  \end{definition}
+#+end_src
+
+# Bibliography
+bibliographystyle:acm
+bibliography:~/Documents/literature/ref.bib,~/Documents/library/ref.bib
