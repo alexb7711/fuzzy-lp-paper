@@ -1,18 +1,67 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{bello-2019-fuzzy-activ}
+Marilyn Bello, Gonzalo N{\'a}poles, Ivett Fuentes, Isel Grau, Rafael Falcon,
+  Rafael Bello, and Koen Vanhoof.
+\newblock {\em Fuzzy Activation of Rough Cognitive Ensembles Using OWA
+  Operators}, pages 317--335.
+\newblock Uncertainty Management with Fuzzy and Rough Sets. Springer
+  International Publishing, 2019.
 
 \bibitem{chen-2010-applied}
-{\sc Chen, D.-S., Batson, R.~G., and Dang, Y.}
+Der-San Chen, Robert~G Batson, and Yu~Dang.
 \newblock {\em Applied integer programming}.
 \newblock Wiley, 2010.
 
+\bibitem{das-2016-mathem-model}
+Sapan~Kumar Das, T.~Mandal, and S.~A. Edalatpanah.
+\newblock A mathematical model for solving fully fuzzy linear programming
+  problem with trapezoidal fuzzy numbers.
+\newblock {\em Applied Intelligence}, 46(3):509--519, 2016.
+
+\bibitem{ebrahimnejad-2016-new-method}
+Ali Ebrahimnejad.
+\newblock New method for solving fuzzy transportation problems with lr flat
+  fuzzy numbers.
+\newblock {\em Information Sciences}, 357(nil):108--124, 2016.
+
+\bibitem{jimenez-2007-linear-progr}
+Mariano Jim{\'e}nez, Mar Arenas, Amelia Bilbao, and M.~Victoria Rodrı´guez.
+\newblock Linear programming with fuzzy parameters: an interactive method
+  resolution.
+\newblock {\em European Journal of Operational Research}, 177(3):1599--1609,
+  2007.
+
 \bibitem{kaur-2016-introd-fuzzy}
-{\sc Kaur, J., and Kumar, A.}
+Jagdeep Kaur and Amit Kumar.
 \newblock {\em An Introduction to Fuzzy Linear Programming Problems}.
 \newblock Studies in Fuzziness and Soft Computing. Springer International
   Publishing, 2016.
 
+\bibitem{nasseri-2013-fully}
+SH~Nasseri, E~Behmanesh, F~Taleshian, M~Abdolalipoor, and NEZHAD~NA TAGHI.
+\newblock Fully fuzzy linear programming with inequality constraints.
+\newblock {\em INTERNATIONAL JOURNAL OF INDUSTRIAL MATHEMATICS}, 2013.
+
+\bibitem{vanderbei-2020-linear-progr}
+Robert~J. Vanderbei.
+\newblock {\em Linear Programming}.
+\newblock International Series in Operations Research &amp; Management Science.
+  Springer International Publishing, 2020.
+
+\bibitem{yager-1981-proced-order}
+Ronald~R. Yager.
+\newblock A procedure for ordering fuzzy subsets of the unit interval.
+\newblock {\em Information Sciences}, 24(2):143--161, 1981.
+
+\bibitem{yaghobi-2014-compar-fuzzy}
+M.~Yaghobi, M.~Rabbani, M.~Adabitabar Firozja, and J.~Vahidi.
+\newblock Comparison of fuzzy numbers with ranking fuzzy and real number.
+\newblock {\em Journal of Mathematics and Computer Science}, 12(01):65--72,
+  2014.
+
 \bibitem{zimmermann-2001-fuzzy-set}
-{\sc Zimmermann, H.-J.}
+H.-J. Zimmermann.
 \newblock {\em Fuzzy Set Theory-and Its Applications}.
 \newblock []. Springer Netherlands, 2001.
 

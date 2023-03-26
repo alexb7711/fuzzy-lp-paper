@@ -8,8 +8,7 @@
 #+LATEX_HEADER: \newtheorem{definition}{Definition}[section]
 
 * Preliminaries
-
-** Mixed Interger Linear Program
+** Mixed Integer Linear Program
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
 set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
 constraints [[cite:&chen-2010-applied]]. Given an objective function $J$, decision variables (i.e. variables of
@@ -96,12 +95,14 @@ The triangular fuzzy number $\tilde{A}$ is nonnegative $\iff\; a \ge 0$.
 
 *** Fuzzy Arithmetic
 If two triangular fuzzy numbers $\tilde{a}_1 = \{a_1, a_2, a_3\}$ and $\tilde{b}_1 = \{b_1, b_2, b_3\}$ are nonnegative
-then the following operations are defined
+then the following operations are defined in autoref:eq:fuzzy-arithmetic.
 
+#+name: eq:fuzzy-arithmetic
 \begin{equation}
 \begin{array}{lcl}
 \tilde{a} \oplus \tilde{b} & = & (a_1 + b_1, a_2 + b_2, a_3 + b_3) \\
 \tilde{a} \ominus \tilde{b} & = & (a_1 + b_3, a_2 + b_2, a_3 + b_1) \\
+\tilde{a} \otimes \tilde{b} & = & (a_1 b_1, a_2 b_2, a_3 b_3) \\
 \end{array}
 \end{equation}
 
@@ -109,8 +110,10 @@ then the following operations are defined
 Fuzzy numbers do not directly provide a method of ordering nor do they always provide an ordered set like real numbers
 [[cite:&bello-2019-fuzzy-activ]]. There are multiple methods for ordering fuzzy numbers, each coming with advantages and
 disadvantages. Different properties have been applied to justify comparison of fuzzy numbers, such as: preference,
-rationality, and robustness [[cite:&jimenez-2007-linear-progr;&bello-2019-fuzzy-activ;&kaur-2016-introd-fuzzy]]. Commonly,
-including in this work, the First index of Yager [[cite:&yager-1981-proced-order]] is used (autoref:eq:first-index-yager).
+rationality, and robustness [[cite:&jimenez-2007-linear-progr;&bello-2019-fuzzy-activ;&kaur-2016-introd-fuzzy]]. These
+methods are commonly known as ranking functions or ordering functions
+[[cite:&bello-2019-fuzzy-activ;&das-2016-mathem-model;&kaur-2016-introd-fuzzy]]. Commonly, including in this work, the First
+index of Yager [[cite:&yager-1981-proced-order]] is used (autoref:eq:first-index-yager).
 
 #+name: eq:first-index-yager
 \begin{equation}
@@ -121,10 +124,77 @@ including in this work, the First index of Yager [[cite:&yager-1981-proced-order
 where $|\cdot|$ represents the cardinality of the fuzzy number. In words, autoref:eq:first-index-yager is merely the average
 of the values in the fuzzy number.
 
+** Fully Fuzzy Linear Programming
+Much like the MILP, fully fuzzy linear programs (FFLP) it is a class of constrained optimization in which one seeks to
+find a set of continuous variables that either maximizes or minimizes an objective function, $J$, while satisfying a set
+of constraints. The key difference in FFLP is that it is designed to accommodate imprecise information
+[[cite:&bello-2019-fuzzy-activ;&kaur-2016-introd-fuzzy]]. In FFLP, the parameters and decision variables are fuzzy and
+linear. A general FFLP is represented as shown in autoref:eq:general-fflp. The subscripts $\cdot_e$, $\cdot_l$, and $\cdot_g$
+indicate to equality, less than, and greater than constraints, respectively.
+
+#+name: eq:general-fflp
+\begin{equation}
+\begin{array}{lll}
+\text{Maximize}   & J = \sum_j \tilde{C}_j\tilde{X}_j              &                 \\
+\text{subject to} & \sum_j \tilde{a}_{ej} \otimes \tilde{x}_j = \tilde{b}_e &  \forall e = 1,2,3,... \\
+                  & \sum_j \tilde{a}_{lj} \otimes \tilde{x}_j \le \tilde{b}_l &  \forall l = 1,2,3,... \\
+                  & \sum_j \tilde{a}_{gj} \otimes \tilde{x}_j \ge \tilde{b}_l &  \forall g = 1,2,3,...
+\end{array}
+\end{equation}
+
+There are many methods of solving FFLP
+[[cite:&bello-2019-fuzzy-activ;&kaur-2016-introd-fuzzy;&ebrahimnejad-2016-new-method;&nasseri-2013-fully]]; however, most
+solution methods convert the fuzzy model into a crisp model that can be solved using traditional methods
+[[cite:&bello-2019-fuzzy-activ]]. In [[cite:&nasseri-2013-fully;&bello-2019-fuzzy-activ]], the method of converting the FFLP
+into a crisp MILP is simply by applying the ranking function to the objective function and breaking the constraints down
+into a set of crisp constraints as shown in autoref:eq:nasseri-solution. The constraints are separated according to the
+definition of fuzzy set multiplication defined in autoref:eq:fuzzy-arithmetic. The fuzzy number index is represented is
+the exponent rather than the subscript to clearly distinguish between the indexed value in the fuzzy number and the
+constraint index (i.e. $\tilde{A} = (a^1,a^2,a^3)$).
+
+#+name: eq:nasseri-solution
+\begin{equation}
+\begin{array}{lll}
+\text{Maximize}   & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3)(x_j^1,x_j^2,x_j^3)\Big) &\\
+\text{subject to} & \sum_j a_{ej}^1 x_j^1 = b_e^1 &  \forall e = 1,2,3,... \\
+                  & \sum_j a_{lj}^1 x_j^1 \le b_l^1 &  \forall l = 1,2,3,... \\
+                  & \sum_j a_{gj}^1 x_j^1 \ge b_l^1  &  \forall g = 1,2,3,... \\
+                  & \sum_j a_{ej}^2 x_j^2 = b_e^2 &  \forall e = 1,2,3,... \\
+                  & \sum_j a_{lj}^2 x_j^2 \le b_l^2 &  \forall l = 1,2,3,... \\
+                  & \sum_j a_{gj}^2 x_j^2 \ge b_l^2  &  \forall g = 1,2,3,... \\
+                  & \sum_j a_{ej}^3 x_j^3 = b_e^3 &  \forall e = 1,2,3,... \\
+                  & \sum_j a_{lj}^3 x_j^3 \le b_l^3 &  \forall l = 1,2,3,... \\
+                  & \sum_j a_{gj}^3 x_j^3 \ge b_l^3  &  \forall g = 1,2,3,... \\
+                  & x_j^2 - x_j^1 \ge 0         & x_j^3 - x_j^2 \ge 0 \\
+\end{array}
+\end{equation}
+
+\noindent
+To be more succinct, the FFLP can also equivalently be written as autoref:eq:nasseri-solution-condensed.
+
+#+name: eq:nasseri-solution-condensed
+\begin{equation}
+\begin{array}{lll}
+\text{Maximize}   & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3)(x_j^1,x_j^2,x_j^3)\Big) &\\
+\text{subject to} & \sum_j a_{ej}^k x_j^k = b_e^k &  \forall e = 1,2,3,... \\
+                  & \sum_j a_{lj}^k x_j^k \le b_l^k &  \forall l = 1,2,3,... \\
+                  & \sum_j a_{gj}^k x_j^k \ge b_l^k  &  \forall g = 1,2,3,... \\
+                  & x_j^2 - x_j^1 \ge 0         & x_j^3 - x_j^2 \ge 0 \\
+                  & \forall k \in \{1,2,...\}        &                  \\
+\end{array}
+\end{equation}
+
+Where $k$ has a max value equal to the cardinality to the type of fuzzy number being utilized. This can be further be
+elaborated on by rewriting the inequality constraints as equality constraints by introducing slack as equality
+constraints by introducing slack as equality constraints by introducing slack variables. This is useful as it
+represents the formulation in a standard form [[cite:&chen-2010-applied;&vanderbei-2020-linear-progr]]. It also has the
+slightly less useful benefit of providing the solver a set of equations called a hyperplane [[cite:&chen-2010-applied]].
+
+The given method is called the Kumar and Kaurs method. Generally speaking, it is designed to solve FFLP problems with
+inequality constraints having LR flat fuzzy numbers.
+
 # Bibliography
 bibliographystyle:plain
 bibliography:~/Documents/literature/ref.bib,~/Documents/library/ref.bib
 
-#  LocalWords:  Yager
-
-** Fully Fuzzy Linear Programming (FFLP)
+#  LocalWords:  Yager MILP FFLP hyperplane
