@@ -68,13 +68,13 @@ defined as autoref:eq:triangular-fuzzy-number.
   \begin{cases}
     \frac{(x-a)}{(b-a)} & a \le x \le b \\
     \frac{(d-x)}{(d-b)} & c \le x \le d \\
-    0                   & \text{else}
+    0                   & \text{otherwise}
   \end{cases}
 \end{equation}
 #+end_definition
 
 #+begin_definition
-The fuzzy set $tilte{A}$ in $\mathbb{R}$ is normal if $\text{max}_x \mu_{\tilde{A}}(x) = 1$.
+The fuzzy set $tilde{A}$ in $\mathbb{R}$ is normal if $\text{max}_x \mu_{\tilde{A}}(x) = 1$.
 #+end_definition
 
 #+begin_definition
@@ -93,6 +93,41 @@ A fuzzy number is a normal convex fuzzy set in $\mathbb{R}$.
 The triangular fuzzy number $\tilde{A}$ is nonnegative $\iff\; a \ge 0$.
 #+end_definition
 
+A more general definition of fuzzy numbers is known as LR fuzzy numbers
+[[cite:&kaur-2016-introd-fuzzy;&zimmermann-2001-fuzzy-set]].
+
+#+begin_definition
+A function $L:[0,\infty] \rightarrow [0,1]$ (or $R:[0,\infty] \rightarrow [0,1]$) is said to be reference a function of the fuzzy number if and only
+if
+
+1. $L(0) = 1$ (or $R(0) = 1$)
+2. $L$ (or $R$) is non-increasing on $[0,\infty)$
+#+end_definition
+
+#+begin_definition
+A fuzzy number $\tidle{A}$ defined on the let of real numbers, $\mathbb{R}$, denoted as $(m,n,\alpha,\beta)_{LR}$, is said to be an $LR$
+flat fuzzy number if its membership function $\mu_{tilde{A}}(x)$ is defined as
+
+\begin{equation}
+\mu_{tilde{A}}(x) =
+\begin{cases}
+L(\frac{m-x}{\alpha}) & x \le m, \alpha > 0 \\
+R(\frac{m-n}{\beta}) & x \ge m, \beta > 0 \\
+1                & m \le x \le n
+\end{cases}
+\end{equation}
+#+end_definition
+
+#+begin_definition
+An $LR$ flat fuzzy number $\tilde{A} = (m,n,\alpha,\beta)_{LR}$ is said to be a non-negative $LR$ flat fuzzy number if and only
+if $m-\alpha \ge 0$ and is said to be non-positive $LR$ flat fuzzy number if and only if $m - \alpha \le 0$ is a real number.
+#+end_definition
+
+#+begin_definition
+An $LR$ flat fuzzy number $\tilde{A} = (m,n,\alpha,\beta)_{LR}$ is said to be an unrestricted $LR$ flat fuzzy number if and only
+if $m - \alpha$ is a real number.
+#+end_definition
+
 *** Fuzzy Arithmetic
 If two triangular fuzzy numbers $\tilde{a}_1 = \{a_1, a_2, a_3\}$ and $\tilde{b}_1 = \{b_1, b_2, b_3\}$ are nonnegative
 then the following operations are defined in autoref:eq:fuzzy-arithmetic.
@@ -102,7 +137,7 @@ then the following operations are defined in autoref:eq:fuzzy-arithmetic.
 \begin{array}{lcl}
 \tilde{a} \oplus \tilde{b} & = & (a_1 + b_1, a_2 + b_2, a_3 + b_3) \\
 \tilde{a} \ominus \tilde{b} & = & (a_1 + b_3, a_2 + b_2, a_3 + b_1) \\
-\tilde{a} \otimes \tilde{b} & = & (a_1 b_1, a_2 b_2, a_3 b_3) \\
+\tilde{a} \otimes \tilde{b} & = & (a_1 b_1, a_2 b_2, a_3 b_3)       \\
 \end{array}
 \end{equation}
 
@@ -135,7 +170,7 @@ indicate to equality, less than, and greater than constraints, respectively.
 #+name: eq:general-fflp
 \begin{equation}
 \begin{array}{lll}
-\text{Maximize}   & J = \sum_j \tilde{C}_j\tilde{X}_j              &                 \\
+\text{Maximize}   & J = \sum_j \tilde{C}_j \otimes \tilde{X}_j              &                 \\
 \text{subject to} & \sum_j \tilde{a}_{ej} \otimes \tilde{x}_j = \tilde{b}_e &  \forall e = 1,2,3,... \\
                   & \sum_j \tilde{a}_{lj} \otimes \tilde{x}_j \le \tilde{b}_l &  \forall l = 1,2,3,... \\
                   & \sum_j \tilde{a}_{gj} \otimes \tilde{x}_j \ge \tilde{b}_l &  \forall g = 1,2,3,...
@@ -150,7 +185,7 @@ into a crisp MILP is simply by applying the ranking function to the objective fu
 into a set of crisp constraints as shown in autoref:eq:nasseri-solution. The constraints are separated according to the
 definition of fuzzy set multiplication defined in autoref:eq:fuzzy-arithmetic. The fuzzy number index is represented is
 the exponent rather than the subscript to clearly distinguish between the indexed value in the fuzzy number and the
-constraint index (i.e. $\tilde{A} = (a^1,a^2,a^3)$).
+constraint index (i.e. $\tilde{A} = (a^1,a^2,a^3)$). Furthermore it is assumed that the fuzzy numbers are nonnegative.
 
 #+name: eq:nasseri-solution
 \begin{equation}
@@ -175,7 +210,7 @@ To be more succinct, the FFLP can also equivalently be written as autoref:eq:nas
 #+name: eq:nasseri-solution-condensed
 \begin{equation}
 \begin{array}{lll}
-\text{Maximize}   & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3)(x_j^1,x_j^2,x_j^3)\Big) &\\
+\text{Maximize}   & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3) \otimes (x_j^1,x_j^2,x_j^3)\Big) &\\
 \text{subject to} & \sum_j a_{ej}^k x_j^k = b_e^k &  \forall e = 1,2,3,... \\
                   & \sum_j a_{lj}^k x_j^k \le b_l^k &  \forall l = 1,2,3,... \\
                   & \sum_j a_{gj}^k x_j^k \ge b_l^k  &  \forall g = 1,2,3,... \\
@@ -188,10 +223,44 @@ Where $k$ has a max value equal to the cardinality to the type of fuzzy number b
 elaborated on by rewriting the inequality constraints as equality constraints by introducing slack as equality
 constraints by introducing slack as equality constraints by introducing slack variables. This is useful as it
 represents the formulation in a standard form [[cite:&chen-2010-applied;&vanderbei-2020-linear-progr]]. It also has the
-slightly less useful benefit of providing the solver a set of equations called a hyperplane [[cite:&chen-2010-applied]].
+slightly less useful benefit of (mostly) providing the solver a set of equations called a hyperplane [[cite:&chen-2010-applied]].
 
 The given method is called the Kumar and Kaurs method. Generally speaking, it is designed to solve FFLP problems with
-inequality constraints having LR flat fuzzy numbers.
+inequality constraints having LR flat fuzzy numbers. Given the FFLP autoref:eq:general-fflp and assuming that
+$\tilde{x}_j$ is an LR flat fuzzy number, the problem can be reformulated as autoref:eq:kumar-kaurs-fuzzy.
+
+#+name: eq:kumar-kaurs-fuzzy
+\begin{equation}
+\begin{array}{lll}
+\text{Maximize}   & J = \sum_j \tilde{C}_j \otimes \tilde{X}_j              &                                              \\
+\text{subject to} & \sum_j \tilde{a}_{ej} \otimes \tilde{x}_j               = \tilde{b}_e & \forall e = 1,2,3,...                \\
+                  & \sum_j \tilde{a}_{lj} \otimes \tilde{x}_j \oplus \tilde{S}_l = \tilde{b}_l \oplus \tilde{S'}_l & \forall l = 1,2,3,... \\
+                  & \sum_j \tilde{a}_{gj} \otimes \tilde{x}_j \oplus \tilde{S}_e = \tilde{b}_l \oplus \tilde{S'}_g & \forall g = 1,2,3,... \\
+                  & \mathfrak{R}(\tilde{S_l}) - \mathfrak{R}(\tilde{S_l'}) \ge 0                                     & \forall l = 1,2,3,...      \\
+                  & \mathfrak{R}(\tilde{S_g}) - \mathfrak{R}(\tilde{S_g'}) \le 0                                     & \forall g = 1,2,3,...
+\end{array}
+\end{equation}
+
+Expanding the set of equation and using the condensed notation in autoref:eq:nasseri-solution-condensed we find
+autoref:eq:kumar-kaurs-crisp.
+
+#+name: eq:kumar-kaurs-crisp
+\begin{equation}
+\begin{array}{lll}
+\text{Maximize}   & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3) \otimes (x_j^1,x_j^2,x_j^3)\Big) & \\
+\text{subject to} & \sum_j a_{ej}^k x_j^k = b_e^k &  \forall e = 1,2,3,...                  \\
+                  & \sum_j a_{lj}^k x_j^k s_l^k \le s'_l^k b_l^k &  \forall l = 1,2,3,...     \\
+                  & \sum_j a_{gj}^k x_j^k s_g^k \ge s'_l^k b_l^k  &  \forall g = 1,2,3,...    \\
+                  & \mathfrak{R}(\tilde{S_l}) - \mathfrak{R}(\tilde{S_l'}) = 0 & \forall l = 1,2,3,...           \\
+                  & \mathfrak{R}(\tilde{S_g}) - \mathfrak{R}(\tilde{S_g'}) = 0 & \forall g = 1,2,3,...           \\
+                  & x_j^2 - x_j^1 \ge 0         & x_j^3 - x_j^2 \ge 0 \\
+                  & s_j^2 - s_j^1 \ge 0         & s_j^3 - s_j^2 \ge 0 \\
+                  & s'_j^2 - s'_j^1 \ge 0         & s'_j^3 - s'_j^2 \ge 0 \\
+                  & \forall k \in \{1,2,...\}        &                                     \\
+\end{array}
+\end{equation}
+
+* The Crisp BAP and PAP
 
 # Bibliography
 bibliographystyle:plain
