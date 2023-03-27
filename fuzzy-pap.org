@@ -42,7 +42,7 @@ characteristic functions applies various degrees of membership for elements of a
 [[cite:&zimmermann-2001-fuzzy-set]].
 #+begin_definition
 Let $X$ be a collection of objects (often called the universe of discourse [[cite:&bello-2019-fuzzy-activ]]). If $X$ is denoted
-generically by $x$, then a fuzzy set $\tilde{A}$ in $X$ is a set of ordered pairs as shown in  autoref:eq:membership-function.
+generically by $x$, then a fuzzy set $\tilde{A}$ in $X$ is a set of ordered pairs as shown in autoref:eq:membership-function.
 
 #+name: eq:membership-function
 \begin{equation}
@@ -185,7 +185,7 @@ into a crisp MILP is simply by applying the ranking function to the objective fu
 into a set of crisp constraints as shown in autoref:eq:nasseri-solution. The constraints are separated according to the
 definition of fuzzy set multiplication defined in autoref:eq:fuzzy-arithmetic. The fuzzy number index is represented is
 the exponent rather than the subscript to clearly distinguish between the indexed value in the fuzzy number and the
-constraint index (i.e. $\tilde{A} = (a^1,a^2,a^3)$). Furthermore it is assumed that the fuzzy numbers are nonnegative.
+constraint index (i.e. $\tilde{A} = (a^1,a^2,a^3)$). Furthermore, it is assumed that the fuzzy numbers are nonnegative.
 
 #+name: eq:nasseri-solution
 \begin{equation}
