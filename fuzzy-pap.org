@@ -34,7 +34,7 @@ This section introduces the notion of fuzzy numbers and some basic definitions. 
 from [[cite:&zimmermann-2001-fuzzy-set;&das-2016-mathem-model;&yaghobi-2014-compar-fuzzy;&bello-2019-fuzzy-activ]].
 
 *** Fuzzy Sets
-Let's begin with what a fuzzy number is
+Let's begin with what a fuzzy number iss
 not. A classical (crisp) set is defined as a collection of elements $x \in X$. Crisp sets are binary, either an element
 either belongs in the set, or it does not [[cite:&zimmermann-2001-fuzzy-set]]. For a fuzzy set, what is known as the
 characteristic functions applies various degrees of membership for elements of a given set.
@@ -227,7 +227,8 @@ slightly less useful benefit of (mostly) providing the solver a set of equations
 
 The given method is called the Kumar and Kaurs method. Generally speaking, it is designed to solve FFLP problems with
 inequality constraints having LR flat fuzzy numbers. Given the FFLP autoref:eq:general-fflp and assuming that
-$\tilde{x}_j$ is an LR flat fuzzy number, the problem can be reformulated as autoref:eq:kumar-kaurs-fuzzy.
+$\tilde{x}_j$ is an LR flat fuzzy number, the problem can be reformulated as autoref:eq:kumar-kaurs-fuzzy
+[[cite:&kaur-2016-introd-fuzzy]].
 
 #+name: eq:kumar-kaurs-fuzzy
 \begin{equation}
@@ -242,7 +243,7 @@ $\tilde{x}_j$ is an LR flat fuzzy number, the problem can be reformulated as aut
 \end{equation}
 
 Expanding the set of equation and using the condensed notation in autoref:eq:nasseri-solution-condensed we find
-autoref:eq:kumar-kaurs-crisp.
+autoref:eq:kumar-kaurs-crisp [[cite:&kaur-2016-introd-fuzzy]].
 
 #+name: eq:kumar-kaurs-crisp
 \begin{equation}
@@ -261,9 +262,61 @@ autoref:eq:kumar-kaurs-crisp.
 \end{equation}
 
 * The Crisp BAP and PAP
+** The Berth Allocation Problem
+The BAP models the optimal distribution of container ships to terminals in order to be serviced. The allocation of the
+ships depends primarily on the size of the ship and its service time
+[[cite:&frojan-2015-contin-berth;&imai-2001-dynam-berth;&buhrkal-2011-model-discr]]. Most BAP models assume the service
+time, size, and preferred terminals to be the input parameters and have delay, deviation from ideal position to be the decision
+variables [[cite:&frojan-2015-contin-berth;&imai-2001-dynam-berth;&buhrkal-2011-model-discr]]. A general formulation for the
+BAP of a single quay is described in autoref:eq:generalbap. The variables are as described in autoref:tab:bapvariables.
+
+The equations will now explained. autoref:subeq:bapobj is the objective function for the BAP. In this form, it is
+attempting to minimize the total time from arrival to service completion. autoref:subeq:baptemporal is a big-M
+constraint that is used to check if ship $i$'s service time ends before ship $i$. That is $\sigma_{ij}=1$ if $a_j \ge a_i -
+s_i$ and $\sigma_{ij} = 0$ otherwise. Similarly, autoref:subeq:bapspatial checks if ship $i$ is asbelow ship $j$. That is
+$\psi_{ij} = 1$ if $v_j \ge v_i - s_i$ and $\psi_{ij} = 0$ otherwise. The equations autoref:subeq:bapvalidpos -
+autoref:subeq:bappsi ensure that ship $j$ is either assigned after ship $i$ has finished its service and/or $j$ is
+assigned below ship $i$; however, $\sigma_{ij} = \sigma_{ji} \ne 1$ or $\psi_{ij} = \psi_{ji} \ne 1$. That is to say a ship cannot be queued
+before and after another or be queued above and below another simultaneously.
+
+#+name: eq:generalbap
+\begin{subequations}
+\label{eq:bapconstrs}
+\begin{align}
+    \text{Minimize }   & \sum_{i=1}^I (e_i - a_i)                                       \label{subeq:bapobj}    \\
+    \text{subject to } &a_j - a_i - s_i - (\sigma_{ij} - 1)T \geq 0                         \label{subeq:baptemporal}         \\
+                       &v_j - v_i - s_i - (\psi_{ij} - 1)S \geq 0                         \label{subeq:bapspatial}        \\
+                       &\sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1                       \label{subeq:bapvalidpos}    \\
+                       &\sigma_{ij} + \sigma_{ji} \leq 1                                         \label{subeq:bapsigma}        \\
+                       &\psi_{ij} + \psi_{ji} \leq 1                                         \label{subeq:bappsi}        \\
+                       &s_i + a_i = e_i                                             \label{subeq:bapdetach}       \\
+                       &a_i \leq a_i \leq (T - s_i)                                       \label{subeq:bapvalidtime} \\
+                       &\sigma_{ij} \in \{0,1\},\;\psi_{ij} \in \{0,1\}\; v_i \in [0 \mbox{ } S ] \label{subeq:bapspaces}
+\end{align}
+\end{subequations}
+
+#+name: tab:bapvariables
+#+caption: Table of variables used for the BAP
+| *Variable*         | *Description*                             |
+|--------------------+-------------------------------------------|
+| Input constants    |                                           |
+| $I$                | Number of total ships                     |
+|--------------------+-------------------------------------------|
+| Input variables    |                                           |
+| $a_i$              | Arrival time of ship $i$                  |
+| $e_i$              | Time ship $i$ must departs the berth      |
+|--------------------+-------------------------------------------|
+| Decision Variables |                                           |
+| $\psi_{ij}$           | Tracks spatial overlap for ships $(i,j)$  |
+| $\sigma_{ij}$           | Tracks temporal overlap for ships $(i,j)$ |
+| $s_i$              | Service time for ship $i$                 |
+| $u_i$              | Service start time for ship $i$           |
+| $v_i$              | Assigned quay for ship $i$                |
+|--------------------+-------------------------------------------|
+
 
 # Bibliography
 bibliographystyle:plain
 bibliography:~/Documents/literature/ref.bib,~/Documents/library/ref.bib
 
-#  LocalWords:  Yager MILP FFLP hyperplane
+#  LocalWords:  Yager MILP FFLP hyperplane BAP

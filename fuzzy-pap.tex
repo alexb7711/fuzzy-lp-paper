@@ -1,4 +1,4 @@
-% Created 2023-03-26 Sun 19:25
+% Created 2023-04-06 Thu 19:58
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt,a4paper,final]{article}
 \usepackage[a4paper, total={7in, 10in}]{geometry}
@@ -37,9 +37,9 @@
 
 
 \section{Preliminaries}
-\label{sec:org6d3f060}
+\label{sec:org499a2ff}
 \subsection{Mixed Integer Linear Program}
-\label{sec:orgbcdf721}
+\label{sec:org3e2531e}
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
 set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
 constraints \cite{chen-2010-applied}. Given an objective function \(J\), decision variables (i.e. variables of
@@ -61,13 +61,13 @@ acts as an injective mapping to its number representation. In other words, no va
 \cite{kaur-2016-introd-fuzzy}.
 
 \subsection{Fuzzy Sets Theory}
-\label{sec:org1fd2922}
+\label{sec:org78c693b}
 This section introduces the notion of fuzzy numbers and some basic definitions. Concepts from this section are pulled
 from \cite{zimmermann-2001-fuzzy-set,das-2016-mathem-model,yaghobi-2014-compar-fuzzy,bello-2019-fuzzy-activ}.
 
 \subsubsection{Fuzzy Sets}
-\label{sec:org9b3c145}
-Let's begin with what a fuzzy number is
+\label{sec:org77258f9}
+Let's begin with what a fuzzy number iss
 not. A classical (crisp) set is defined as a collection of elements \(x \in X\). Crisp sets are binary, either an element
 either belongs in the set, or it does not \cite{zimmermann-2001-fuzzy-set}. For a fuzzy set, what is known as the
 characteristic functions applies various degrees of membership for elements of a given set.
@@ -75,7 +75,7 @@ characteristic functions applies various degrees of membership for elements of a
 \cite{zimmermann-2001-fuzzy-set}.
 \begin{definition}
 Let \(X\) be a collection of objects (often called the universe of discourse \cite{bello-2019-fuzzy-activ}). If \(X\) is denoted
-generically by \(x\), then a fuzzy set \(\tilde{A}\) in \(X\) is a set of ordered pairs as shown in  \autoref{eq:membership-function}.
+generically by \(x\), then a fuzzy set \(\tilde{A}\) in \(X\) is a set of ordered pairs as shown in \autoref{eq:membership-function}.
 
 \begin{equation}
 \label{eq:membership-function}
@@ -164,7 +164,7 @@ if \(m - \alpha\) is a real number.
 \end{definition}
 
 \subsubsection{Fuzzy Arithmetic}
-\label{sec:org7b9932f}
+\label{sec:orgc6b52c5}
 If two triangular fuzzy numbers \(\tilde{a}_1 = \{a_1, a_2, a_3\}\) and \(\tilde{b}_1 = \{b_1, b_2, b_3\}\) are nonnegative
 then the following operations are defined in \autoref{eq:fuzzy-arithmetic}.
 
@@ -178,7 +178,7 @@ then the following operations are defined in \autoref{eq:fuzzy-arithmetic}.
 \end{equation}
 
 \subsubsection{Comparing Fuzzy Numbers}
-\label{sec:org8fca536}
+\label{sec:org0b07980}
 Fuzzy numbers do not directly provide a method of ordering nor do they always provide an ordered set like real numbers
 \cite{bello-2019-fuzzy-activ}. There are multiple methods for ordering fuzzy numbers, each coming with advantages and
 disadvantages. Different properties have been applied to justify comparison of fuzzy numbers, such as: preference,
@@ -197,7 +197,7 @@ where \(|\cdot|\) represents the cardinality of the fuzzy number. In words, \aut
 of the values in the fuzzy number.
 
 \subsection{Fully Fuzzy Linear Programming}
-\label{sec:org2e0e158}
+\label{sec:org49d318d}
 Much like the MILP, fully fuzzy linear programs (FFLP) it is a class of constrained optimization in which one seeks to
 find a set of continuous variables that either maximizes or minimizes an objective function, \(J\), while satisfying a set
 of constraints. The key difference in FFLP is that it is designed to accommodate imprecise information
@@ -223,7 +223,7 @@ into a crisp MILP is simply by applying the ranking function to the objective fu
 into a set of crisp constraints as shown in \autoref{eq:nasseri-solution}. The constraints are separated according to the
 definition of fuzzy set multiplication defined in \autoref{eq:fuzzy-arithmetic}. The fuzzy number index is represented is
 the exponent rather than the subscript to clearly distinguish between the indexed value in the fuzzy number and the
-constraint index (i.e. \(\tilde{A} = (a^1,a^2,a^3)\)). Furthermore it is assumed that the fuzzy numbers are nonnegative.
+constraint index (i.e. \(\tilde{A} = (a^1,a^2,a^3)\)). Furthermore, it is assumed that the fuzzy numbers are nonnegative.
 
 \begin{equation}
 \label{eq:nasseri-solution}
@@ -265,7 +265,8 @@ slightly less useful benefit of (mostly) providing the solver a set of equations
 
 The given method is called the Kumar and Kaurs method. Generally speaking, it is designed to solve FFLP problems with
 inequality constraints having LR flat fuzzy numbers. Given the FFLP \autoref{eq:general-fflp} and assuming that
-\(\tilde{x}_j\) is an LR flat fuzzy number, the problem can be reformulated as \autoref{eq:kumar-kaurs-fuzzy}.
+\(\tilde{x}_j\) is an LR flat fuzzy number, the problem can be reformulated as \autoref{eq:kumar-kaurs-fuzzy}
+\cite{kaur-2016-introd-fuzzy}.
 
 \begin{equation}
 \label{eq:kumar-kaurs-fuzzy}
@@ -280,7 +281,7 @@ inequality constraints having LR flat fuzzy numbers. Given the FFLP \autoref{eq:
 \end{equation}
 
 Expanding the set of equation and using the condensed notation in \autoref{eq:nasseri-solution-condensed} we find
-\autoref{eq:kumar-kaurs-crisp}.
+\autoref{eq:kumar-kaurs-crisp} \cite{kaur-2016-introd-fuzzy}.
 
 \begin{equation}
 \label{eq:kumar-kaurs-crisp}
@@ -299,7 +300,64 @@ Expanding the set of equation and using the condensed notation in \autoref{eq:na
 \end{equation}
 
 \section{The Crisp BAP and PAP}
-\label{sec:orgd136fd4}
+\label{sec:org78f646e}
+\subsection{The Berth Allocation Problem}
+\label{sec:orgcfe67ca}
+The BAP models the optimal distribution of container ships to terminals in order to be serviced. The allocation of the
+ships depends primarily on the size of the ship and its service time
+\cite{frojan-2015-contin-berth,imai-2001-dynam-berth,buhrkal-2011-model-discr}. Most BAP models assume the service
+time, size, and preferred terminals to be the input parameters and have delay, deviation from ideal position to be the decision
+variables \cite{frojan-2015-contin-berth,imai-2001-dynam-berth,buhrkal-2011-model-discr}. A general formulation for the
+BAP of a single quay is described in \autoref{eq:generalbap}. The variables are as described in \autoref{tab:bapvariables}.
+
+The equations will now explained. \autoref{subeq:bapobj} is the objective function for the BAP. In this form, it is
+attempting to minimize the total time from arrival to service completion. \autoref{subeq:baptemporal} is a big-M
+constraint that is used to check if ship \(i\)'s service time ends before ship \(i\). That is \(\sigma_{ij}=1\) if \(a_j \ge a_i -
+s_i\) and \(\sigma_{ij} = 0\) otherwise. Similarly, \autoref{subeq:bapspatial} checks if ship \(i\) is asbelow ship \(j\). That is
+\(\psi_{ij} = 1\) if \(v_j \ge v_i - s_i\) and \(\psi_{ij} = 0\) otherwise. The equations \autoref{subeq:bapvalidpos} -
+\autoref{subeq:bappsi} ensure that ship \(j\) is either assigned after ship \(i\) has finished its service and/or \(j\) is
+assigned below ship \(i\); however, \(\sigma_{ij} = \sigma_{ji} \ne 1\) or \(\psi_{ij} = \psi_{ji} \ne 1\). That is to say a ship cannot be queued
+before and after another or be queued above and below another simultaneously.
+
+\begin{subequations}
+\label{eq:generalbap}
+\label{eq:bapconstrs}
+\begin{align}
+    \text{Minimize }   & \sum_{i=1}^I (e_i - a_i)                                       \label{subeq:bapobj}    \\
+    \text{subject to } &a_j - a_i - s_i - (\sigma_{ij} - 1)T \geq 0                         \label{subeq:baptemporal}         \\
+                       &v_j - v_i - s_i - (\psi_{ij} - 1)S \geq 0                         \label{subeq:bapspatial}        \\
+                       &\sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1                       \label{subeq:bapvalidpos}    \\
+                       &\sigma_{ij} + \sigma_{ji} \leq 1                                         \label{subeq:bapsigma}        \\
+                       &\psi_{ij} + \psi_{ji} \leq 1                                         \label{subeq:bappsi}        \\
+                       &s_i + a_i = e_i                                             \label{subeq:bapdetach}       \\
+                       &a_i \leq a_i \leq (T - s_i)                                       \label{subeq:bapvalidtime} \\
+                       &\sigma_{ij} \in \{0,1\},\;\psi_{ij} \in \{0,1\}\; v_i \in [0 \mbox{ } S ] \label{subeq:bapspaces}
+\end{align}
+\end{subequations}
+
+\begin{table}[htbp]
+\caption{\label{tab:bapvariables}Table of variables used for the BAP}
+\centering
+\begin{tabular}{ll}
+\textbf{Variable} & \textbf{Description}\\
+\hline
+Input constants & \\
+\(I\) & Number of total ships\\
+\hline
+Input variables & \\
+\(a_i\) & Arrival time of ship \(i\)\\
+\(e_i\) & Time ship \(i\) must departs the berth\\
+\hline
+Decision Variables & \\
+\(\psi_{ij}\) & Tracks spatial overlap for ships \((i,j)\)\\
+\(\sigma_{ij}\) & Tracks temporal overlap for ships \((i,j)\)\\
+\(s_i\) & Service time for ship \(i\)\\
+\(u_i\) & Service start time for ship \(i\)\\
+\(v_i\) & Assigned quay for ship \(i\)\\
+\hline
+\end{tabular}
+\end{table}
+
 
 \bibliographystyle{plain}
 \bibliography{../../literature/ref,../../library/ref}
