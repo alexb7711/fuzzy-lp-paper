@@ -277,7 +277,10 @@ s_i$ and $\sigma_{ij} = 0$ otherwise. Similarly, autoref:subeq:bapspatial checks
 $\psi_{ij} = 1$ if $v_j \ge v_i - s_i$ and $\psi_{ij} = 0$ otherwise. The equations autoref:subeq:bapvalidpos -
 autoref:subeq:bappsi ensure that ship $j$ is either assigned after ship $i$ has finished its service and/or $j$ is
 assigned below ship $i$; however, $\sigma_{ij} = \sigma_{ji} \ne 1$ or $\psi_{ij} = \psi_{ji} \ne 1$. That is to say a ship cannot be queued
-before and after another or be queued above and below another simultaneously.
+before and after another or be queued above and below another simultaneously. autoref:subeq:bapdetach represents the time the ship will depart
+from the berth after being serviced. autoref:subeq:bapvalidtime ensures that the arrival time is less than the starting ervice time and that the
+starting service time is early enough such that the total time spent servicing the vessel is less than the time horizon. autoref:subeq:bapspaces
+defines the sets for each decision variable.
 
 #+name: eq:generalbap
 \begin{subequations}
@@ -290,7 +293,7 @@ before and after another or be queued above and below another simultaneously.
                        &\sigma_{ij} + \sigma_{ji} \leq 1                                         \label{subeq:bapsigma}        \\
                        &\psi_{ij} + \psi_{ji} \leq 1                                         \label{subeq:bappsi}        \\
                        &s_i + a_i = e_i                                             \label{subeq:bapdetach}       \\
-                       &a_i \leq a_i \leq (T - s_i)                                       \label{subeq:bapvalidtime} \\
+                       &a_i \leq u_i \leq (T - s_i)                                       \label{subeq:bapvalidtime} \\
                        &\sigma_{ij} \in \{0,1\},\;\psi_{ij} \in \{0,1\}\; v_i \in [0 \mbox{ } S ] \label{subeq:bapspaces}
 \end{align}
 \end{subequations}
@@ -314,6 +317,27 @@ before and after another or be queued above and below another simultaneously.
 | $v_i$              | Assigned quay for ship $i$                |
 |--------------------+-------------------------------------------|
 
+** The Position Allocation Problem (from MILP paper)
+The BAP formulation forms the basis of the PAP; however, there are some differences in the way the variables are
+perceived. Using the same formulation as autoref:eq:generalbap, the $i^{th}$ visit, the starting service time, 
+$u_i$, is now the starting charge time, the berth location, $v_i$, is now the charger queue for assignment, 
+and the service time, $s_i$, is now the time to charge. The PAP utilizes a number of parameters. The following 
+parameters are constants.
+
+- $Q$   : charger length
+- $T$   : time horizon
+- $N$   : number of incoming vehicles
+- $s_i$ : charging time for vehicle $i;\; 1 \leq i \leq N$
+- $a_i$ : arrival time of vehicle $i;\; 1 \leq i \leq N$
+
+These constants define the problem bounds. The following list provides a series of decision variables used in the
+formulation.
+
+- $u_i$         : starting time of service for vehicle $i;\; 1 \leq i \leq N$
+- $v_i$         : charge location $i;\; 1 \leq i \leq N$
+- $e_i$         : departure time for vehicle $i;\; 1 \leq i \leq N$
+- $\sigma_{ij}$ : binary variable that determines ordering of vehicles $i$ and $j$ in time
+- $\psi_{ij}$   : binary variable that determines relative position of vehicles $i$ and $j$ when charging simultaneously
 
 # Bibliography
 bibliographystyle:plain
