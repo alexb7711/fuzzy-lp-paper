@@ -65,7 +65,6 @@ tasks:
         latexmk -f -interaction=nonstopmode \
                    -pdf -pdflatex="pdflatex --shell-escape %O %S" \
                    -bibtex {{.DOC}}.tex
-        [ -f {{.DOC}}.pdf ] && mv {{.DOC}}.pdf {{.TARGET}}
     silent: false
 
 ##==============================================================================
