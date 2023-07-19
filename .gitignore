@@ -2,3 +2,4 @@
 ltximg/
 auto/fuzzy-pap.el
 .task/
+*.pdf
