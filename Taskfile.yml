@@ -1,0 +1,81 @@
+################################################################################
+# ENVIRONTMENT
+################################################################################
+version: '3'
+
+env:
+  TARGET : fuzzy-pap.pdf
+  DOC    : fuzzy-pap
+
+################################################################################
+# RECIPES
+################################################################################
+
+tasks:
+
+##==============================================================================
+#
+  default:
+    cmds:
+      - task: precheck
+      - task: pdf
+
+##==============================================================================
+#
+  pipeline:
+    cmds:
+      - task: precheck
+      - task: set-version
+      - task: pdf
+
+##==============================================================================
+#
+  precheck:
+    desc: "Make sure that all the dependencies are installed."
+    cmds:
+      - |
+        echo "Checking the programs required for the build are installed..."
+        latexmk --version >/dev/null 2>&1 && (echo "latexmk installed!") || (echo "ERROR: latexmk is required."; exit 1)
+        pdflatex --version >/dev/null 2>&1 && (echo "pdflatex installed!") || (echo "ERROR: pdflatex is required."; exit 1)
+    silent: true
+
+##==============================================================================
+#
+  set-version:
+    desc: "Dynamically sets the version of the document."
+    vars:
+      MAIN: fuzzy-pap.tex
+      VERSION:
+        sh: git describe --tags
+    cmds:
+      - |
+        sed -i 's/\\date{\\today/\\date{\\today:{{.VERSION}}/' {{.MAIN}}
+    silent: true
+
+##==============================================================================
+#
+  pdf:
+    desc: "Output {{.TARGET}} PDF."
+    sources:
+      - ./*.tex
+    generates:
+      - ./fuzzy-pap.pdf
+    cmds:
+      - |
+        latexmk -f -interaction=nonstopmode \
+                   -pdf -pdflatex="pdflatex --shell-escape %O %S" \
+                   -bibtex {{.DOC}}.tex
+    silent: false
+
+##==============================================================================
+#
+  clean:
+    desc: "Clean up the project."
+    vars:
+      DOC_SRC: fuzzy-pap.tex
+    cmds:
+      - |
+        # Clean up the document files
+        rm -f {{.TARGET}}
+        latexmk -silent -c {{.DOC_SRC}}
+    silent: true
