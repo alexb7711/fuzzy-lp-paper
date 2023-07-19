@@ -1,0 +1,42 @@
+#+title: Fuzzy Position Allocation Problem Paper
+#+autor: Alexander Brown
+#+date: \today
+
+This paper discusses the research behind the derivation of the Fuzzy Position Allocation Problem (FPAP). This paper is
+based off the theory of fuzzy logic as well as [[https://github.com/alexb7711/milp-pap-paper-frontiers][my previous work on the Posistion Allocation Problem (PAP)]]. The purpose
+of introducing fuzzy logic into the PAP is to allow some sense of uncertainty into model's solution. The motivation
+behind allowing this flexibility in the solution is because there will be variance in the route schedule, whether it be
+the schedule is slightly off or the bus driver arrives to the station a little late or early.
+
+* Artifacts and Releases
+:PROPERTIES:
+:CUSTOM_ID: sec:artifacts-and-releases
+:END:
+
+** Peer Reviews
+:PROPERTIES:
+:CUSTOM_ID: sec:peer-reviews
+:END:
+If you are veiwing this to review the latest revision from the =main= branch, then it is *highly* recommended that you
+run =go-task pipeline= to generate a PDF with the version embedded in the PDF (see [[*Building the Paper][Building the Paper]]).
+
+** Releases
+:PROPERTIES:
+:CUSTOM_ID: sec:releases
+:END:
+If you are reading this from the release notes then the PDF associated with the release will have a version (same as the
+git tag from the given commit). This is done to be able to easily track what version of the document is being released
+and reviewed.
+
+* Building the Paper
+:PROPERTIES:
+:CUSTOM_ID: sec:building-the-paper
+:END:
+The document is written in [[https://orgmode.org/][org mode]] and is thus primarily generated via the export functions in Emacs; however, the
+=LaTeX= file generated from the =org= document is included in the repository which can also be built from. Since that
+file is regenerated every time the PDF is generated, the =LaTeX= file /should/ be up-to-date with =org= changes.
+
+With that being said. The required programs are a full instalation of =LaTeX= as well as [[https://mg.readthedocs.io/latexmk.html][latexmk]] and =pdflatex=.
+
+It is recommended to have [[https://taskfile.dev/][task]] installed to automate the build process. Type =go-task -l= or =task -l= depending on your
+install of task.
