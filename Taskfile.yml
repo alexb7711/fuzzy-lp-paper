@@ -4,8 +4,7 @@
 version: '3'
 
 env:
-  TARGET : sa-pap.pdf
-  IMG_DIR: ./sections/img/
+  TARGET : fuzzy-pap.pdf
   DOC    : main    																															# Name of main source file
 
 ################################################################################
@@ -42,33 +41,10 @@ tasks:
 
 ##==============================================================================
 #
-  images:
-    desc: "Creates a PDF of all the files in {{.IMG_DIR}}."
-    sources:
-      - ./img/*.pml
-    generates:
-      - ./img/*.png
-    vars:
-      IMG_SRC:
-        sh: ls {{.IMG_DIR}} | grep ".pml"
-    cmds:
-      - |
-        for f in {{.IMG_SRC | catLines}}
-        do
-          if [ $f != "general_yaml.pml" ] && [ $f != "route_yaml.pml" ]
-          then
-            echo "Compiling ${f}"
-            plantuml -tpng {{.IMG_DIR}}/${f}
-          fi
-        done
-    silent: true
-
-##==============================================================================
-#
   set-version:
     desc: "Dynamically sets the version of the document."
     vars:
-      MAIN: main.tex
+      MAIN: fuzzy-pap.tex
       VERSION:
         sh: git describe --tags
     cmds:
@@ -83,7 +59,7 @@ tasks:
     sources:
       - ./*.tex
     generates:
-      - ./sa-pap.pdf
+      - ./fuzzy-pap.pdf
     cmds:
       - |
         latexmk -f -interaction=nonstopmode \
@@ -97,14 +73,9 @@ tasks:
   clean:
     desc: "Clean up the project."
     vars:
-      DOC_SRC: main.tex
+      DOC_SRC: fuzzy-pap.tex
     cmds:
       - |
-        # Clean up {{.IMG_DIR}}
-        for f in $(find {{.IMG_DIR}} -maxdepth 1 -type f)
-        do
-          [ ${f##*.} != "pml" ] && [ ${f##*.} != "jpg" ] && [ ${f##*.} != "org" ]  && rm ${f}
-        done
         # Clean up the document files
         rm -f {{.TARGET}}
         latexmk -silent -c {{.DOC_SRC}}
