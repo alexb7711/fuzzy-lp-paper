@@ -14,6 +14,7 @@
 #+end_export
 # =========================================================================================================================
 
+* Introduction
 * Preliminaries
 ** Mixed Integer Linear Program
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
@@ -344,6 +345,10 @@ formulation.
 - $e_i$         : departure time for vehicle $i;\; 1 \leq i \leq N$
 - $\sigma_{ij}$ : binary variable that determines ordering of vehicles $i$ and $j$ in time
 - $\psi_{ij}$   : binary variable that determines relative position of vehicles $i$ and $j$ when charging simultaneously
+
+* The Fuzzy BAP
+
+* Fuzzy PAP
 
 * References
 #+bibliographystyle:plain
