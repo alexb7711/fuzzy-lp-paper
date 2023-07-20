@@ -3,7 +3,9 @@
 #+EMAIL: A01704744@usu.edu
 #+LANGUAGE: en
 
-#+LATEX_CLASS: article
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+LATEX_HEADER: \usepackage{lmodern}
+#+LATEX_HEADER: \include{milp-pap-paper-frontiers/tex/preamble.tex}
 
 # Theorems/Lemmas/Definition headers
 #+LATEX_HEADER: \newtheorem{definition}{Definition}[section]
@@ -269,84 +271,24 @@ Expanding the set of equation and using the condensed notation in [[eq:nasseri-s
 \end{equation}
 
 * The Crisp BAP and PAP
-** The Berth Allocation Problem
-The BAP models the optimal distribution of container ships to terminals in order to be serviced. The allocation of the
-ships depends primarily on the size of the ship and its service time
-[cite:@frojan-2015-contin-berth;@imai-2001-dynam-berth;@buhrkal-2011-model-discr]. Most BAP models assume the service
-time, size, and preferred terminals to be the input parameters and have delay, deviation from ideal position to be the decision
-variables [cite:@frojan-2015-contin-berth;@imai-2001-dynam-berth;@buhrkal-2011-model-discr]. A general formulation for the
-BAP of a single quay is described in [[eq:generalbap]]. The variables are as described in [[tab:bapvariables]].
-
-The equations will now be explained. \autoref{subeq:bapobj} is the objective function for the BAP. In this form, it is
-attempting to minimize the total time from arrival to service completion. \autoref{subeq:baptemporal} is a big-M
-constraint that is used to check if ship $i$'s service time ends before ship $i$. That is $\sigma_{ij}=1$ if $a_j \ge a_i -
-s_i$ and $\sigma_{ij} = 0$ otherwise. Similarly, \autoref{subeq:bapspatial} checks if ship $i$ is as below ship $j$. That is
-$\psi_{ij} = 1$ if $v_j \ge v_i - s_i$ and $\psi_{ij} = 0$ otherwise. The equations \autoref{subeq:bapvalidpos} -
-\autoref{subeq:bappsi} ensure that ship $j$ is either assigned after ship $i$ has finished its service and/or $j$ is
-assigned below ship $i$; however, $\sigma_{ij} = \sigma_{ji} \ne 1$ or $\psi_{ij} = \psi_{ji} \ne 1$. That is to say a ship cannot be queued
-before and after another or be queued above and below another simultaneously. \autoref{subeq:bapdetach} represents the
-time the ship will depart from the berth after being serviced. \autoref{subeq:bapvalidtime} ensures that the arrival
-time is less than the starting ervice time and that the starting service time is early enough such that the total time
-spent servicing the vessel is less than the time horizon. \autoref{subeq:bapspaces} defines the sets for each decision
-variable.
-
-#+name: eq:generalbap
-\begin{subequations}
-\label{eq:bapconstrs}
-\begin{align}
-    \text{Minimize }   & \sum_{i=1}^I (e_i - a_i)                                       \label{subeq:bapobj}    \\
-    \text{subject to } &a_j - a_i - s_i - (\sigma_{ij} - 1)T \geq 0                         \label{subeq:baptemporal}         \\
-                       &v_j - v_i - s_i - (\psi_{ij} - 1)S \geq 0                         \label{subeq:bapspatial}        \\
-                       &\sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1                       \label{subeq:bapvalidpos}    \\
-                       &\sigma_{ij} + \sigma_{ji} \leq 1                                         \label{subeq:bapsigma}        \\
-                       &\psi_{ij} + \psi_{ji} \leq 1                                         \label{subeq:bappsi}        \\
-                       &s_i + a_i = e_i                                             \label{subeq:bapdetach}       \\
-                       &a_i \leq u_i \leq (T - s_i)                                       \label{subeq:bapvalidtime} \\
-                       &\sigma_{ij} \in \{0,1\},\;\psi_{ij} \in \{0,1\}\; v_i \in [0 \mbox{ } S ] \label{subeq:bapspaces}
-\end{align}
-\end{subequations}
-
-#+name: tab:bapvariables
-#+caption: Table of variables used for the BAP
-| *Variable*         | *Description*                             |
-|--------------------+-------------------------------------------|
-| Input constants    |                                           |
-| $I$                | Number of total ships                     |
-|--------------------+-------------------------------------------|
-| Input variables    |                                           |
-| $a_i$              | Arrival time of ship $i$                  |
-| $e_i$              | Time ship $i$ must departs the berth      |
-|--------------------+-------------------------------------------|
-| Decision Variables |                                           |
-| $\psi_{ij}$           | Tracks spatial overlap for ships $(i,j)$  |
-| $\sigma_{ij}$           | Tracks temporal overlap for ships $(i,j)$ |
-| $s_i$              | Service time for ship $i$                 |
-| $u_i$              | Service start time for ship $i$           |
-| $v_i$              | Assigned quay for ship $i$                |
-|--------------------+-------------------------------------------|
-
-** The Position Allocation Problem (from MILP paper)
-The BAP formulation forms the basis of the PAP; however, there are some differences in the way the variables are
-interpreted. Using the same formulation as [[eq:generalbap]], the $i^{th}$ visit, the starting service time, $u_i$, is now
-the starting charge time, the berth location, $v_i$, is now the charger queue for assignment, and the service time,
-$s_i$, is now the time to charge. The PAP utilizes a number of parameters. The following parameters are constants.
-
-- $Q$   : charger length
-- $T$   : time horizon
-- $N$   : number of incoming vehicles
-- $s_i$ : charging time for vehicle $i;\; 1 \leq i \leq N$
-- $a_i$ : arrival time of vehicle $i;\; 1 \leq i \leq N$
-
-These constants define the problem bounds. The following list provides a series of decision variables used in the
-formulation.
-
-- $u_i$         : starting time of service for vehicle $i;\; 1 \leq i \leq N$
-- $v_i$         : charge location $i;\; 1 \leq i \leq N$
-- $e_i$         : departure time for vehicle $i;\; 1 \leq i \leq N$
-- $\sigma_{ij}$ : binary variable that determines ordering of vehicles $i$ and $j$ in time
-- $\psi_{ij}$   : binary variable that determines relative position of vehicles $i$ and $j$ when charging simultaneously
+#+include: milp-pap-paper-frontiers/tex/pap-problem.tex
+#+include: milp-pap-paper-frontiers/tex/rectangle-packing.tex
 
 * The Fuzzy BAP
+The following is a FFLP model to the continuous dynamical BAP that is able to allocate a quay to an incoming vessel
+[cite:@bello-2019-fuzzy-activ]. The model assumes that the arrival time, $\tilde{a}$, berthing time, $\tilde{u}$, and
+handling time, $\tilde{p}$, are assumed to be imprecise. The objective of the model is to allocate all the vessels to
+different quays, according to several constraints minimizing the total waiting time for all the vessels. The model in
+its entirety is presented in [[eq:fuzzy-bap]]. Note that $Q$ in this section refers to the set of quays.
+
+#+name: eq:fuzzy-bap
+\begin{equation}
+\begin{array}{rc}
+                   & min \sum_{q \in Q}\sum_{i \in I} (\tilde{m}_{iq} - \tilde{a}_i) \\
+\text{Subject to:} &      \\
+& \sum_{q \in Q}
+\end{array}
+\end{equation}
 
 * Fuzzy PAP
 
