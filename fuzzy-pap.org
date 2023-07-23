@@ -272,6 +272,24 @@ Expanding the set of equation and using the condensed notation in [[eq:nasseri-s
 
 * The Crisp BAP and PAP
 #+include: sup-doc/milp-pap-paper-frontiers/tex/pap-problem.tex
+
+#+caption: Example of rectangle packing problem.
+#+name: fig:packexample
+#+attr_latex: :scale 1
+[[./sup-doc/milp-pap-paper-frontiers/img/spatiotemporal-packing.pdf]]
+
+#+caption: Example of position allocation. Vehicles are placed in queues to be charged and move in the direction indicated by the arrow.
+#+name: subfig:bapexample
+#+attr_latex: :scale 1
+[[./sup-doc/milp-pap-paper-frontiers/img/bap.pdf]]
+
+#+caption: The representation of the berth-time space
+#+name: fig:bap
+#+attr_latex: :scale 1
+[[./sup-doc/milp-pap-paper-frontiers/img/baprep.pdf]]
+
+#+include: sup-doc/milp-pap-paper-frontiers/tex/vartab.tex
+
 #+include: sup-doc/milp-pap-paper-frontiers/tex/rectangle-packing.tex
 
 * The Fuzzy BAP
@@ -285,7 +303,8 @@ the notation presented in this paper. In this section, $Q$ refers to the set of 
 over multiple quays, thus indexing for position shall be written as $v_{iq}$. Similarly, because of the added degree of
 freedom the spatiotemporal binary decision variables are represented as $\sigma_{ijq}$ and $\psi_{ijq}$.
 
-#TODO: Verify \sigma and \psi in these equations
+# TODO: Verify \sigma and \psi in these equations
+
 #+name: eq:fuzzy-bap
 \begin{equation}
 \begin{array}{rc}
@@ -305,10 +324,12 @@ exactly defined in a way useful to the purposes of this paper. The adaptation of
 
 * Fuzzy PAP
 
-* References
 #+bibliographystyle:plain
 #+bibliography:citation-database/lit-ref.bib
 #+bibliography:citation-database/lib-ref.bib
-#+print_bibliography:
+\bibliographystyle{plain}
+\bibliography{citation-database/lit-ref.bib, citation-database/lib-ref.bib}
+# print_bibliography:
+
 
 #  LocalWords:  Yager MILP FFLP hyperplane BAP
