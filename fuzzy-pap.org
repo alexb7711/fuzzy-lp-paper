@@ -5,7 +5,7 @@
 
 #+LATEX_HEADER: \usepackage[T1]{fontenc}
 #+LATEX_HEADER: \usepackage{lmodern}
-#+LATEX_HEADER: \include{milp-pap-paper-frontiers/tex/preamble.tex}
+#+LATEX_HEADER: \include{sup-doc/milp-pap-paper-frontiers/tex/preamble.tex}
 
 # Theorems/Lemmas/Definition headers
 #+LATEX_HEADER: \newtheorem{definition}{Definition}[section]
@@ -271,8 +271,8 @@ Expanding the set of equation and using the condensed notation in [[eq:nasseri-s
 \end{equation}
 
 * The Crisp BAP and PAP
-#+include: milp-pap-paper-frontiers/tex/pap-problem.tex
-#+include: milp-pap-paper-frontiers/tex/rectangle-packing.tex
+#+include: sup-doc/milp-pap-paper-frontiers/tex/pap-problem.tex
+#+include: sup-doc/milp-pap-paper-frontiers/tex/rectangle-packing.tex
 
 * The Fuzzy BAP
 The following is a FFLP model to the continuous dynamical BAP that is able to allocate a quay to an incoming vessel

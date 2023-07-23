@@ -1,4 +1,4 @@
-% Created 2023-07-20 Thu 08:56
+% Created 2023-07-22 Sat 11:50
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt,a4paper,final]{article}
 \usepackage[a4paper, total={7in, 10in}]{geometry}
@@ -7,7 +7,7 @@
 \usepackage{subcaption}
 \usepackage{graphicx}
 \usepackage{tikz}
-\usepackage[utf8]{inputenc}
+\usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{longtable}
@@ -20,7 +20,7 @@
 \usepackage{hyperref}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\include{milp-pap-paper-frontiers/tex/preamble.tex}
+\include{sup-doc/milp-pap-paper-frontiers/tex/preamble.tex}
 \newtheorem{definition}{Definition}[section]
 \author{Alexander Brown}
 \date{\today}
@@ -40,11 +40,11 @@
 \let\ref\autoref                            % Redifine `\ref` as `\autoref` because lazy
 
 \section{Introduction}
-\label{sec:org0e21b39}
+\label{sec:org683859f}
 \section{Preliminaries}
-\label{sec:org83df3e0}
+\label{sec:orga1b6172}
 \subsection{Mixed Integer Linear Program}
-\label{sec:org063caa8}
+\label{sec:org72ccaa9}
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
 set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
 constraints (Chen, Der-San and Batson, Robert G and Dang, Yu, 2010). Given a general objective function \(J\), decision variables (i.e. variables of
@@ -66,12 +66,12 @@ acts as an injective mapping to its number representation. In other words, every
 variable to value (Jagdeep Kaur and Amit Kumar, 2016).
 
 \subsection{Fuzzy Sets Theory}
-\label{sec:org4c9ccd1}
+\label{sec:org4607d10}
 This section introduces the notion of fuzzy numbers and some basic definitions. Concepts from this section are pulled
 from (H.-J. Zimmermann, 2001, Sapan Kumar Das and T. Mandal and S. A. Edalatpanah, 2016, M. Yaghobi and M. Rabbani and M. Adabitabar Firozja and J. Vahidi, 2014, Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019).
 
 \subsubsection{Fuzzy Sets}
-\label{sec:org3803b49}
+\label{sec:org87df47e}
 Let's begin with what a fuzzy number is not. A classical (crisp) set is defined as a collection of elements \(x \in X\).
 Crisp sets are binary, either an element belongs in the set, or it does not (H.-J. Zimmermann, 2001). For a
 fuzzy set, what is known as the characteristic function applies various degrees of membership for elements of a given
@@ -168,7 +168,7 @@ if \(m - \alpha\) is a real number.
 \end{definition}
 
 \subsubsection{Fuzzy Arithmetic}
-\label{sec:org94726a4}
+\label{sec:org5e3b2fc}
 If two triangular fuzzy numbers \(\tilde{a}_1 = \{a_1, a_2, a_3\}\) and \(\tilde{b}_1 = \{b_1, b_2, b_3\}\) are nonnegative
 then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 
@@ -182,11 +182,11 @@ then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 \end{equation}
 
 \subsubsection{Comparing Fuzzy Numbers}
-\label{sec:orge872dd6}
+\label{sec:org3b0ebcc}
 Fuzzy numbers do not directly provide a method of ordering nor do they always provide an ordered set like real numbers
 (Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019). There are multiple methods for ordering fuzzy numbers, each coming with advantages and
 disadvantages. Different properties have been applied to justify comparison of fuzzy numbers, such as: preference,
-rationality, and robustness (Mariano Jim{\'e}nez and Mar Arenas and Amelia Bilbao and M. Victoria RodrÄ±Â´guez, 2007, Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019, Jagdeep Kaur and Amit Kumar, 2016). These
+rationality, and robustness (Mariano Jim{\'e}nez and Mar Arenas and Amelia Bilbao and M. Victoria Rodr �guez, 2007, Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019, Jagdeep Kaur and Amit Kumar, 2016). These
 methods are commonly known as ranking functions or ordering functions
 (Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019, Sapan Kumar Das and T. Mandal and S. A. Edalatpanah, 2016, Jagdeep Kaur and Amit Kumar, 2016). Commonly, including in this work, the First
 index of Yager (Ronald R. Yager, 1981) is used (\ref{eq:first-index-yager}).
@@ -201,7 +201,7 @@ where \(|\cdot|\) represents the cardinality of the fuzzy number. In words, \ref
 of the values in the fuzzy number.
 
 \subsection{Fully Fuzzy Linear Programming}
-\label{sec:orgd23f018}
+\label{sec:org1d99b91}
 Much like the MILP, Fully Fuzzy Linear Programs (FFLP), it is a class of constrained optimization in which one seeks to
 find a set of continuous variables that either maximizes or minimizes an objective function, \(J\), while satisfying a set
 of constraints. The key difference in FFLP is that it is designed to accommodate imprecise information
@@ -304,7 +304,7 @@ Expanding the set of equation and using the condensed notation in \ref{eq:nasser
 \end{equation}
 
 \section{The Crisp BAP and PAP}
-\label{sec:org17815b6}
+\label{sec:org8d7cf49}
 \subsection{The Position Allocation Problem}
 \label{sec:positionallocationproblem}
 This section provides a brief overview of the BAP and a detailed formulation of PAP as presented in \cite{Qarebagh2019}.
@@ -638,13 +638,40 @@ pairing. The last constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace}
 variable.
 
 \section{The Fuzzy BAP}
-\label{sec:org30564fa}
+\label{sec:orgced825f}
+The following is a FFLP model to the continuous dynamical BAP that is able to allocate a quay to an incoming vessel
+(Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019). The model assumes that the arrival time, \(\tilde{a}\), berthing time, \(\tilde{u}\), and
+handling time, \(\tilde{p}\), are assumed to be imprecise. The objective of the model is to allocate all the vessels to
+different quays, according to several constraints minimizing the total waiting time for all the vessels. The model in
+its entirety is presented in \ref{eq:fuzzy-bap}. Note that a few modifications are made to the notation to accommodate the
+notation of (, , Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019) while attempting to remain as consistent as possible with
+the notation presented in this paper. In this section, \(Q\) refers to the set of quays. Furthermore, the model is defined
+over multiple quays, thus indexing for position shall be written as \(v_{iq}\). Similarly, because of the added degree of
+freedom the spatiotemporal binary decision variables are represented as \(\sigma_{ijq}\) and \(\psi_{ijq}\).
+
+\#TODO: Verify \(\sigma\) and \(\psi\) in these equations
+\begin{equation}
+\label{eq:fuzzy-bap}
+\begin{array}{rc}
+                                                               & min \sum_{q \in Q}\sum_{i \in I} (\tilde{m}_{iq} - \tilde{a}_i) \\
+\text{Subject to:}                                             &                                                       \\
+\sum_{q \in Q} v_{iq} = 1                                           & \forall i \in I;\; \forall q \in Q                                    \\
+\tilde{u}_{iq} \ge \tilde{a}_i                                   & \forall i \in I;\; \forall q \in Q                                    \\
+v_{iq} + l_i \le L_q                                             & \forall i \in I;\; \forall q \in Q                                    \\
+v_{iq} + l_i \le v_{jq} + M(1-\sigma_{ijq}^x)                         & \forall i,j \in I;\; i \ne j;\; \forall q \in Q                         \\
+\tilde{u}_{iq} + \tilde{s}_i \le T                               & \forall i \in I;\; \forall q \in Q                                    \\
+\tilde{u}_{iq} + \tilde{s}_i \le \tilde{u}_{iq + M(1-\psi{ijq}^y)} & \forall i,j \in I;\; i \ne j;\; \forall q \in Q                         \\
+\end{array}
+\end{equation}
+
+One may note the similarities to the previously presented BAB and PAP models in \ref{eq:fuzzy-bap}. It is, however, not
+exactly defined in a way useful to the purposes of this paper. The adaptation of the Fuzzy BAP (FBAP) is discussed next.
 
 \section{Fuzzy PAP}
-\label{sec:org36f73b8}
+\label{sec:org6b437d4}
 
 \section{References}
-\label{sec:orgee2d802}
+\label{sec:orgfe777d0}
 \noindent
 Ali Ebrahimnejad (2016). \emph{New Method for Solving Fuzzy Transportation Problems With Lr Flat Fuzzy Numbers}, Information Sciences.
 
@@ -661,7 +688,7 @@ Jagdeep Kaur and Amit Kumar (2016). \emph{An Introduction to Fuzzy Linear Progra
 M. Yaghobi and M. Rabbani and M. Adabitabar Firozja and J. Vahidi (2014). \emph{Comparison of Fuzzy Numbers With Ranking Fuzzy and Real Number}, Journal of Mathematics and Computer Science.
 
 \noindent
-Mariano Jim{\'e}nez and Mar Arenas and Amelia Bilbao and M. Victoria RodrÄ±Â´guez (2007). \emph{Linear Programming With Fuzzy Parameters: an Interactive Method Resolution}, European Journal of Operational Research.
+Mariano Jim{\'e}nez and Mar Arenas and Amelia Bilbao and M. Victoria Rodr �guez (2007). \emph{Linear Programming With Fuzzy Parameters: an Interactive Method Resolution}, European Journal of Operational Research.
 
 \noindent
 Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof (2019). \emph{Fuzzy Activation of Rough Cognitive Ensembles Using OWA Operators}, Springer International Publishing.
