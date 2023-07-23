@@ -1,8 +1,8 @@
 [submodule "citation-database"]
 	path = citation-database
 	url = https://github.com/alexb7711/citation-database.git
-        branch = main
+	branch = main
 [submodule "milp-pap-paper-frontiers"]
 	path = sup-doc/milp-pap-paper-frontiers
 	url = https://github.com/alexb7711/milp-pap-paper-frontiers.git
-        branch = fuzzy-edits
+	branch = fuzzy-edits
