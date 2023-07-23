@@ -1,4 +1,4 @@
-% Created 2023-07-23 Sun 11:55
+% Created 2023-07-23 Sun 12:27
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt,a4paper,final]{article}
 \usepackage[a4paper, total={7in, 10in}]{geometry}
@@ -40,11 +40,11 @@
 \let\ref\autoref                            % Redifine `\ref` as `\autoref` because lazy
 
 \section{Introduction}
-\label{sec:org5626521}
+\label{sec:org668f99e}
 \section{Preliminaries}
-\label{sec:org73045e2}
+\label{sec:orgb6abf12}
 \subsection{Mixed Integer Linear Program}
-\label{sec:orgefd9e47}
+\label{sec:org43f13d9}
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
 set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
 constraints (Chen, Der-San and Batson, Robert G and Dang, Yu, 2010). Given a general objective function \(J\), decision variables (i.e. variables of
@@ -66,12 +66,12 @@ acts as an injective mapping to its number representation. In other words, every
 variable to value (Jagdeep Kaur and Amit Kumar, 2016).
 
 \subsection{Fuzzy Sets Theory}
-\label{sec:org2cd7137}
+\label{sec:org4e4b45d}
 This section introduces the notion of fuzzy numbers and some basic definitions. Concepts from this section are pulled
 from (H.-J. Zimmermann, 2001, Sapan Kumar Das and T. Mandal and S. A. Edalatpanah, 2016, M. Yaghobi and M. Rabbani and M. Adabitabar Firozja and J. Vahidi, 2014, Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019).
 
 \subsubsection{Fuzzy Sets}
-\label{sec:orge8ee005}
+\label{sec:org988272d}
 Let's begin with what a fuzzy number is not. A classical (crisp) set is defined as a collection of elements \(x \in X\).
 Crisp sets are binary, either an element belongs in the set, or it does not (H.-J. Zimmermann, 2001). For a
 fuzzy set, what is known as the characteristic function applies various degrees of membership for elements of a given
@@ -168,7 +168,7 @@ if \(m - \alpha\) is a real number.
 \end{definition}
 
 \subsubsection{Fuzzy Arithmetic}
-\label{sec:org10ef7cd}
+\label{sec:orgb294f73}
 If two triangular fuzzy numbers \(\tilde{a}_1 = \{a_1, a_2, a_3\}\) and \(\tilde{b}_1 = \{b_1, b_2, b_3\}\) are nonnegative
 then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 
@@ -182,7 +182,7 @@ then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 \end{equation}
 
 \subsubsection{Comparing Fuzzy Numbers}
-\label{sec:orge3e743c}
+\label{sec:org2769935}
 Fuzzy numbers do not directly provide a method of ordering nor do they always provide an ordered set like real numbers
 (Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019). There are multiple methods for ordering fuzzy numbers, each coming with advantages and
 disadvantages. Different properties have been applied to justify comparison of fuzzy numbers, such as: preference,
@@ -201,7 +201,7 @@ where \(|\cdot|\) represents the cardinality of the fuzzy number. In words, \ref
 of the values in the fuzzy number.
 
 \subsection{Fully Fuzzy Linear Programming}
-\label{sec:org6624ba1}
+\label{sec:org9417cee}
 Much like the MILP, Fully Fuzzy Linear Programs (FFLP), it is a class of constrained optimization in which one seeks to
 find a set of continuous variables that either maximizes or minimizes an objective function, \(J\), while satisfying a set
 of constraints. The key difference in FFLP is that it is designed to accommodate imprecise information
@@ -304,7 +304,7 @@ Expanding the set of equation and using the condensed notation in \ref{eq:nasser
 \end{equation}
 
 \section{The Crisp BAP and PAP}
-\label{sec:org03a324b}
+\label{sec:orgb92ef47}
 \subsection{The Position Allocation Problem}
 \label{sec:positionallocationproblem}
 This section provides a brief overview of the BAP and a detailed formulation of PAP as presented in
@@ -711,28 +711,28 @@ pairing. The last constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace}
 variable.
 
 \section{The Fuzzy BAP}
-\label{sec:org4cd5f29}
+\label{sec:orgf6c0d10}
 The following is a FFLP model to the continuous dynamical BAP that is able to allocate a quay to an incoming vessel
 (Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019). The model assumes that the arrival time, \(\tilde{a}\), berthing time, \(\tilde{u}\), and
 handling time, \(\tilde{p}\), are assumed to be imprecise. The objective of the model is to allocate all the vessels to
 different quays, according to several constraints minimizing the total waiting time for all the vessels. The model in
 its entirety is presented in \ref{eq:fuzzy-bap}. Note that a few modifications are made to the notation to accommodate the
-notation of (, , Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019) while attempting to remain as consistent as possible with
+notation of (Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019) while attempting to remain as consistent as possible with
 the notation presented in this paper. In this section, \(Q\) refers to the set of quays. Furthermore, the model is defined
 over multiple quays, thus indexing for position shall be written as \(v_{iq}\). Similarly, because of the added degree of
 freedom the spatiotemporal binary decision variables are represented as \(\sigma_{ijq}\) and \(\psi_{ijq}\).
 
 \begin{equation}
 \label{eq:fuzzy-bap}
-\begin{array}{rc}
-                                                               & min \sum_{q \in Q}\sum_{i \in I} (\tilde{m}_{iq} - \tilde{a}_i) \\
-\text{Subject to:}                                             &                                                       \\
-\sum_{q \in Q} v_{iq} = 1                                           & \forall i \in I;\; \forall q \in Q                                    \\
-\tilde{u}_{iq} \ge \tilde{a}_i                                   & \forall i \in I;\; \forall q \in Q                                    \\
-v_{iq} + l_i \le L_q                                             & \forall i \in I;\; \forall q \in Q                                    \\
-v_{iq} + l_i \le v_{jq} + M(1-\sigma_{ijq}^x)                         & \forall i,j \in I;\; i \ne j;\; \forall q \in Q                         \\
-\tilde{u}_{iq} + \tilde{s}_i \le T                               & \forall i \in I;\; \forall q \in Q                                    \\
-\tilde{u}_{iq} + \tilde{s}_i \le \tilde{u}_{iq + M(1-\psi{ijq}^y)} & \forall i,j \in I;\; i \ne j;\; \forall q \in Q                         \\
+\begin{array}{lll}
+                   & min \sum_{q \in Q}\sum_{i \in I} (\tilde{m}_{iq} - \tilde{a}_i)        &                                \\
+\text{Subject to:} &                                                          &                                    \\
+                   & \sum_{q \in Q} v_{iq} = 1                                       & \forall i \in I;\; \forall q \in Q               \\
+                   & \tilde{u}_{iq} \ge \tilde{a}_i                              & \forall i \in I;\; \forall q \in Q                \\
+                   & v_{iq} + l_i \le L_q                                        & \forall i \in I;\; \forall q \in Q                \\
+                   & v_{iq} + l_i \le v_{jq} + M(1-\sigma_{ijq}^x)                      & \forall i,j \in I;\; i \ne j;\; \forall q \in Q   \\
+                   & \tilde{u}_{iq} + \tilde{s}_i \le T                          & \forall i \in I;\; \forall q \in Q                \\
+                   & \tilde{u}_{iq} + \tilde{s}_i \le \tilde{u}_{iq + M(1-\psi{ijq}^y)} & \forall i,j \in I;\; i \ne j;\; \forall q \in Q \\
 \end{array}
 \end{equation}
 
@@ -740,7 +740,7 @@ One may note the similarities to the previously presented BAB and PAP models in 
 exactly defined in a way useful to the purposes of this paper. The adaptation of the Fuzzy BAP (FBAP) is discussed next.
 
 \section{Fuzzy PAP}
-\label{sec:org79c4295}
+\label{sec:org1705e27}
 
 \bibliographystyle{plain}
 \bibliography{citation-database/lit-ref.bib, citation-database/lib-ref.bib}
