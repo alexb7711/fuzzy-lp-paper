@@ -301,7 +301,7 @@ its entirety is presented in [[eq:fuzzy-bap]]. Note that a few modifications are
 notation of [cite:@bello-2019-fuzzy-activ] while attempting to remain as consistent as possible with the notation
 presented in this paper. In this section, $Q$ refers to the set of quays. Furthermore, the model is defined over
 multiple quays, thus indexing for position shall be written as $v_{iq}$. Similarly, because of the added degree of
-freedom the spatiotemporal binary decision variables are represented as $\sigma_{ijq}$ and $\psi_{ijq}$.
+freedom, the spatiotemporal binary decision variables are represented as $\sigma_{ijq}$ and $\psi_{ijq}$.
 
 # TODO: Verify \sigma and \psi in these equations
 
