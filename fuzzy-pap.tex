@@ -1,4 +1,4 @@
-% Created 2023-07-19 Wed 20:22
+% Created 2023-07-23 Sun 13:44
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt,a4paper,final]{article}
 \usepackage[a4paper, total={7in, 10in}]{geometry}
@@ -18,6 +18,9 @@
 \usepackage{amssymb}
 \usepackage{capt-of}
 \usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\include{sup-doc/milp-pap-paper-frontiers/tex/preamble.tex}
 \newtheorem{definition}{Definition}[section]
 \author{Alexander Brown}
 \date{\today}
@@ -36,10 +39,12 @@
 
 \let\ref\autoref                            % Redifine `\ref` as `\autoref` because lazy
 
+\section{Introduction}
+\label{sec:orgb47b9bc}
 \section{Preliminaries}
-\label{sec:orgf93db56}
+\label{sec:org64d2501}
 \subsection{Mixed Integer Linear Program}
-\label{sec:orgeec5c14}
+\label{sec:orga908cb9}
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
 set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
 constraints (Chen, Der-San and Batson, Robert G and Dang, Yu, 2010). Given a general objective function \(J\), decision variables (i.e. variables of
@@ -61,12 +66,12 @@ acts as an injective mapping to its number representation. In other words, every
 variable to value (Jagdeep Kaur and Amit Kumar, 2016).
 
 \subsection{Fuzzy Sets Theory}
-\label{sec:orga37fca3}
+\label{sec:orgc324b5c}
 This section introduces the notion of fuzzy numbers and some basic definitions. Concepts from this section are pulled
 from (H.-J. Zimmermann, 2001, Sapan Kumar Das and T. Mandal and S. A. Edalatpanah, 2016, M. Yaghobi and M. Rabbani and M. Adabitabar Firozja and J. Vahidi, 2014, Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019).
 
 \subsubsection{Fuzzy Sets}
-\label{sec:org4c08601}
+\label{sec:org2110fbc}
 Let's begin with what a fuzzy number is not. A classical (crisp) set is defined as a collection of elements \(x \in X\).
 Crisp sets are binary, either an element belongs in the set, or it does not (H.-J. Zimmermann, 2001). For a
 fuzzy set, what is known as the characteristic function applies various degrees of membership for elements of a given
@@ -163,7 +168,7 @@ if \(m - \alpha\) is a real number.
 \end{definition}
 
 \subsubsection{Fuzzy Arithmetic}
-\label{sec:org25314e2}
+\label{sec:org94cef83}
 If two triangular fuzzy numbers \(\tilde{a}_1 = \{a_1, a_2, a_3\}\) and \(\tilde{b}_1 = \{b_1, b_2, b_3\}\) are nonnegative
 then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 
@@ -177,7 +182,7 @@ then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 \end{equation}
 
 \subsubsection{Comparing Fuzzy Numbers}
-\label{sec:org645e590}
+\label{sec:org136958f}
 Fuzzy numbers do not directly provide a method of ordering nor do they always provide an ordered set like real numbers
 (Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019). There are multiple methods for ordering fuzzy numbers, each coming with advantages and
 disadvantages. Different properties have been applied to justify comparison of fuzzy numbers, such as: preference,
@@ -196,7 +201,7 @@ where \(|\cdot|\) represents the cardinality of the fuzzy number. In words, \ref
 of the values in the fuzzy number.
 
 \subsection{Fully Fuzzy Linear Programming}
-\label{sec:orgad956b3}
+\label{sec:orgd10ee08}
 Much like the MILP, Fully Fuzzy Linear Programs (FFLP), it is a class of constrained optimization in which one seeks to
 find a set of continuous variables that either maximizes or minimizes an objective function, \(J\), while satisfying a set
 of constraints. The key difference in FFLP is that it is designed to accommodate imprecise information
@@ -299,135 +304,445 @@ Expanding the set of equation and using the condensed notation in \ref{eq:nasser
 \end{equation}
 
 \section{The Crisp BAP and PAP}
-\label{sec:orgf78824b}
-\subsection{The Berth Allocation Problem}
-\label{sec:orgfc280b4}
-The BAP models the optimal distribution of container ships to terminals in order to be serviced. The allocation of the
-ships depends primarily on the size of the ship and its service time
-(Pablo Frojan and Juan Francisco Correcher and Ramon Alvarez-Valdes and Gerasimos Koulouris and Jose Manuel Tamarit, 2015, Akio Imai and Etsuko Nishimura and Stratos Papadimitriou, 2001, Katja Buhrkal and Sara Zuglian and Stefan Ropke and Jesper Larsen and Richard Lusby, 2011). Most BAP models assume the service
-time, size, and preferred terminals to be the input parameters and have delay, deviation from ideal position to be the decision
-variables (Pablo Frojan and Juan Francisco Correcher and Ramon Alvarez-Valdes and Gerasimos Koulouris and Jose Manuel Tamarit, 2015, Akio Imai and Etsuko Nishimura and Stratos Papadimitriou, 2001, Katja Buhrkal and Sara Zuglian and Stefan Ropke and Jesper Larsen and Richard Lusby, 2011). A general formulation for the
-BAP of a single quay is described in \ref{eq:generalbap}. The variables are as described in \ref{tab:bapvariables}.
+\label{sec:orgc856390}
+\subsection{The Position Allocation Problem}
+\label{sec:positionallocationproblem}
+This section provides a brief overview of the BAP and a detailed formulation of PAP as presented in
+\cite{qarebagh-2019-optim-sched}.
 
-The equations will now be explained. \autoref{subeq:bapobj} is the objective function for the BAP. In this form, it is
-attempting to minimize the total time from arrival to service completion. \autoref{subeq:baptemporal} is a big-M
-constraint that is used to check if ship \(i\)'s service time ends before ship \(i\). That is \(\sigma_{ij}=1\) if \(a_j \ge a_i -
-s_i\) and \(\sigma_{ij} = 0\) otherwise. Similarly, \autoref{subeq:bapspatial} checks if ship \(i\) is as below ship \(j\). That is
-\(\psi_{ij} = 1\) if \(v_j \ge v_i - s_i\) and \(\psi_{ij} = 0\) otherwise. The equations \autoref{subeq:bapvalidpos} -
-\autoref{subeq:bappsi} ensure that ship \(j\) is either assigned after ship \(i\) has finished its service and/or \(j\) is
-assigned below ship \(i\); however, \(\sigma_{ij} = \sigma_{ji} \ne 1\) or \(\psi_{ij} = \psi_{ji} \ne 1\). That is to say a ship cannot be queued
-before and after another or be queued above and below another simultaneously. \autoref{subeq:bapdetach} represents the
-time the ship will depart from the berth after being serviced. \autoref{subeq:bapvalidtime} ensures that the arrival
-time is less than the starting ervice time and that the starting service time is early enough such that the total time
-spent servicing the vessel is less than the time horizon. \autoref{subeq:bapspaces} defines the sets for each decision
-variable.
+\subsubsection{Overview of BAP}
+The BAP is a rectangle packing problem where a set of rectangles, \(\mathbb{O}\), are attempted to be optimally placed in
+a larger rectangle, \(O\), as shown in \autoref{fig:packexample}. The rectangle packing problem is an NP-hard problem that
+can be used to describe many real life problems \cite{bruin-2013-rectan-packin,murata-1995-rectan}. In some of these
+problems, the dimensions of \(\mathbb{O}\) are held constant such as in the problem of packing modules on a chip, where
+the widths and height of the rectangles represent the physical width and heights of the modules
+\cite{murata-1995-rectan}. Other problems, such as the BAP can allow one side of the rectangle to vary depending on its
+assigned position (e.g. the varying lengths of the vessels) \cite{buhrkal-2011-model-discr}.
 
-\begin{subequations}
-\label{eq:generalbap}
-\label{eq:bapconstrs}
-\begin{align}
-    \text{Minimize }   & \sum_{i=1}^I (e_i - a_i)                                       \label{subeq:bapobj}    \\
-    \text{subject to } &a_j - a_i - s_i - (\sigma_{ij} - 1)T \geq 0                         \label{subeq:baptemporal}         \\
-                       &v_j - v_i - s_i - (\psi_{ij} - 1)S \geq 0                         \label{subeq:bapspatial}        \\
-                       &\sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1                       \label{subeq:bapvalidpos}    \\
-                       &\sigma_{ij} + \sigma_{ji} \leq 1                                         \label{subeq:bapsigma}        \\
-                       &\psi_{ij} + \psi_{ji} \leq 1                                         \label{subeq:bappsi}        \\
-                       &s_i + a_i = e_i                                             \label{subeq:bapdetach}       \\
-                       &a_i \leq u_i \leq (T - s_i)                                       \label{subeq:bapvalidtime} \\
-                       &\sigma_{ij} \in \{0,1\},\;\psi_{ij} \in \{0,1\}\; v_i \in [0 \mbox{ } S ] \label{subeq:bapspaces}
-\end{align}
-\end{subequations}
+The BAP solves the problem of optimally assigning incoming vessels to berth positions to be serviced
+(\autoref{subfig:bapexample}). The width and height of \(O\) time horizon \(T\) and represent the berth length \(S\),
+respectively. Similarly, the width and height for \(\mathbb{O}\) represent the time spent to service vessel \(i\) and the
+space taken by docking vessel \(i\), respectively. In the BAP, the vessel characteristics (length of the vessel, arrival
+time, handling time, desired departure time) are assumed to be known for all vessels to be serviced. A representation of
+a BAP solution is shown in \autoref{fig:bap}. The x and y-axis represent time and space, respectively. The grey squares,
+labeled A, B, C, and D, represent berthed vessels. The width of the boxes represent the time spent being serviced, and
+the height represents the amount of space the vessel requires on the berth. The vertical line adjacent
+ ``Arrival Time'' represents the actual
+time that the vessel arrives and is available to be berthed. ``Berthing Time'' is the time the vessel is berthed and
+begins being serviced. ``Completion time'' represents the time at which the berthing space becomes available again.
 
-\begin{table}[htbp]
-\caption{\label{tab:bapvariables}Table of variables used for the BAP}
-\centering
-\begin{tabular}{ll}
-\textbf{Variable} & \textbf{Description}\\[0pt]
-\hline
-Input constants & \\[0pt]
-\(I\) & Number of total ships\\[0pt]
-\hline
-Input variables & \\[0pt]
-\(a_i\) & Arrival time of ship \(i\)\\[0pt]
-\(e_i\) & Time ship \(i\) must departs the berth\\[0pt]
-\hline
-Decision Variables & \\[0pt]
-\(\psi_{ij}\) & Tracks spatial overlap for ships \((i,j)\)\\[0pt]
-\(\sigma_{ij}\) & Tracks temporal overlap for ships \((i,j)\)\\[0pt]
-\(s_i\) & Service time for ship \(i\)\\[0pt]
-\(u_i\) & Service start time for ship \(i\)\\[0pt]
-\(v_i\) & Assigned quay for ship \(i\)\\[0pt]
-\hline
-\end{tabular}
-\end{table}
-
-\subsection{The Position Allocation Problem (from MILP paper)}
-\label{sec:org5856a6e}
-The BAP formulation forms the basis of the PAP; however, there are some differences in the way the variables are
-interpreted. Using the same formulation as \ref{eq:generalbap}, the \(i^{th}\) visit, the starting service time, \(u_i\), is now
-the starting charge time, the berth location, \(v_i\), is now the charger queue for assignment, and the service time,
-\(s_i\), is now the time to charge. The PAP utilizes a number of parameters. The following parameters are constants.
+\subsubsection{The PAP Formulation}
+The BAP forms the basis of the PAP; however, there are some differences in the way the variables are interpreted. For the
+\(i^{th}\) visit, starting service time, \(u_i\), is now the starting charge time, the berth location, \(v_i\), is now the
+charger queue for assignment, and the service time, \(s_i\), is now the elapsed charge time. There are also a few clarifying concepts
+about how the system is modeled. The PAP models the set of chargers as one continuous line; that is, the natural
+behavior of the PAP model is to allow vehicles to be queued anywhere along \([0,S]\). Similarly, the charge times are
+continuous and can be placed anywhere on the time horizon, \([0,T]\), as long as the allocated times do not interfere with
+other scheduled charge times. The PAP formulation's parameters can be divided into two categories: input parameters and
+decision variables. Each type will now be introduced. The following parameters are constant inputs into the MILP.
 
 \begin{itemize}
-\item \(Q\)   : charger length
-\item \(T\)   : time horizon
-\item \(N\)   : number of incoming vehicles
-\item \(s_i\) : charging time for vehicle \(i;\; 1 \leq i \leq N\)
-\item \(a_i\) : arrival time of vehicle \(i;\; 1 \leq i \leq N\)
+	\item $S$   : Size of the vehicle
+	\item $T$   : time horizon
+	\item $n_V$ : total number of incoming vehicles
+	\item $s_i$ : charging time for vehicle $i;\; 1 \leq i \leq n_N$
+	\item $s_i$ : width of vehicle $i;\; 1 \leq i \leq n_N$
+	\item $a_i$ : arrival time of vehicle $i;\; 1 \leq i \leq n_N$
 \end{itemize}
 
 These constants define the problem bounds. The following list provides a series of decision variables used in the
 formulation.
 
 \begin{itemize}
-\item \(u_i\)         : starting time of service for vehicle \(i;\; 1 \leq i \leq N\)
-\item \(v_i\)         : charge location \(i;\; 1 \leq i \leq N\)
-\item \(e_i\)         : departure time for vehicle \(i;\; 1 \leq i \leq N\)
-\item \(\sigma_{ij}\) : binary variable that determines ordering of vehicles \(i\) and \(j\) in time
-\item \(\psi_{ij}\)   : binary variable that determines relative position of vehicles \(i\) and \(j\) when charging simultaneously
+    \item $u_i$    : starting charge time for vehicle $i;\; 1 \leq i \leq n_N$
+    \item $v_i$    : assigned charge queue for vehicle $i;\; 1 \leq i \leq n_N$
+    \item $d_i$    : departure time for vehicle $i;\; 1 \leq i \leq n_N$
+    \item $\sigma_{ij}$ : binary variable that determines ordering of vehicles $i$ and $j$ in time
+    \item $\psi_{ij}$ : binary variable that determines relative position of vehicles $i$ and $j$ when charging simultaneously
 \end{itemize}
 
-\section{References}
-\label{sec:org4262e70}
-\noindent
-Akio Imai and Etsuko Nishimura and Stratos Papadimitriou (2001). \emph{The Dynamic Berth Allocation Problem for a Container Port}, Elsevier {BV}.
+To determine the values for each of these decision variables, a MILP is formulated in \cite{qarebagh-2019-optim-sched}
+and shown here for completeness.
+
+\begin{equation}
+	\label{eq:bapobjective}
+	\min\; \sum_{i=1}^N (d_i - a_i)
+\end{equation}
+Subject to:
+\begin{subequations}
+\label{eq:bapconstrs}
+\begin{align}
+    u_j - u_i - s_i - (\sigma_{ij} - 1)T \geq 0                  \label{subeq:baptime}          \\
+    v_j - v_i - s_i - (\psi_{ij} - 1)S \geq 0                \label{subeq:bapspace}           \\
+    \sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1 \label{subeq:bapvalid_pos}     \\
+    \sigma_{ij} + \sigma_{ji} \leq 1                              \label{subeq:bapsigma}        \\
+    \psi_{ij} + \psi_{ji} \leq 1                              \label{subeq:bapdelta}        \\
+    s_i + u_i = d_i                                               \label{subeq:bapdetach}       \\
+    a_i \leq u_i \leq (T - s_i)                                   \label{subeq:bapvalid_starts} \\
+    \sigma_{ij} \in \{0,1\},\;\psi_{ij} \in \{0,1\}\;           \label{subeq:bapsdspace}      \\
+    v_i \in [0, S ]                                               \label{subeq:bapvspace}
+\end{align}
+\end{subequations}
 
 \noindent
-Ali Ebrahimnejad (2016). \emph{New Method for Solving Fuzzy Transportation Problems With Lr Flat Fuzzy Numbers}, Information Sciences.
+
+The objective function, \autoref{eq:bapobjective}, minimizes the time spent to service each vehicle by minimizing over
+the sum of differences between the departure time, \(d_i\), and arrival time, \(a_i\). i.e., It seeks to get each vehicle
+charged and on its way as quickly as possible.
+
+\autoref{subeq:baptime}-\autoref{subeq:bapdelta} are used to ensure that individual rectangles do not overlap. For the
+PAP, they ensure that two vehicles charging simultaneously are at different positions and, similarly, two vehicles that
+have overlapping positions do not overlap temporally. \autoref{subeq:baptime} establishes temporal ordering when active
+(\(\sigma_{ij}=1\)). Similarly, when \(\psi_{ij} =1\) in \autoref{subeq:bapspace} then spatial ordering is established. Constraints
+\autoref{subeq:bapvalid_pos}-\autoref{subeq:bapdelta} enforce that spatial and/or temporal ordering is established
+between each possible queue/vehicle pair. Constraints \autoref{subeq:bapsigma} and \autoref{subeq:bapdelta} enforce
+consistency. For example, \autoref{subeq:bapsigma} enforces that vehicle \(i\) cannot come before vehicle \(j\) and vehicle
+\(j\) simultaneously come before vehicle \(i\).
+
+The last constraints force relationships between arrival time, charge start time, and departure time.
+\autoref{subeq:bapdetach} states that the service start time, \(u_i\), plus the time to service vehicle \(i\), \(s_i\), must
+equal the departure time, \(d_i\). \autoref{subeq:bapvalid_starts} enforces the arrival time, \(a_i\), to be less than or
+equal to the service start time, \(u_i\), which in turn must be less than or equal to the latest time the vehicle may
+begin to be serviced to stay within the time horizon. \autoref{subeq:bapsdspace} ensures that \(\sigma_{ij}\) and
+\(\psi_{ij}\) are binary. \autoref{subeq:bapvspace} ensures that the assigned value of \(v_i\) is a valid charging position.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=1]{./sup-doc/milp-pap-paper-frontiers/img/spatiotemporal-packing.pdf}
+\caption{\label{fig:packexample}Example of rectangle packing problem.}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=1]{./sup-doc/milp-pap-paper-frontiers/img/bap.pdf}
+\caption{\label{subfig:bapexample}Example of position allocation. Vehicles are placed in queues to be charged and move in the direction indicated by the arrow.}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=1]{./sup-doc/milp-pap-paper-frontiers/img/baprep.pdf}
+\caption{\label{fig:bap}The representation of the berth-time space}
+\end{figure}
+
+\begin{table}[!htpb]
+  \caption{Notation used throughout the paper}
+  \label{tab:variables}
+  \centering
+  \begin{tabularx}{\textwidth}{l l}
+    \toprule
+    \textbf{Variable} & \textbf{Description}                                                                               \\
+    \toprule
+    \multicolumn{2}{l}{Input values}                                                                                       \\
+    $n_B$        & Number of buses                                                                                         \\
+    $M$          & An arbitrary very large upper bound value                                                               \\
+    $n_V$        & Number of total visits                                                                                  \\
+    $n_Q$        & Number of queues                                                                                        \\
+    $n_C$ 	 & Number of chargers                                                                                      \\
+    $\mathbb{V}$ & Set of visit indices, $\mathbb{V} = \{1, ..., n_V\}$                                                    \\
+    $\mathbb{B}$ & Set of bus indices, $\mathbb{B} = \{1, ..., n_B\}$                                                      \\
+    $\mathbb{Q}$          & Set of queue indices, $\mathbb{Q} = \{1, ..., n_Q\}$                                                             \\
+    $i,j$        & Indices used to refer to visits                                                                         \\
+    $b$ 	 & Index used to refer to a bus                                                                            \\
+    $q$ 	 & Index used to refer to a queue                                                                          \\
+    \hline
+    \multicolumn{2}{l}{Problem definition parameters}                                                                      \\
+    $\Gamma$   & $\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ with $\Gamma_i$ used to denote the bus for visit $i$                                   \\
+    $\alpha_i$ & Initial charge percentage time for visit $i$                                                                   \\
+    $\beta_i$ & Final charge percentage for bus $i$ at the end of the time horizon                                             \\
+    $\epsilon_q$ & Cost of using charger $q$ per unit time                                                                        \\
+    $\Upsilon$   & $\Upsilon: \mathbb{V} \rightarrow \mathbb{V}$ mapping a visit to the next visit by the same bus with $\Upsilon_i$ being the shorthand. \\
+    $\kappa_b$ & Battery capacity for bus $b$                                                                                   \\
+    $\Delta_i$ & Discharge of visit over route $i$                                                                              \\
+    $\nu_b$ & Minimum charge allowed for bus $b$                                                                             \\
+    $\tau_i$ & Time visit $i$ must depart the station                                                                         \\
+    $\zeta_b$ & Discharge rate for bus $b$                                                                                     \\
+    $a_i$ & Arrival time of visit  $i$                                                                                     \\
+    $i_0$ & Indices associated with the initial arrival for every bus in $A$                                               \\
+    $i_f$ & Indices associated with the final arrival for every bus in $A$                                                 \\
+    $m_q$ & Cost of a visit being assigned to charger $q$                                                                  \\
+    $r_q$ & Charge rate of charger $q$ per unit time                                                                       \\
+    \hline
+    \multicolumn{2}{l}{Decision Variables}                                                                                 \\
+    $\psi_{ij}$ & Binary variable determining spatial ordering of vehicles $i$ and $j$                                       \\
+    $\eta_i$    & Initial charge for visit $i$                                                                                \\
+    $\sigma{ij}$ & Binary variable determining temporal ordering of vehicles $i$ and $j$                                       \\
+    $d_i$    & Ending charge time for visit $i$                                                                            \\
+    $g_{iq}$ & The charge gain for visit $i$ from charger $q$                                                              \\
+    $s_i$    & Amount of time spent on charger for visit $i$                                                               \\
+    $u_i$    & Starting charge time of visit $i$                                                                           \\
+    $v_i$    & Assigned queue for visit $i$                                                                                \\
+    $w_{iq}$ & Binary assignment variable for visit $i$ to queue $q$                                                       \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{A Rectangle Packing Formulation for BEB Charging}  \label{sec:problemformulation}
+
+Applying the PAP to BEB charging requires four fundamental changes. The first is that the time that a BEB spends
+charging is allowed to vary. Thus, \(s_i\) becomes a variable of optimization. Second, in the PAP each charging visit is
+assumed to be a different vehicle. For the BEB charging problem, each bus may make multiple visits to the station
+throughout the day and the resulting charge for a bus at a given time is dependent upon each of the prior visits made.
+The third fundamental change is related to the first two. The charge of each bus must be tracked in
+the optimization to ensure that charging across multiple visits is sufficient to allow each bus to execute its route throughout the day.
+The final change in the PAP, the charger is one continuous bar with vehicle width effectively restricting the number of vehicles
+charging simultaneously. For the BEB, it is assumed that a discrete number of chargers exist. Moreover, it is assumed
+that these chargers have different charge rates.
+
+The discussion of the four changes are separated into two sections. \autoref{sec:queuing} discusses the changes in the
+spatial-temporal constraint formulation to form a queuing constraint. \autoref{sec:batt_dynamics} then discusses the
+addition of the bus charge management. This section ends with a brief discussion of a modified objective function and
+the statement of the full problem in \autoref{sec:BEB_MILP}. The notation is explained throughout and summarized in
+\autoref{tab:variables}.
+
+\subsubsection{Queuing Constraints} \label{sec:queuing}
 
 \noindent
-Chen, Der-San and Batson, Robert G and Dang, Yu (2010). \emph{Applied integer programming}, Wiley.
+The queuing constraints ensure that the busses entering the queues for charging are assigned in a feasible manner as
+they come into the station. There are three sets to differentiate between different entities. \(\mathbb{B} = \{1, ...,
+n_B\}\) is the set of bus indices with index \(b\) used to denote an individual bus, \(\mathbb{Q} = \{1, ..., n_Q\}\) is the set of
+queues with index \(q\) used to denote an individual queue, and \(\mathbb{V} = \{1, ..., n_V\}\) is a set of visits to the
+station with \(i,j\) used to refer to individual visits. The mapping \(\Gamma: \mathbb{V} \rightarrow \mathbb{B}\) is used to map a visit
+index to a bus index with the shorthand \(\Gamma_i\) used to refer to the bus index for visit \(i\).
+
+Most variables are now defined in terms of a visit. Two separate visits could correspond to different buses or visits by
+the same bus. The PAP spatial variable, \(s_i\), is removed and \(v_i\) is made to be an integer corresponding to which
+queue visit \(i\) will be using. Thus, when \(\psi_{ij} = 1\), vehicle \(i\) is queued to a charger that has a larger index than
+the charger that vehicle \(j\) is queued, i.e., \(v_i-v_j \geq 1\). The variable \(S\) is likewise replaced with \(n_Q\). Note that
+\(n_Q = n_B + n_C\), where \(n_B\) is the number of busses and \(n_C\) is the number of chargers. The rationale for having
+more queues than chargers is to allow buses to sit idle instead of requiring the bus to charge at each visit. The
+modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
+
+\begin{subequations}
+\label{eq:packconstrs}
+\begin{align}
+    v_i - v_j - (\psi_{ij} - 1)n_Q \geq 1       \label{subeq:space}        \\
+    d_i \leq \tau_i                             \label{subeq:valid_depart} \\
+    s_i \geq 0                               \label{subeq:pos_charge} \\
+    v_i \in \mathbb{Q}                       \label{subeq:vspace}
+\end{align}
+\end{subequations}
+
+The constraint in \autoref{subeq:space} is nearly identical to \autoref{subeq:bapspace}, but rather than viewing the
+charger as a continuous strip of length \(S\), it is discretized into \(n_Q\) queues a width of unit length one. A BEB is
+also assigned a unit length of one which is reflected in \autoref{subeq:space} by \(\cdot \geq 1\). \autoref{subeq:valid_depart}
+ensures that the time the BEB is detatched from the charger, \(d_i\), is before its departure time, \(\tau_i\).
+\autoref{subeq:vspace} defines the integer set of indices for queues for \(v_i\).
+
+\subsubsection{Battery Charge Dynamic Constraints}
+\label{sec:batt_dynamics}
+Battery dynamic constraints are now introduced to relate busses to visits and guarantee that buses have sufficient time
+to charge. Two constraints are enforced on the bus charge: busses must always have sufficient charge to execute their
+respective routes and each bus must end the day with a specific charge threshold, preparatory for the next day.
+
+The charge at the beginning of visit \(i\) is denoted as \(\eta_i\). As a charge on the bus is dependent upon the visits that
+bus makes to the station, the mapping \(\Upsilon: \mathbb{V} \rightarrow \mathbb{V} \bigcup \{\varnothing\}\) is used to determine the next visit
+that corresponds to the same bus, with \(\Upsilon_i\) being shorthand notation. Thus, \(\Gamma_i\) and \(\Gamma_{\Upsilon_i}\) would both map to the
+same bus index as long as \(\Upsilon_i\) is not the null element, \(\varnothing\). That is, \(\Gamma_{\Upsilon_i}\) where \(\Upsilon_i = 0\) indicates
+that there are no future visits for bus \(i\).
+
+To drive time spent on the charger, \(s_i\), as well as define initial, final, and intermediate bus charges for each visit
+\(i\), the sets for initial and final visits must be defined. Let the mapping of the first visit by each bus be denoted as
+\(\Gamma^0_i : \mathbb{B} \rightarrow \mathbb{V}\). The indexed value of \(\Gamma^0_i\) represents the index for the first visit of bus \(b\) or
+the null element, \(\varnothing\). Similarly, let \(\Gamma^f_i : \mathbb{B} \rightarrow \mathbb{B}\) contain the indexes for the final
+visit of each bus \(b\) or the null element. The initial and final bus charge percentages, \(\alpha\) and \(\beta\), can then be
+represented by the constraint equations \(\eta_{\Gamma^0_i} = \alpha \kappa_{\Gamma^0_i}\) and \(\eta_{\Gamma^f_i} = \beta \kappa_{\Gamma^f_i}\), respectively. The
+intermediate charges must be determined at solve time.
+
+It is assumed that the charge received is proportional to the time spent charging. The charge rate for charger \(q\) is
+denoted as \(r_q\). Note that a value of \(r_q = 0\) corresponds to a queue where no charging occurs. A bus in such a queue
+is simply waiting for the departure time. The queue indices are ordered such that the final \(n_B\) queues have \(r_q = 0\)
+to allow an arbitrary number of buses to sit idle at any given moment in time. The amount of discharge between visits
+\(i\) and \(\Upsilon_i\), the next visit of the same bus, is denoted as \(\Delta_i\). If visit \(i\) occurred at charger \(q\), the charge of
+the bus coming into visit \(\Upsilon_i\) would be \(\eta_{\Upsilon_i} = \eta_i + s_i r_q - \Delta_i\).
+
+The binary decision variable \(w_{iq}\) is introduced to determine whether visit \(i\) uses charger \(q\). This allows the
+charge of the bus coming into visit \(\Upsilon_i\) to be written in summation form as
+
+\begin{subequations}
+    \label{subeq:pre_next_charge}
+\begin{align}
+    \eta_{\Upsilon_i} = \eta_i + \sum_{q=1}^{n_Q} s_i w_{iq} r_q - \Delta_i  \\
+    \sum_{q=1}^{n_Q} w_{iq} = 1 \\
+    w_{iq} \in \{0,1\}
+\end{align}
+\end{subequations}
+
+The choice of queue for visit \(i\), becomes a slack variable and is defined in terms of \(w_{iq}\) as
+
+\begin{equation}
+    v_i = \sum_{q=1}^{n_Q} qw_{iq}
+\end{equation}
+
+Maximum and minimum values for the charges are included to ensure that the battery is not overcharged and to guarantee
+sufficient charge for subsequent visits. The upper and lower battery charge bounds for bus \(b\) are \(\kappa_b\) and \(\nu_b \kappa_b\),
+respectively0 \(\kappa_b\) is the battery capacity and \(\nu_b\) is a percent value. As \(\eta_i\) corresponds to the charge at the
+beginning of the visit, the upper bound constraint must also include the charge received during the visit as follows.
+
+\begin{subequations}
+    \label{subeq:pre_min_max}
+\begin{align}
+    \eta_i + \sum_{q=1}^{n_Q} s_i w_{iq} r_q \leq \kappa_{\Gamma_i}                 \\
+    \eta_i \geq \nu_{\Gamma_i} \kappa_{\Gamma_i}
+\end{align}
+\end{subequations}
+
+Note that the term \(s_i w_{iq}\) is a bilinear term. A standard way of linearizing a bilinear term that contains an
+integer variable is by introducing a slack variable with an either/or constraint
+\cite{chen-2010-applied,rodriguez-2013-compar-asses}. Allowing the slack variable \(g_{iq}\) to be equal to \(s_i w_{iq}\),
+\(g_{iq}\) can be defined as
+
+\begin{equation}
+    \label{eq:giq_cases}
+    g_{iq} =
+    \begin{cases}
+        s_i & w_{iq} = 1 \\
+        0 & w_{iq} = 0
+    \end{cases}.
+\end{equation}
+
+\autoref{eq:giq_cases} can be expressed as a mixed integer constraint using big-M notation with the following four
+constraints.
+
+\begin{subequations}
+    \label{eq:slack_gain}
+\begin{align}
+    s_i - (1 - w_{iq})M \leq g_{iq}  \label{subeq:repgpgret} \\
+    s_i \geq g_{iq}                 \label{subeq:repgples} \\
+    Mw_{iq} \geq g_{iq}              \label{subeq:repgwgret} \\
+    0 \leq g_{iq}                   \label{subeq:repgwles}
+\end{align}
+\end{subequations}
 
 \noindent
-H.-J. Zimmermann (2001). \emph{Fuzzy Set Theory-and Its Applications}, Springer Netherlands.
+where \(M\) is a large value. If \(w_{iq} = 1\) then \autoref{subeq:repgpgret} and \autoref{subeq:repgples} become \(s_i \leq
+g_{iq}\) and \(s_i \geq g_{iq}\), forcing \(s_i = g_{iq}\) with \autoref{subeq:repgwgret} being inactive. If \(w_{iq} = 0\),
+\autoref{subeq:repgpgret} is inactive and \autoref{subeq:repgwgret} and \autoref{subeq:repgwles} force \(g_{iq} = 0\).
 
-\noindent
-Jagdeep Kaur and Amit Kumar (2016). \emph{An Introduction to Fuzzy Linear Programming Problems}, Springer International Publishing.
+\subsubsection{The BEB Charging Problem} \label{sec:BEB_MILP}
+The goal of the MILP is to utilize chargers as little as possible to reduce energy costs with the fast charging being
+penalized more to reduce battery damage. Thus, an assignment cost \(m_q\) and usage cost \(\epsilon_q\) are associated with each
+charger, \(q\). These weights can be adjusted based on charger type or time of day that the visit occurs. The assignment
+term takes the form \(w_{iq}m_q\), and the usage term takes the form \(g_{iq} \epsilon_q\). The resulting BEB charging problem is
+defined in \autoref{eq:objective}.
 
-\noindent
-Katja Buhrkal and Sara Zuglian and Stefan Ropke and Jesper Larsen and Richard Lusby (2011). \emph{Models for the Discrete Berth Allocation Problem: a Computational Comparison}, Transportation Research Part E: Logistics and Transportation Review.
+\begin{equation}
+\label{eq:objective}
+	\min \sum_{i=1}^N \sum_{q=1}^{n_Q} \Big( w_{iq} m_q + g_{iq} \epsilon_q \Big) \\
+\end{equation}
 
-\noindent
-M. Yaghobi and M. Rabbani and M. Adabitabar Firozja and J. Vahidi (2014). \emph{Comparison of Fuzzy Numbers With Ranking Fuzzy and Real Number}, Journal of Mathematics and Computer Science.
+Subject to the constraints
 
-\noindent
-Mariano Jim{\'e}nez and Mar Arenas and Amelia Bilbao and M. Victoria Rodrı´guez (2007). \emph{Linear Programming With Fuzzy Parameters: an Interactive Method Resolution}, European Journal of Operational Research.
+\begin{multicols}{2}
+\begin{subequations}
+                                                     \label{eq:dynconstrs}
+\begin{equation}
+    u_i - u_j - s_j - (\sigma_{ij} - 1)T \geq 0              \label{subeq:m_time}         \\
+\end{equation}
+\begin{equation}
+    v_i - v_j - (\psi_{ij} - 1)n_Q \geq 1                  \label{subeq:m_space}        \\
+\end{equation}
+\begin{equation}
+    \sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1            \label{subeq:m_valid_pos}    \\
+\end{equation}
+\begin{equation}
+    \sigma_{ij} + \sigma_{ji} \leq 1                              \label{subeq:m_sigma}        \\
+\end{equation}
+\begin{equation}
+    \psi_{ij} + \psi_{ji} \leq 1                              \label{subeq:m_delta}        \\
+\end{equation}
+\begin{equation}
+    s_i + u_i = d_i                                  \label{subeq:m_detach}       \\
+\end{equation}
+\begin{equation}
+    \eta_{\Gamma^0_i} = \alpha \kappa_{\Gamma^0_i}                           \label{subeq:init_charge}    \\
+\end{equation}
+\begin{equation}
+    a_i \leq u_i \leq (T - s_i)                            \label{subeq:m_valid_starts} \\
+\end{equation}
+\begin{equation}
+    d_i \leq \tau_i                                        \label{subeq:m_valid_depart} \\
+\end{equation}
+\begin{equation}
+    \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i = \eta_{\gamma_i}   \label{subeq:next_charge}    \\
+\end{equation}
+\begin{equation}
+    \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i \geq \nu \kappa_{\Gamma_i} \label{subeq:min_charge}     \\
+\end{equation}
+\begin{equation}
+    \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q \leq \kappa_{\Gamma_i}         \label{subeq:max_charge}     \\
+\end{equation}
+\begin{equation}
+    \eta_{\Gamma^f_i} \geq \beta \kappa_{\Gamma^f_i}                          \label{subeq:final_charge}   \\
+\end{equation}
+\begin{equation}
+    s_i - (1 - w_{iq})M \leq g_{iq}                     \label{subeq:gpgret}         \\
+\end{equation}
+\begin{equation}
+    s_i \geq g_{iq}                                     \label{subeq:gples}          \\
+\end{equation}
+\begin{equation}
+    Mw_{iq} \geq g_{iq}                                 \label{subeq:gwgret}         \\
+\end{equation}
+\begin{equation}
+    0 \leq g_{iq}                                       \label{subeq:gwles}          \\
+\end{equation}
+\begin{equation}
+    v_i = \sum_{q=1}^{n_Q} qw_{iq}                      \label{subeq:wmax}           \\
+\end{equation}
+\begin{equation}
+    \sum_{q=1}^{n_Q} w_{iq} = 1                         \label{subeq:wone}           \\
+\end{equation}
+\begin{equation}
+   w_{iq}, \sigma_{ij}, \psi_{ij} \in \{0,1\}\;            \label{subeq:binaryspace}        \\
+\end{equation}
+\begin{equation}
+    v_i, q_i \in  \mathbb{Q}                                         \label{subeq:Qspace}        \\
+\end{equation}
+\begin{equation}
+    i \in \mathbb{V}                                   \label{subeq:Ispace}         \\
+\end{equation}
+\end{subequations}
+\end{multicols}
 
-\noindent
-Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof (2019). \emph{Fuzzy Activation of Rough Cognitive Ensembles Using OWA Operators}, Springer International Publishing.
+\autoref{subeq:m_time}-\autoref{subeq:m_valid_depart} are reiterations of the queuing constraints in
+\autoref{eq:packconstrs}. \autoref{subeq:init_charge}-\autoref{subeq:final_charge} provide the battery charge
+constraints. \autoref{subeq:gpgret} through \autoref{subeq:gwles} define the charge gain of every visit/queue
+pairing. The last constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace} define the sets of valid values for each
+variable.
 
-\noindent
-Nasseri, SH and Behmanesh, E and Taleshian, F and Abdolalipoor, M and TAGHI, NEZHAD NA (2013). \emph{Fully fuzzy linear programming with inequality constraints}, INTERNATIONAL JOURNAL OF INDUSTRIAL MATHEMATICS.
+\section{The Fuzzy BAP}
+\label{sec:org9c5633a}
+The following is a FFLP model to the continuous dynamical BAP that is able to allocate a quay to an incoming vessel
+(Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019). The model assumes that the arrival time, \(\tilde{a}\), berthing time, \(\tilde{u}\), and
+handling time, \(\tilde{s}\), are assumed to be imprecise. The objective of the model is to allocate all the vessels to
+different quays, according to several constraints minimizing the total waiting time for all the vessels. The model in
+its entirety is presented in \ref{eq:fuzzy-bap}. Note that a few modifications are made to the notation to accommodate the
+notation of (Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019) while attempting to remain as consistent as possible with the notation
+presented in this paper. In this section, \(Q\) refers to the set of quays. Furthermore, the model is defined over
+multiple quays, thus indexing for position shall be written as \(v_{iq}\). Similarly, because of the added degree of
+freedom, the spatiotemporal binary decision variables are represented as \(\sigma_{ijq}\) and \(\psi_{ijq}\).
 
-\noindent
-Pablo Frojan and Juan Francisco Correcher and Ramon Alvarez-Valdes and Gerasimos Koulouris and Jose Manuel Tamarit (2015). \emph{The Continuous Berth Allocation Problem in a Container Terminal With Multiple Quays}, Expert Systems with Applications.
+\begin{equation}
+\label{eq:fuzzy-bap}
+\begin{array}{lll}
+                   & min \sum_{q \in Q}\sum_{i \in I} (\tilde{m}_{iq} - \tilde{a}_i)           &                                \\
+\text{Subject to:} &                                                             &                                    \\
+                   & \sum_{q \in Q} v_{iq} = 1                                          & \forall i \in I;\; \forall q \in Q               \\
+                   & \tilde{u}_{iq} \ge \tilde{a}_i                                 & \forall i \in I;\; \forall q \in Q                \\
+                   & v_{iq} + l_i \le L_q                                           & \forall i \in I;\; \forall q \in Q                \\
+                   & v_{iq} + l_i \le v_{jq} + M(1-\sigma_{ijq})                           & \forall i,j \in I;\; i \ne j;\; \forall q \in Q   \\
+                   & \tilde{u}_{iq} + \tilde{s}_i \le T                             & \forall i \in I;\; \forall q \in Q                \\
+                   & \tilde{u}_{iq} + \tilde{s}_i \le \tilde{u}_{iq} + M(1-\psi_{ijq})   & \forall i,j \in I;\; i \ne j;\; \forall q \in Q \\
+\end{array}
+\end{equation}
 
-\noindent
-Robert J. Vanderbei (2020). \emph{Linear Programming}, Springer International Publishing.
+One may note the similarities to the previously presented BAB and PAP models in \ref{eq:fuzzy-bap}. It is, however, not
+defined in a way useful for the purposes of this paper. The adaptation of the Fuzzy BAP (FBAP) to the Fuzzy PAP (FPAP)
+is discussed next.
 
-\noindent
-Ronald R. Yager (1981). \emph{A Procedure for Ordering Fuzzy Subsets of the Unit Interval}, Information Sciences.
+\section{The Fuzzy PAP}
+\label{sec:org198bb6d}
 
-\noindent
-Sapan Kumar Das and T. Mandal and S. A. Edalatpanah (2016). \emph{A Mathematical Model for Solving Fully Fuzzy Linear Programming Problem With Trapezoidal Fuzzy Numbers}, Applied Intelligence.
+\bibliographystyle{plain}
+\bibliography{citation-database/lit-ref.bib, citation-database/lib-ref.bib}
 \end{document}
