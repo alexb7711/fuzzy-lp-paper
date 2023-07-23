@@ -315,7 +315,7 @@ freedom, the spatiotemporal binary decision variables are represented as $\sigma
                    & v_{iq} + l_i \le L_q                                           & \forall i \in I;\; \forall q \in Q                \\
                    & v_{iq} + l_i \le v_{jq} + M(1-\sigma_{ijq})                           & \forall i,j \in I;\; i \ne j;\; \forall q \in Q   \\
                    & \tilde{u}_{iq} + \tilde{s}_i \le T                             & \forall i \in I;\; \forall q \in Q                \\
-                   & \tilde{u}_{iq} + \tilde{s}_i \le \tilde{u}_{iq} + M(1-\psi_{ijq})}  & \forall i,j \in I;\; i \ne j;\; \forall q \in Q \\
+                   & \tilde{u}_{iq} + \tilde{s}_i \le \tilde{u}_{iq} + M(1-\psi_{ijq})   & \forall i,j \in I;\; i \ne j;\; \forall q \in Q \\
 \end{array}
 \end{equation}
 

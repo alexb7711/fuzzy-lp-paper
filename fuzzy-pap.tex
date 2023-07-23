@@ -1,4 +1,4 @@
-% Created 2023-07-23 Sun 12:35
+% Created 2023-07-23 Sun 13:44
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt,a4paper,final]{article}
 \usepackage[a4paper, total={7in, 10in}]{geometry}
@@ -40,11 +40,11 @@
 \let\ref\autoref                            % Redifine `\ref` as `\autoref` because lazy
 
 \section{Introduction}
-\label{sec:orgfe2debb}
+\label{sec:orgb47b9bc}
 \section{Preliminaries}
-\label{sec:orgb961f7c}
+\label{sec:org64d2501}
 \subsection{Mixed Integer Linear Program}
-\label{sec:orgba2adec}
+\label{sec:orga908cb9}
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
 set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
 constraints (Chen, Der-San and Batson, Robert G and Dang, Yu, 2010). Given a general objective function \(J\), decision variables (i.e. variables of
@@ -66,12 +66,12 @@ acts as an injective mapping to its number representation. In other words, every
 variable to value (Jagdeep Kaur and Amit Kumar, 2016).
 
 \subsection{Fuzzy Sets Theory}
-\label{sec:orge348ce3}
+\label{sec:orgc324b5c}
 This section introduces the notion of fuzzy numbers and some basic definitions. Concepts from this section are pulled
 from (H.-J. Zimmermann, 2001, Sapan Kumar Das and T. Mandal and S. A. Edalatpanah, 2016, M. Yaghobi and M. Rabbani and M. Adabitabar Firozja and J. Vahidi, 2014, Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019).
 
 \subsubsection{Fuzzy Sets}
-\label{sec:orge8c994f}
+\label{sec:org2110fbc}
 Let's begin with what a fuzzy number is not. A classical (crisp) set is defined as a collection of elements \(x \in X\).
 Crisp sets are binary, either an element belongs in the set, or it does not (H.-J. Zimmermann, 2001). For a
 fuzzy set, what is known as the characteristic function applies various degrees of membership for elements of a given
@@ -168,7 +168,7 @@ if \(m - \alpha\) is a real number.
 \end{definition}
 
 \subsubsection{Fuzzy Arithmetic}
-\label{sec:org509ed8f}
+\label{sec:org94cef83}
 If two triangular fuzzy numbers \(\tilde{a}_1 = \{a_1, a_2, a_3\}\) and \(\tilde{b}_1 = \{b_1, b_2, b_3\}\) are nonnegative
 then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 
@@ -182,7 +182,7 @@ then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 \end{equation}
 
 \subsubsection{Comparing Fuzzy Numbers}
-\label{sec:org9390e0d}
+\label{sec:org136958f}
 Fuzzy numbers do not directly provide a method of ordering nor do they always provide an ordered set like real numbers
 (Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019). There are multiple methods for ordering fuzzy numbers, each coming with advantages and
 disadvantages. Different properties have been applied to justify comparison of fuzzy numbers, such as: preference,
@@ -201,7 +201,7 @@ where \(|\cdot|\) represents the cardinality of the fuzzy number. In words, \ref
 of the values in the fuzzy number.
 
 \subsection{Fully Fuzzy Linear Programming}
-\label{sec:org78a9baa}
+\label{sec:orgd10ee08}
 Much like the MILP, Fully Fuzzy Linear Programs (FFLP), it is a class of constrained optimization in which one seeks to
 find a set of continuous variables that either maximizes or minimizes an objective function, \(J\), while satisfying a set
 of constraints. The key difference in FFLP is that it is designed to accommodate imprecise information
@@ -304,7 +304,7 @@ Expanding the set of equation and using the condensed notation in \ref{eq:nasser
 \end{equation}
 
 \section{The Crisp BAP and PAP}
-\label{sec:orgc3f1c84}
+\label{sec:orgc856390}
 \subsection{The Position Allocation Problem}
 \label{sec:positionallocationproblem}
 This section provides a brief overview of the BAP and a detailed formulation of PAP as presented in
@@ -711,7 +711,7 @@ pairing. The last constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace}
 variable.
 
 \section{The Fuzzy BAP}
-\label{sec:org2628628}
+\label{sec:org9c5633a}
 The following is a FFLP model to the continuous dynamical BAP that is able to allocate a quay to an incoming vessel
 (Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019). The model assumes that the arrival time, \(\tilde{a}\), berthing time, \(\tilde{u}\), and
 handling time, \(\tilde{s}\), are assumed to be imprecise. The objective of the model is to allocate all the vessels to
@@ -720,7 +720,7 @@ its entirety is presented in \ref{eq:fuzzy-bap}. Note that a few modifications a
 notation of (Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019) while attempting to remain as consistent as possible with the notation
 presented in this paper. In this section, \(Q\) refers to the set of quays. Furthermore, the model is defined over
 multiple quays, thus indexing for position shall be written as \(v_{iq}\). Similarly, because of the added degree of
-freedom the spatiotemporal binary decision variables are represented as \(\sigma_{ijq}\) and \(\psi_{ijq}\).
+freedom, the spatiotemporal binary decision variables are represented as \(\sigma_{ijq}\) and \(\psi_{ijq}\).
 
 \begin{equation}
 \label{eq:fuzzy-bap}
@@ -732,7 +732,7 @@ freedom the spatiotemporal binary decision variables are represented as \(\sigma
                    & v_{iq} + l_i \le L_q                                           & \forall i \in I;\; \forall q \in Q                \\
                    & v_{iq} + l_i \le v_{jq} + M(1-\sigma_{ijq})                           & \forall i,j \in I;\; i \ne j;\; \forall q \in Q   \\
                    & \tilde{u}_{iq} + \tilde{s}_i \le T                             & \forall i \in I;\; \forall q \in Q                \\
-                   & \tilde{u}_{iq} + \tilde{s}_i \le \tilde{u}_{iq} + M(1-\psi_{ijq})}  & \forall i,j \in I;\; i \ne j;\; \forall q \in Q \\
+                   & \tilde{u}_{iq} + \tilde{s}_i \le \tilde{u}_{iq} + M(1-\psi_{ijq})   & \forall i,j \in I;\; i \ne j;\; \forall q \in Q \\
 \end{array}
 \end{equation}
 
@@ -741,7 +741,7 @@ defined in a way useful for the purposes of this paper. The adaptation of the Fu
 is discussed next.
 
 \section{The Fuzzy PAP}
-\label{sec:org2f75d08}
+\label{sec:org198bb6d}
 
 \bibliographystyle{plain}
 \bibliography{citation-database/lit-ref.bib, citation-database/lib-ref.bib}
