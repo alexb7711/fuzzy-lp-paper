@@ -295,7 +295,7 @@ Expanding the set of equation and using the condensed notation in [[eq:nasseri-s
 * The Fuzzy BAP
 The following is a FFLP model to the continuous dynamical BAP that is able to allocate a quay to an incoming vessel
 [cite:@bello-2019-fuzzy-activ]. The model assumes that the arrival time, $\tilde{a}$, berthing time, $\tilde{u}$, and
-handling time, $\tilde{p}$, are assumed to be imprecise. The objective of the model is to allocate all the vessels to
+handling time, $\tilde{s}$, are assumed to be imprecise. The objective of the model is to allocate all the vessels to
 different quays, according to several constraints minimizing the total waiting time for all the vessels. The model in
 its entirety is presented in [[eq:fuzzy-bap]]. Note that a few modifications are made to the notation to accommodate the
 notation of [cite:@bello-2019-fuzzy-activ] while attempting to remain as consistent as possible with the notation
@@ -308,21 +308,22 @@ freedom the spatiotemporal binary decision variables are represented as $\sigma_
 #+name: eq:fuzzy-bap
 \begin{equation}
 \begin{array}{lll}
-                   & min \sum_{q \in Q}\sum_{i \in I} (\tilde{m}_{iq} - \tilde{a}_i)        &                                \\
-\text{Subject to:} &                                                          &                                    \\
-                   & \sum_{q \in Q} v_{iq} = 1                                       & \forall i \in I;\; \forall q \in Q               \\
-                   & \tilde{u}_{iq} \ge \tilde{a}_i                              & \forall i \in I;\; \forall q \in Q                \\
-                   & v_{iq} + l_i \le L_q                                        & \forall i \in I;\; \forall q \in Q                \\
-                   & v_{iq} + l_i \le v_{jq} + M(1-\sigma_{ijq}^x)                      & \forall i,j \in I;\; i \ne j;\; \forall q \in Q   \\
-                   & \tilde{u}_{iq} + \tilde{s}_i \le T                          & \forall i \in I;\; \forall q \in Q                \\
-                   & \tilde{u}_{iq} + \tilde{s}_i \le \tilde{u}_{iq + M(1-\psi{ijq}^y)} & \forall i,j \in I;\; i \ne j;\; \forall q \in Q \\
+                   & min \sum_{q \in Q}\sum_{i \in I} (\tilde{m}_{iq} - \tilde{a}_i)           &                                \\
+\text{Subject to:} &                                                             &                                    \\
+                   & \sum_{q \in Q} v_{iq} = 1                                          & \forall i \in I;\; \forall q \in Q               \\
+                   & \tilde{u}_{iq} \ge \tilde{a}_i                                 & \forall i \in I;\; \forall q \in Q                \\
+                   & v_{iq} + l_i \le L_q                                           & \forall i \in I;\; \forall q \in Q                \\
+                   & v_{iq} + l_i \le v_{jq} + M(1-\sigma_{ijq})                           & \forall i,j \in I;\; i \ne j;\; \forall q \in Q   \\
+                   & \tilde{u}_{iq} + \tilde{s}_i \le T                             & \forall i \in I;\; \forall q \in Q                \\
+                   & \tilde{u}_{iq} + \tilde{s}_i \le \tilde{u}_{iq} + M(1-\psi_{ijq})}  & \forall i,j \in I;\; i \ne j;\; \forall q \in Q \\
 \end{array}
 \end{equation}
 
 One may note the similarities to the previously presented BAB and PAP models in [[eq:fuzzy-bap]]. It is, however, not
-exactly defined in a way useful to the purposes of this paper. The adaptation of the Fuzzy BAP (FBAP) is discussed next.
+defined in a way useful for the purposes of this paper. The adaptation of the Fuzzy BAP (FBAP) to the Fuzzy PAP (FPAP)
+is discussed next.
 
-* Fuzzy PAP
+* The Fuzzy PAP
 
 #+bibliographystyle:plain
 #+bibliography:citation-database/lit-ref.bib
