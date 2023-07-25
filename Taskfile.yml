@@ -77,6 +77,19 @@ tasks:
 
 ##==============================================================================
 #
+  update-modules:
+    desc: "Update all the submodules"
+    vars:
+      DATE:
+        sh: date +%Y-%m-%d
+    cmds:
+      - |
+        git submodule foreach git pull
+        git commit -am "Update modules: {{.DATE}}"
+        git push
+
+##==============================================================================
+#
   clean:
     desc: "Clean up the project."
     vars:
