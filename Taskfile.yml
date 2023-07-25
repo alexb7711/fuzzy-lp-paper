@@ -86,6 +86,7 @@ tasks:
       - |
         git submodule foreach git pull origin main
         git commit -am "Update modules: {{.DATE}}"
+        git push
 
 ##==============================================================================
 #
