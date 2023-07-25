@@ -84,9 +84,8 @@ tasks:
         sh: date +%Y-%m-%d
     cmds:
       - |
-        git submodule foreach git pull origin main
+        git submodule foreach git pull
         git commit -am "Update modules: {{.DATE}}"
-        git push
 
 ##==============================================================================
 #
