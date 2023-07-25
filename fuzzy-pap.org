@@ -308,7 +308,7 @@ freedom, the spatiotemporal binary decision variables are represented as $\sigma
 #+name: eq:fuzzy-bap
 \begin{equation}
 \begin{array}{lll}
-                   & min \sum_{q \in Q}\sum_{i \in I} (\tilde{m}_{iq} - \tilde{a}_i)           &                                \\
+                   & min \sum_{q \in Q}\sum_{i \in I} (\tilde{u}_{iq} - \tilde{a}_i)           &                                \\
 \text{Subject to:} &                                                             &                                    \\
                    & \sum_{q \in Q} v_{iq} = 1                                          & \forall i \in I;\; \forall q \in Q               \\
                    & \tilde{u}_{iq} \ge \tilde{a}_i                                 & \forall i \in I;\; \forall q \in Q                \\
