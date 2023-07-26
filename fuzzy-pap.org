@@ -323,6 +323,10 @@ One may note the similarities to the previously presented BAB and PAP models in 
 defined in a way useful for the purposes of this paper. The adaptation of the Fuzzy BAP (FBAP) to the Fuzzy PAP (FPAP)
 is discussed next.
 
+#+begin_comment
+TODO: Add example results from the book and talk about what the results mean
+#+end_comment
+
 * The Fuzzy PAP
 
 #+bibliographystyle:plain
