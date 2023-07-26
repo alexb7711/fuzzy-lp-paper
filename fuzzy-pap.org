@@ -169,6 +169,10 @@ where $|\cdot|$ represents the cardinality of the fuzzy number. In words, [[eq:f
 of the values in the fuzzy number.
 
 ** Fully Fuzzy Linear Programming
+:properties:
+:custom_id: sec:fully-fuzzy-linear-programming
+:end:
+
 Much like the MILP, Fully Fuzzy Linear Programs (FFLP), it is a class of constrained optimization in which one seeks to
 find a set of continuous variables that either maximizes or minimizes an objective function, $J$, while satisfying a set
 of constraints. The key difference in FFLP is that it is designed to accommodate imprecise information
@@ -328,6 +332,32 @@ TODO: Add example results from the book and talk about what the results mean
 #+end_comment
 
 * The Fuzzy PAP
+This section derives the Fuzzy PAP (FPAP). It is separated into 3 parts to construct each component individually:
+objective function, queuing constraints, and charging constraints. Before deriving the FPAP, it is prudent to define the
+set of fuzzy variables. Similarly to the Fuzzy BAP, the arrival times, $\tilde{a}_i$, berthing time $\tilde{u}_i$, and
+detach time from the charger $\tilde{d}_i$ are assumed to be imprecise. Thus, indirectly, the service time,
+$\tilde{s}_i$, the linearization constraint in \ref{eq:slack_gain}, $\tilde{g}_{iq}$, and the initial charge for visit
+$i$, $\tilde{\eta}_i$ will also become fuzzy values.
+
+** Objective Function
+Begin by rewriting the crisp objective function with the fuzzy linearization term as shown in [[eq:fuzzy-objective]].
+
+#+name: eq:fuzzy-objective
+\begin{equation}
+\text{min } \sum_{i=1}^{n_I} \sum_{q=1}^{n_Q} \Big( w_{iq} m_q + \tilde{g}_{iq} \epsilon_{q} \Big)
+\end{equation}
+
+As shown in [[#sec:fully-fuzzy-linear-programming]], the method of handling the fuzzy values in the objective function is to
+simply apply a ranking function. Let $\mathfrak{R}$ be defined as the First Index of Yager as shown in [[eq:first-index-yager]].
+The resulting objective function is shown in [[eq:fuzzy-objective-yager]].
+
+#+name: eq:fuzzy-objective-yager
+\begin{equation}
+\text{min } \sum_{i=1}^{n_I} \sum_{q=1}^{n_Q} \Big( w_{iq} m_q + \mathfrak{R}(g_{iq}) \epsilon_{q} \Big)
+\end{equation}
+
+** Queuing Constraints
+** Charging Constraints
 
 #+bibliographystyle:plain
 #+bibliography:citation-database/lit-ref.bib
