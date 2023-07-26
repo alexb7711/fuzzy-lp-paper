@@ -1,4 +1,4 @@
-% Created 2023-07-23 Sun 13:44
+% Created 2023-07-26 Wed 14:31
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt,a4paper,final]{article}
 \usepackage[a4paper, total={7in, 10in}]{geometry}
@@ -40,11 +40,11 @@
 \let\ref\autoref                            % Redifine `\ref` as `\autoref` because lazy
 
 \section{Introduction}
-\label{sec:orgb47b9bc}
+\label{sec:org3d5d762}
 \section{Preliminaries}
-\label{sec:org64d2501}
+\label{sec:orgb5f9fe2}
 \subsection{Mixed Integer Linear Program}
-\label{sec:orga908cb9}
+\label{sec:org8b4e704}
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
 set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
 constraints (Chen, Der-San and Batson, Robert G and Dang, Yu, 2010). Given a general objective function \(J\), decision variables (i.e. variables of
@@ -66,12 +66,12 @@ acts as an injective mapping to its number representation. In other words, every
 variable to value (Jagdeep Kaur and Amit Kumar, 2016).
 
 \subsection{Fuzzy Sets Theory}
-\label{sec:orgc324b5c}
+\label{sec:orgbc13efa}
 This section introduces the notion of fuzzy numbers and some basic definitions. Concepts from this section are pulled
 from (H.-J. Zimmermann, 2001, Sapan Kumar Das and T. Mandal and S. A. Edalatpanah, 2016, M. Yaghobi and M. Rabbani and M. Adabitabar Firozja and J. Vahidi, 2014, Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019).
 
 \subsubsection{Fuzzy Sets}
-\label{sec:org2110fbc}
+\label{sec:orgb88a075}
 Let's begin with what a fuzzy number is not. A classical (crisp) set is defined as a collection of elements \(x \in X\).
 Crisp sets are binary, either an element belongs in the set, or it does not (H.-J. Zimmermann, 2001). For a
 fuzzy set, what is known as the characteristic function applies various degrees of membership for elements of a given
@@ -168,7 +168,7 @@ if \(m - \alpha\) is a real number.
 \end{definition}
 
 \subsubsection{Fuzzy Arithmetic}
-\label{sec:org94cef83}
+\label{sec:orgd52e07c}
 If two triangular fuzzy numbers \(\tilde{a}_1 = \{a_1, a_2, a_3\}\) and \(\tilde{b}_1 = \{b_1, b_2, b_3\}\) are nonnegative
 then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 
@@ -182,11 +182,11 @@ then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 \end{equation}
 
 \subsubsection{Comparing Fuzzy Numbers}
-\label{sec:org136958f}
+\label{sec:orge79e553}
 Fuzzy numbers do not directly provide a method of ordering nor do they always provide an ordered set like real numbers
 (Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019). There are multiple methods for ordering fuzzy numbers, each coming with advantages and
 disadvantages. Different properties have been applied to justify comparison of fuzzy numbers, such as: preference,
-rationality, and robustness (Mariano Jim{\'e}nez and Mar Arenas and Amelia Bilbao and M. Victoria Rodrı´guez, 2007, Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019, Jagdeep Kaur and Amit Kumar, 2016). These
+rationality, and robustness (Mariano Jim{\'e}nez and Mar Arenas and Amelia Bilbao and M. Victoria RodrÄ±Â´guez, 2007, Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019, Jagdeep Kaur and Amit Kumar, 2016). These
 methods are commonly known as ranking functions or ordering functions
 (Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019, Sapan Kumar Das and T. Mandal and S. A. Edalatpanah, 2016, Jagdeep Kaur and Amit Kumar, 2016). Commonly, including in this work, the First
 index of Yager (Ronald R. Yager, 1981) is used (\ref{eq:first-index-yager}).
@@ -201,7 +201,7 @@ where \(|\cdot|\) represents the cardinality of the fuzzy number. In words, \ref
 of the values in the fuzzy number.
 
 \subsection{Fully Fuzzy Linear Programming}
-\label{sec:orgd10ee08}
+\label{sec:fully-fuzzy-linear-programming}
 Much like the MILP, Fully Fuzzy Linear Programs (FFLP), it is a class of constrained optimization in which one seeks to
 find a set of continuous variables that either maximizes or minimizes an objective function, \(J\), while satisfying a set
 of constraints. The key difference in FFLP is that it is designed to accommodate imprecise information
@@ -304,7 +304,7 @@ Expanding the set of equation and using the condensed notation in \ref{eq:nasser
 \end{equation}
 
 \section{The Crisp BAP and PAP}
-\label{sec:orgc856390}
+\label{sec:orgc6106d6}
 \subsection{The Position Allocation Problem}
 \label{sec:positionallocationproblem}
 This section provides a brief overview of the BAP and a detailed formulation of PAP as presented in
@@ -711,7 +711,7 @@ pairing. The last constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace}
 variable.
 
 \section{The Fuzzy BAP}
-\label{sec:org9c5633a}
+\label{sec:org14355a4}
 The following is a FFLP model to the continuous dynamical BAP that is able to allocate a quay to an incoming vessel
 (Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019). The model assumes that the arrival time, \(\tilde{a}\), berthing time, \(\tilde{u}\), and
 handling time, \(\tilde{s}\), are assumed to be imprecise. The objective of the model is to allocate all the vessels to
@@ -725,7 +725,7 @@ freedom, the spatiotemporal binary decision variables are represented as \(\sigm
 \begin{equation}
 \label{eq:fuzzy-bap}
 \begin{array}{lll}
-                   & min \sum_{q \in Q}\sum_{i \in I} (\tilde{m}_{iq} - \tilde{a}_i)           &                                \\
+                   & min \sum_{q \in Q}\sum_{i \in I} (\tilde{u}_{iq} - \tilde{a}_i)           &                                \\
 \text{Subject to:} &                                                             &                                    \\
                    & \sum_{q \in Q} v_{iq} = 1                                          & \forall i \in I;\; \forall q \in Q               \\
                    & \tilde{u}_{iq} \ge \tilde{a}_i                                 & \forall i \in I;\; \forall q \in Q                \\
@@ -741,7 +741,93 @@ defined in a way useful for the purposes of this paper. The adaptation of the Fu
 is discussed next.
 
 \section{The Fuzzy PAP}
-\label{sec:org198bb6d}
+\label{sec:org3012802}
+This section derives the Fuzzy PAP (FPAP). It is separated into 3 parts to construct each component individually:
+objective function, queuing constraints, and charging constraints. Before deriving the FPAP, it is prudent to define the
+set of fuzzy variables. Similarly to the Fuzzy BAP, the arrival times, \(\tilde{a}_i\), berthing time \(\tilde{u}_i\), and
+detach time from the charger \(\tilde{d}_i\) are assumed to be imprecise. Thus, indirectly, the service time,
+\(\tilde{s}_i\), the linearization constraint in \ref{eq:slack_gain}, \(\tilde{g}_{iq}\), and the initial charge for visit
+\(i\), \(\tilde{\eta}_i\) will also become fuzzy values.
+
+\subsection{Objective Function}
+\label{sec:org7fffd35}
+Begin by rewriting the crisp objective function with the fuzzy linearization term as shown in \ref{eq:fuzzy-objective}.
+
+\begin{equation}
+\label{eq:fuzzy-objective}
+\text{min } \sum_{i=1}^{n_I} \sum_{q=1}^{n_Q} \Big( w_{iq} m_q + \tilde{g}_{iq} \epsilon_{q} \Big)
+\end{equation}
+
+As shown in \ref{sec:fully-fuzzy-linear-programming}, the method of handling the fuzzy values in the objective function is to
+simply apply a ranking function. Let \(\mathfrak{R}\) be defined as the First Index of Yager as shown in \ref{eq:first-index-yager}.
+The resulting objective function is shown in \ref{eq:fuzzy-objective-yager}.
+
+\begin{equation}
+\label{eq:fuzzy-objective-yager}
+\text{min } \sum_{i=1}^{n_I} \sum_{q=1}^{n_Q} \Big( w_{iq} m_q + \mathfrak{R}(g_{iq}) \epsilon_{q} \Big)
+\end{equation}
+
+\subsection{Queuing Constraints}
+\label{sec:org727b11a}
+For the queuing constraints, lets begin with the set of crisp constraints that are of interest
+
+\begin{multicols}{2}
+\begin{subequations}
+                                                     \label{eq:dynconstrs}
+\begin{equation}
+    u_i - u_j - s_j - (\sigma_{ij} - 1)T \geq 0              \label{subeq:m_time}         \\
+\end{equation}
+\begin{equation}
+    v_i - v_j - (\psi_{ij} - 1)n_Q \geq 1                  \label{subeq:m_space}        \\
+\end{equation}
+\begin{equation}
+    \sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1            \label{subeq:m_valid_pos}    \\
+\end{equation}
+\begin{equation}
+    \sigma_{ij} + \sigma_{ji} \leq 1                              \label{subeq:m_sigma}        \\
+\end{equation}
+\begin{equation}
+    \psi_{ij} + \psi_{ji} \leq 1                              \label{subeq:m_delta}        \\
+\end{equation}
+\begin{equation}
+    s_i + u_i = d_i                                  \label{subeq:m_detach}       \\
+\end{equation}
+\begin{equation}
+    a_i \leq u_i \leq (T - s_i)                            \label{subeq:m_valid_starts} \\
+\end{equation}
+\begin{equation}
+    d_i \leq \tau_i                                        \label{subeq:m_valid_depart} \\
+\end{equation}
+\begin{equation}
+    s_i - (1 - w_{iq})M \leq g_{iq}                     \label{subeq:gpgret}         \\
+\end{equation}
+\begin{equation}
+    s_i \geq g_{iq}                                     \label{subeq:gples}          \\
+\end{equation}
+\begin{equation}
+    Mw_{iq} \geq g_{iq}                                 \label{subeq:gwgret}         \\
+\end{equation}
+\begin{equation}
+    0 \leq g_{iq}                                       \label{subeq:gwles}          \\
+\end{equation}
+\begin{equation}
+    v_i = \sum_{q=1}^{n_Q} qw_{iq}                      \label{subeq:wmax}           \\
+\end{equation}
+\begin{equation}
+   \sigma_{ij}, \psi_{ij} \in \{0,1\}\;            \label{subeq:binaryspace}        \\
+\end{equation}
+\begin{equation}
+    v_i, q_i \in  \mathbb{Q}                                         \label{subeq:Qspace}        \\
+\end{equation}
+\begin{equation}
+    i \in \mathbb{V}                                   \label{subeq:Ispace}         \\
+\end{equation}
+\end{subequations}
+\end{multicols}
+
+
+\subsection{Charging Constraints}
+\label{sec:org7738472}
 
 \bibliographystyle{plain}
 \bibliography{citation-database/lit-ref.bib, citation-database/lib-ref.bib}
