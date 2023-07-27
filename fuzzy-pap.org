@@ -370,6 +370,7 @@ specified queue is the same for each element of the fuzzy temporal values. Thus,
 converted into crisp constraints, the constraint validity is maintained. \ref{subeq:fp_binaryspace} simply updates the
 binary decision term.
 
+#+begin_src latex
 \begin{multicols}{2}
 \begin{subequations}
                                                      \label{eq:fuzzy-constrs-pre}
@@ -408,8 +409,7 @@ binary decision term.
 \end{equation}
 \end{subequations}
 \end{multicols}
-
-
+#+end_src
 
 ** Charging Constraints
 
