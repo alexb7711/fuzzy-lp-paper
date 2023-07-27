@@ -357,58 +357,58 @@ The resulting objective function is shown in [[eq:fuzzy-objective-yager]].
 \end{equation}
 
 ** Queuing Constraints
-For the queuing constraints, lets begin with the set of crisp constraints that are of interest
+To derive the queuing constraints, begin by rewriting the set of crisp constraints that are of interest as fuzzy
+variables as shown in \ref{eq:fuzzy-constrs-pre}. \ref{subeq:fp_m_time} fuzzifies all the temporal terms; however note
+that the binary decision variable, $\sigma_{ij}$, is now written as $\sigma^k_{ij}$, where $k \in \{1,..,|\tilde{u}_i|\} \in \mathbb{Z}$ is
+used to indicate the temporal binary decision for the $k^{\text{th}}$ fuzzy value in $\tilde{u}_i$.
+\ref{subeq:fp_m_valid_pos} and \ref{subeq:fp_m_sigma} duplicate the constraints $|\tilde{u}_i|$ times. Using triangular
+fuzzy numbers, that would imply constraints for the lower, middle, and upper bounds of the temporal impreciseness.
+Similarly, \ref{subeq:fp_m_detach}-\ref{subeq:fp_m_valid_depart} are equivalent to their crisp counterparts, but with
+fuzzified terms. \ref{subeq:fp_gpgret}-\ref{subeq:fp_gwles} fuzzify the linearization terms in a similar manner, but the
+crisp spatial term, $w_{iq}$ is included. This is allowed because although the time may be allowed to fluctuate, the
+specified queue is the same for each element of the fuzzy temporal values. Thus, when the fuzzy constraints are
+converted into crisp constraints, the constraint validity is maintained. \ref{subeq:fp_binaryspace} simply updates the
+binary decision term.
 
 \begin{multicols}{2}
 \begin{subequations}
-                                                     \label{eq:dynconstrs}
+                                                     \label{eq:fuzzy-constrs-pre}
 \begin{equation}
-    \tilde{u}_i - \tilde{u}_j - \tilde{s}_j - (\tilde{\sigma}_{ij} - 1)T \geq 0              \label{subeq:m_time}         \\
+    \tilde{u}_i - \tilde{u}_j - \tilde{s}_j - (\sigma^k_{ij} - 1)T \geq 0 \label{subeq:fp_m_time}         \\
 \end{equation}
 \begin{equation}
-    v_i - v_j - (\psi_{ij} - 1)n_Q \geq 1                  \label{subeq:m_space}        \\
+    \sigma^k_{ij} + \sigma^k_{ji} + \psi_{ij} + \psi_{ji} \geq 1                     \label{subeq:fp_m_valid_pos}    \\
 \end{equation}
 \begin{equation}
-    \tilde{\sigma}_{ij} + \tilde{\sigma}_{ji} + \psi_{ij} + \psi_{ji} \geq 1            \label{subeq:m_valid_pos}    \\
+    \sigma^k_{ij} + \sigma^k_{ji} \leq 1                                       \label{subeq:fp_m_sigma}        \\
 \end{equation}
 \begin{equation}
-    \tilde{\sigma}_{ij} + \tilde{\sigma}_{ji} \leq 1                              \label{subeq:m_sigma}        \\
+    \tilde{s}_i + \tilde{u}_i = \tilde{d}_i                       \label{subeq:fp_m_detach}       \\
 \end{equation}
 \begin{equation}
-    \psi_{ij} + \psi_{ji} \leq 1                              \label{subeq:m_delta}        \\
+    \tilde{a}_i \leq \tilde{u}_i \leq (T - \tilde{s}_i)                 \label{subeq:fp_m_valid_starts} \\
 \end{equation}
 \begin{equation}
-    s_i + u_i = d_i                                  \label{subeq:m_detach}       \\
+    \tilde{d}_i \leq \tau_i                                             \label{subeq:fp_m_valid_depart} \\
 \end{equation}
 \begin{equation}
-    a_i \leq u_i \leq (T - s_i)                            \label{subeq:m_valid_starts} \\
+    \tilde{s}_i - (1 - w_{iq})M \leq \tilde{g}_{iq}                  \label{subeq:fp_gpgret}         \\
 \end{equation}
 \begin{equation}
-    d_i \leq \tau_i                                        \label{subeq:m_valid_depart} \\
+    \tilde{s}_i \geq \tilde{g}_{iq}                                  \label{subeq:fp_gples}          \\
 \end{equation}
 \begin{equation}
-    s_i - (1 - w_{iq})M \leq g_{iq}                     \label{subeq:gpgret}         \\
+    Mw_{iq} \geq \tilde{g}_{iq}                                      \label{subeq:fp_gwgret}         \\
 \end{equation}
 \begin{equation}
-    s_i \geq g_{iq}                                     \label{subeq:gples}          \\
+    0 \leq \tilde{g}_{iq}                                            \label{subeq:fp_gwles}          \\
 \end{equation}
 \begin{equation}
-    Mw_{iq} \geq g_{iq}                                 \label{subeq:gwgret}         \\
-\end{equation}
-\begin{equation}
-    0 \leq g_{iq}                                       \label{subeq:gwles}          \\
-\end{equation}
-\begin{equation}
-   \sigma_{ij}, \psi_{ij} \in \{0,1\}\;            \label{subeq:binaryspace}        \\
-\end{equation}
-\begin{equation}
-    v_i, q_i \in  \mathbb{Q}                                         \label{subeq:Qspace}        \\
-\end{equation}
-\begin{equation}
-    i \in \mathbb{V}                                   \label{subeq:Ispace}         \\
+   \sigma^k_{ij}, \psi_{ij} \in \{0,1\}\;                                   \label{subeq:fp_binaryspace}        \\
 \end{equation}
 \end{subequations}
 \end{multicols}
+
 
 
 ** Charging Constraints
