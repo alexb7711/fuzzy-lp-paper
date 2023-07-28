@@ -358,22 +358,18 @@ The resulting objective function is shown in [[eq:fuzzy-objective-yager]].
 
 ** Queuing Constraints
 To derive the queuing constraints, begin by rewriting the set of crisp constraints that are of interest as fuzzy
-variables as shown in \ref{eq:fuzzy-constrs-pre}. \ref{subeq:fp_m_time} fuzzifies all the temporal terms; however note
-that the binary decision variable, $\sigma_{ij}$, is now written as $\sigma^k_{ij}$, where $k \in \{1,..,|\tilde{u}_i|\} \in \mathbb{Z}$ is
-used to indicate the temporal binary decision for the $k^{\text{th}}$ fuzzy value in $\tilde{u}_i$.
-\ref{subeq:fp_m_valid_pos} and \ref{subeq:fp_m_sigma} duplicate the constraints $|\tilde{u}_i|$ times. Using triangular
-fuzzy numbers, that would imply constraints for the lower, middle, and upper bounds of the temporal impreciseness.
-Similarly, \ref{subeq:fp_m_detach}-\ref{subeq:fp_m_valid_depart} are equivalent to their crisp counterparts, but with
-fuzzified terms. \ref{subeq:fp_gpgret}-\ref{subeq:fp_gwles} fuzzify the linearization terms in a similar manner, but the
-crisp spatial term, $w_{iq}$ is included. This is allowed because although the time may be allowed to fluctuate, the
-specified queue is the same for each element of the fuzzy temporal values. Thus, when the fuzzy constraints are
-converted into crisp constraints, the constraint validity is maintained. \ref{subeq:fp_binaryspace} simply updates the
-binary decision term.
+variables as shown in \ref{eq:fuzzy-packing-constrs}. \ref{subeq:fp_m_time} fuzzifies all the temporal terms;
+however note that the binary decision variable, $\sigma_{ij}$, is now written as $\sigma^k_{ij}$, where $k \in
+\{1,..,|\tilde{u}_i|\} \in \mathbb{Z}$ is used to indicate the temporal binary decision for the $k^{\text{th}}$ fuzzy value in
+$\tilde{u}_i$. \ref{subeq:fp_m_valid_pos} and \ref{subeq:fp_m_sigma} duplicate the constraints $|\tilde{u}_i|$ times.
+Using triangular fuzzy numbers, that would imply constraints for the lower, middle, and upper bounds of the temporal
+impreciseness. Similarly, \ref{subeq:fp_m_detach}-\ref{subeq:fp_m_valid_depart} are equivalent to their crisp
+counterparts, but with fuzzified terms. \ref{subeq:fp_binaryspace} simply updates the binary decision term.
 
 #+begin_src latex
 \begin{multicols}{2}
 \begin{subequations}
-                                                     \label{eq:fuzzy-constrs-pre}
+                                                     \label{eq:fuzzy-pack-constrs}
 \begin{equation}
     \tilde{u}_i - \tilde{u}_j - \tilde{s}_j - (\sigma^k_{ij} - 1)T \geq 0 \label{subeq:fp_m_time}         \\
 \end{equation}
@@ -393,6 +389,40 @@ binary decision term.
     \tilde{d}_i \leq \tau_i                                             \label{subeq:fp_m_valid_depart} \\
 \end{equation}
 \begin{equation}
+   \sigma^k_{ij}, \psi_{ij} \in \{0,1\}\;                                   \label{subeq:fp_binaryspace}        \\
+\end{equation}
+\end{subequations}
+\end{multicols}
+#+end_src
+
+** Charging Constraints
+Similarly to the other derivations, the crisp constraints are rewritten with their equivalent fuzzy terms.
+
+\ref{subeq:fp_gpgret}-\ref{subeq:fp_gwles} fuzzify the linearization terms in a
+similar manner, but the crisp spatial term, $w_{iq}$ is included. This is allowed because although the time may be
+allowed to fluctuate, the specified queue is the same for each element of the fuzzy temporal values. Thus, when the
+fuzzy constraints are converted into crisp constraints, the constraint validity is maintained.
+
+#+begin_src latex
+\begin{multicols}{2}
+\begin{subequations}
+                                                     \label{eq:fuzzy-dyn-constrs}
+\begin{equation}
+    \eta_{\Gamma^0_i} = \alpha \kappa_{\Gamma^0_i}                           \label{subeq:fp_init_charge}    \\
+\end{equation}
+\begin{equation}
+    \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i = \eta_{\gamma_i}   \label{subeq:fp_next_charge}    \\
+\end{equation}
+\begin{equation}
+    \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i \geq \nu \kappa_{\Gamma_i} \label{subeq:fp_min_charge}     \\
+\end{equation}
+\begin{equation}
+    \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q \leq \kappa_{\Gamma_i}         \label{subeq:fp_max_charge}     \\
+\end{equation}
+\begin{equation}
+    \eta_{\Gamma^f_i} \geq \beta \kappa_{\Gamma^f_i}                          \label{subeq:fp_final_charge}   \\
+\end{equation}
+\begin{equation}
     \tilde{s}_i - (1 - w_{iq})M \leq \tilde{g}_{iq}                  \label{subeq:fp_gpgret}         \\
 \end{equation}
 \begin{equation}
@@ -404,14 +434,9 @@ binary decision term.
 \begin{equation}
     0 \leq \tilde{g}_{iq}                                            \label{subeq:fp_gwles}          \\
 \end{equation}
-\begin{equation}
-   \sigma^k_{ij}, \psi_{ij} \in \{0,1\}\;                                   \label{subeq:fp_binaryspace}        \\
-\end{equation}
 \end{subequations}
 \end{multicols}
 #+end_src
-
-** Charging Constraints
 
 #+bibliographystyle:plain
 #+bibliography:citation-database/lit-ref.bib
