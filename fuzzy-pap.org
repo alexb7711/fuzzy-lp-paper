@@ -396,43 +396,46 @@ counterparts, but with fuzzified terms. \ref{subeq:fp_binaryspace} simply update
 #+end_src
 
 ** Charging Constraints
+# TODO: Get info about partially fuzzy linear programs
 Similarly to the other derivations, the crisp constraints are rewritten with their equivalent fuzzy terms.
-
-\ref{subeq:fp_gpgret}-\ref{subeq:fp_gwles} fuzzify the linearization terms in a
-similar manner, but the crisp spatial term, $w_{iq}$ is included. This is allowed because although the time may be
-allowed to fluctuate, the specified queue is the same for each element of the fuzzy temporal values. Thus, when the
-fuzzy constraints are converted into crisp constraints, the constraint validity is maintained.
+\ref{subeq:fp_init_charge}-\ref{subeq:fp_final_charge} are equivalent to their crisp counterpart with the added lower
+and upper bounds for the battery charge for visit $i$. Note that the discharge amount, $\Delta_i$, is not fuzzy. It is
+assumed that the bus traveled the same distance during the route, thus the same amount of discharge, but is either
+early, on time, or late to the station. \ref{subeq:fp_gpgret}-\ref{subeq:fp_gwles} fuzzify the linearization terms in a
+similar manner, but the crisp spatial term, $w_{iq}$ is included. The inclusion of the crisp terms with the fuzzy values
+is allowed because although the time may be allowed to fluctuate, the specified queue, discharge amounts, or
+initial/final charges are the same for each element of the fuzzy temporal values. Thus, when the fuzzy constraints are
+converted into crisp constraints, the constraint validity is maintained [cite:@ghanbari-2019-fuzzy].
 
 #+begin_src latex
 \begin{multicols}{2}
-\begin{subequations}
-                                                     \label{eq:fuzzy-dyn-constrs}
+\begin{subequations}                                                       \label{eq:fuzzy-dyn-constrs}
 \begin{equation}
-    \eta_{\Gamma^0_i} = \alpha \kappa_{\Gamma^0_i}                           \label{subeq:fp_init_charge}    \\
+    \tilde{\eta}_{\Gamma^0_i} = \alpha \kappa_{\Gamma^0_i}                                        \label{subeq:fp_init_charge}    \\
 \end{equation}
 \begin{equation}
-    \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i = \eta_{\gamma_i}   \label{subeq:fp_next_charge}    \\
+    \tilde{\eta}_i + \sum_{q=1}^{n_Q} \tilde{g}_{iq} r_q - \Delta_i = \tilde{\eta}_{\gamma_i} \label{subeq:fp_next_charge}    \\
 \end{equation}
 \begin{equation}
-    \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i \geq \nu \kappa_{\Gamma_i} \label{subeq:fp_min_charge}     \\
+    \tilde{\eta}_i + \sum_{q=1}^{n_Q} \tilde{g}_{iq} r_q - \Delta_i \geq \nu \kappa_{\Gamma_i}       \label{subeq:fp_min_charge}     \\
 \end{equation}
 \begin{equation}
-    \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q \leq \kappa_{\Gamma_i}         \label{subeq:fp_max_charge}     \\
+    \tilde{\eta}_i + \sum_{q=1}^{n_Q} \tilde{g}_{iq} r_q \leq \kappa_{\Gamma_i}               \label{subeq:fp_max_charge}     \\
 \end{equation}
 \begin{equation}
-    \eta_{\Gamma^f_i} \geq \beta \kappa_{\Gamma^f_i}                          \label{subeq:fp_final_charge}   \\
+    \tilde{\eta}_{\Gamma^f_i} \geq \beta \kappa_{\Gamma^f_i}                                        \label{subeq:fp_final_charge}   \\
 \end{equation}
 \begin{equation}
-    \tilde{s}_i - (1 - w_{iq})M \leq \tilde{g}_{iq}                  \label{subeq:fp_gpgret}         \\
+    \tilde{s}_i - (1 - w_{iq})M \leq \tilde{g}_{iq}                           \label{subeq:fp_gpgret}         \\
 \end{equation}
 \begin{equation}
-    \tilde{s}_i \geq \tilde{g}_{iq}                                  \label{subeq:fp_gples}          \\
+    \tilde{s}_i \geq \tilde{g}_{iq}                                           \label{subeq:fp_gples}          \\
 \end{equation}
 \begin{equation}
-    Mw_{iq} \geq \tilde{g}_{iq}                                      \label{subeq:fp_gwgret}         \\
+    Mw_{iq} \geq \tilde{g}_{iq}                                               \label{subeq:fp_gwgret}         \\
 \end{equation}
 \begin{equation}
-    0 \leq \tilde{g}_{iq}                                            \label{subeq:fp_gwles}          \\
+    0 \leq \tilde{g}_{iq}                                                     \label{subeq:fp_gwles}          \\
 \end{equation}
 \end{subequations}
 \end{multicols}
