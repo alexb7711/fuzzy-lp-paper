@@ -325,12 +325,12 @@ is discussed next.
 
 * The Fuzzy PAP
 
-#+bibliographystyle:plain
+#+cite_export: bibtex plain
 #+bibliography:citation-database/lit-ref.bib
 #+bibliography:citation-database/lib-ref.bib
-\bibliographystyle{plain}
-\bibliography{citation-database/lit-ref.bib, citation-database/lib-ref.bib}
-# print_bibliography:
+#+print_bibliography:
+# \bibliographystyle{plain}
+# \bibliography{citation-database/lit-ref.bib, citation-database/lib-ref.bib}
 
 
 #  LocalWords:  Yager MILP FFLP hyperplane BAP
