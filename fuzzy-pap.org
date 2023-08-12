@@ -288,7 +288,7 @@ Expanding the set of equation and using the condensed notation in [[eq:nasseri-s
 #+attr_latex: :scale 1
 [[./sup-doc/milp-pap-paper-frontiers/img/baprep.pdf]]
 
-#+include: sup-doc/milp-pap-paper-frontiers/sections/vartab.tex
+#+include: sup-doc/milp-pap-paper-frontiers/sections/vartab.org
 
 #+include: sup-doc/milp-pap-paper-frontiers/sections/rectangle-packing.org
 
@@ -325,12 +325,9 @@ is discussed next.
 
 * The Fuzzy PAP
 
-#+bibliographystyle:plain
+#+cite_export: bibtex plain
 #+bibliography:citation-database/lit-ref.bib
 #+bibliography:citation-database/lib-ref.bib
-\bibliographystyle{plain}
-\bibliography{citation-database/lit-ref.bib, citation-database/lib-ref.bib}
-# print_bibliography:
-
+#+print_bibliography:
 
 #  LocalWords:  Yager MILP FFLP hyperplane BAP
