@@ -5,11 +5,11 @@ version: '3'
 
 env:
   TARGET : fuzzy-pap.pdf
-  DOC    : fuzzy-pap
+  FDOC    : fuzzy-pap
 
 includes:
   mpap:
-    taskfile: ./sup-doc/milp-pap-paper-frontiers/Taskfile.yml
+    taskfile: ./sup-doc/milp-pap-paper-frontiers/taskfile.yml
     dir: ./sup-doc/milp-pap-paper-frontiers
 
 ################################################################################
@@ -69,11 +69,19 @@ tasks:
     generates:
       - ./fuzzy-pap.pdf
     cmds:
+      - task: relative-path-bibtex
       - |
         latexmk -f -interaction=nonstopmode \
                    -pdf -pdflatex="pdflatex --shell-escape %O %S" \
                    -bibtex {{.DOC_SRC}}
     silent: false
+
+##==============================================================================
+#
+  relative-path-bibtex:
+    desc: "Update the paths in the 'bibtex' command to be relative."
+    cmds:
+      - sh scripts/relative-path-bibtex {{.FDOC}}.tex
 
 ##==============================================================================
 #

@@ -20,7 +20,63 @@
 \usepackage{hyperref}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\include{sup-doc/milp-pap-paper-frontiers/tex/preamble.tex}
+%%==============================================================================
+% Package configuration
+\usepackage{amsmath}                                  % Miscellaneous enhancements for mathematics
+\usepackage{amssymb}                                  % Math symbols
+\usepackage{booktabs}                                 % Extend tables
+\usepackage{cite}                                     % Improved citation mechanics
+\usepackage{graphicx}                                 % Enhance graphics
+\usepackage{lineno}                                   % Add line numbers to page
+\usepackage{microtype}                                % Uses different techniques for spacing
+\usepackage{multicol}                                 % Create tables spanning multiple columns
+\usepackage{multirow}                                 % Create tables spanning multiple rows
+\usepackage{pgfplots}                                 % Plot in LaTeX
+\usepackage{subcaption}                               % Subfigures (Get rid of this)
+\usepackage{subfloat}                                 % Subfigures
+\usepackage{tabularx}                                 % Add more contol to tables
+\usepackage{tikz}                                     % Generate figures in LaTeX
+\usepackage{xcolor}                                   % Colors
+\usepackage{xfp}                                      % No trailing zeros
+\usepackage{standalone}                               % Include standalone documents
+\usepackage{hyperref}                                 % Better references (keep last)
+%% Plot configurations
+\usetikzlibrary{automata, positioning, arrows.meta}   % Tikz macros
+\pgfplotsset{compat=1.3, width=\textwidth}
+\graphicspath{ {img} }                                % Paths to find images
+%% Paper configuration
+\let\ref\autoref                                      % Redifine `\ref` as `\autoref` because lazy
+%%==============================================================================
+% `autoref' formatting
+\renewcommand*{\sectionautorefname}{Section}
+\renewcommand*{\subsectionautorefname}{Subsection}
+\renewcommand*{\subsubsectionautorefname}{Subsubsection}
+\renewcommand*{\paragraphautorefname}{Paragraph}
+%%===============================================================================
+% Custom Commands
+\newcommand{\TODO}[1]{{\color{green} To do: #1}}                                % For adding notes to paper
+%%-------------------------------------------------------------------------------
+% Experiment parameters
+% TODO: Ensure these are accurate
+\newcommand{\A}{35 }                                                            % Number of buses
+\newcommand{\N}{338 }                                                           % Number of visits
+\newcommand{\acharge}{0.9}                                                      % BOD charge percentage
+\newcommand{\bcharge}{0.7 }                                                     % EOD charge percentage
+\newcommand{\mincharge}{25\% }                                                  % Min visit charge percent
+\newcommand{\minchargeD}{0.25 }                                                 % Min visit charge decimal
+\newcommand{\maxcharge}{100\% }                                                 % Max visit charge percent
+\newcommand{\batsize}{388 }                                                     % Battery capacity
+\newcommand{\fast}{15 }                                                         % Number of fast chargers
+\newcommand{\slow}{15 }                                                         % Number of slow chargers
+\newcommand{\fasts}{911 }                                                       % Speed of fast charger
+\newcommand{\slows}{30 }                                                        % Speed of slow charger
+\newcommand{\contvars}{7,511 }
+\newcommand{\intvars}{328,282 }
+%%-------------------------------------------------------------------------------
+%% Solve output
+\newcommand{\timeran}{1800 }                                                    % Time ran for MILP [s]
+\newcommand{\gappercent}{65.2\% }                                               % Gap percent after runtime
+\newcommand{\processor}{Ryzen 9 }                                               % Processor type
 \newtheorem{definition}{Definition}[section]
 \author{Alexander Brown}
 \date{\today}
@@ -30,7 +86,7 @@
  pdftitle={Fuzzy Bus Charging Schedule With MILP Constraints},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 28.2 (Org mode 9.6.7)}, 
+ pdfcreator={Emacs 29.1 (Org mode 9.6.7)},
  pdflang={English}}
 \begin{document}
 
@@ -47,9 +103,9 @@
 \label{sec:org8510d47}
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
 set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
-constraints (Chen, Der-San and Batson, Robert G and Dang, Yu, 2010). Given a general objective function \(J\), decision variables (i.e. variables of
+constraints \cite{chen-2010-applied}. Given a general objective function \(J\), decision variables (i.e. variables of
 optimization) \(x_j \in \mathbb{R}\) and \(y_k \in \mathbb{Z}^+\), and input parameters \(c_j, d_k, a_{ij}, g_{ik}, b_i \in \mathbb{R}\), a MILP has the
-mathematical structure represented in \ref{eq:milp-structure} (Chen, Der-San and Batson, Robert G and Dang, Yu, 2010).
+mathematical structure represented in \ref{eq:milp-structure} \cite{chen-2010-applied}.
 
 \begin{equation}
 \label{eq:milp-structure}
@@ -63,22 +119,22 @@ mathematical structure represented in \ref{eq:milp-structure} (Chen, Der-San and
 
 This formulation of the MILP is also referred to as ``crisp''. By this it is meant that each variable in the formulation
 acts as an injective mapping to its number representation. In other words, every variable has a one-to-one mapping from
-variable to value (Jagdeep Kaur and Amit Kumar, 2016).
+variable to value \cite{kaur-2016-introd-fuzzy}.
 
 \subsection{Fuzzy Sets Theory}
 \label{sec:org671b56f}
 This section introduces the notion of fuzzy numbers and some basic definitions. Concepts from this section are pulled
-from (H.-J. Zimmermann, 2001, Sapan Kumar Das and T. Mandal and S. A. Edalatpanah, 2016, M. Yaghobi and M. Rabbani and M. Adabitabar Firozja and J. Vahidi, 2014, Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019).
+from \cite{zimmermann-2001-fuzzy-set,das-2016-mathem-model,yaghobi-2014-compar-fuzzy,bello-2019-fuzzy-activ}.
 
 \subsubsection{Fuzzy Sets}
 \label{sec:org4d100d2}
 Let's begin with what a fuzzy number is not. A classical (crisp) set is defined as a collection of elements \(x \in X\).
-Crisp sets are binary, either an element belongs in the set, or it does not (H.-J. Zimmermann, 2001). For a
+Crisp sets are binary, either an element belongs in the set, or it does not \cite{zimmermann-2001-fuzzy-set}. For a
 fuzzy set, what is known as the characteristic function applies various degrees of membership for elements of a given
-set (H.-J. Zimmermann, 2001).
+set \cite{zimmermann-2001-fuzzy-set}.
 
 \begin{definition}
-Let \(X\) be a collection of objects (often called the universe of discourse (Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019)). If \(X\) is denoted
+Let \(X\) be a collection of objects (often called the universe of discourse \cite{bello-2019-fuzzy-activ}). If \(X\) is denoted
 generically by \(x\), then a fuzzy set \(\tilde{A}\) in \(X\) is a set of ordered pairs as shown in \ref{eq:membership-function}.
 
 \begin{equation}
@@ -131,7 +187,7 @@ The triangular fuzzy number \(\tilde{A}\) is nonnegative \(\iff\; a \ge 0\).
 \end{definition}
 
 A more general definition of fuzzy numbers is known as LR fuzzy numbers
-(Jagdeep Kaur and Amit Kumar, 2016, H.-J. Zimmermann, 2001).
+\cite{kaur-2016-introd-fuzzy,zimmermann-2001-fuzzy-set}.
 
 \begin{definition}
 A function \(L:[0,\infty] \rightarrow [0,1]\) (or \(R:[0,\infty] \rightarrow [0,1]\)) is said to be reference a function of the fuzzy number if and only
@@ -184,12 +240,12 @@ then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 \subsubsection{Comparing Fuzzy Numbers}
 \label{sec:org7c25f11}
 Fuzzy numbers do not directly provide a method of ordering nor do they always provide an ordered set like real numbers
-(Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019). There are multiple methods for ordering fuzzy numbers, each coming with advantages and
+\cite{bello-2019-fuzzy-activ}. There are multiple methods for ordering fuzzy numbers, each coming with advantages and
 disadvantages. Different properties have been applied to justify comparison of fuzzy numbers, such as: preference,
 rationality, and robustness (Mariano Jim{\'e}nez and Mar Arenas and Amelia Bilbao and M. Victoria RodrÄ±Â´guez, 2007, Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019, Jagdeep Kaur and Amit Kumar, 2016). These
 methods are commonly known as ranking functions or ordering functions
-(Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019, Sapan Kumar Das and T. Mandal and S. A. Edalatpanah, 2016, Jagdeep Kaur and Amit Kumar, 2016). Commonly, including in this work, the First
-index of Yager (Ronald R. Yager, 1981) is used (\ref{eq:first-index-yager}).
+\cite{bello-2019-fuzzy-activ,das-2016-mathem-model,kaur-2016-introd-fuzzy}. Commonly, including in this work, the First
+index of Yager \cite{yager-1981-proced-order} is used (\ref{eq:first-index-yager}).
 
 \begin{equation}
 \label{eq:first-index-yager}
@@ -205,7 +261,7 @@ of the values in the fuzzy number.
 Much like the MILP, Fully Fuzzy Linear Programs (FFLP), it is a class of constrained optimization in which one seeks to
 find a set of continuous variables that either maximizes or minimizes an objective function, \(J\), while satisfying a set
 of constraints. The key difference in FFLP is that it is designed to accommodate imprecise information
-(Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019, Jagdeep Kaur and Amit Kumar, 2016). In FFLP, the parameters and decision variables are fuzzy and
+\cite{bello-2019-fuzzy-activ,kaur-2016-introd-fuzzy}. In FFLP, the parameters and decision variables are fuzzy and
 linear. A general FFLP is represented as shown in \ref{eq:general-fflp}. The subscripts \(\cdot_e\), \(\cdot_l\), and \(\cdot_g\) indicate to
 equality, less than, and greater than constraints, respectively.
 
@@ -220,9 +276,9 @@ equality, less than, and greater than constraints, respectively.
 \end{equation}
 
 There are many methods of solving FFLP
-(Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019, Jagdeep Kaur and Amit Kumar, 2016, Ali Ebrahimnejad, 2016, Nasseri, SH and Behmanesh, E and Taleshian, F and Abdolalipoor, M and TAGHI, NEZHAD NA, 2013); however, the
+\cite{bello-2019-fuzzy-activ,kaur-2016-introd-fuzzy,ebrahimnejad-2016-new-method,nasseri-2013-fully}; however, the
 general strategy is to convert the fuzzy model into a crisp model that can be solved using traditional methods
-(Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019). In (Nasseri, SH and Behmanesh, E and Taleshian, F and Abdolalipoor, M and TAGHI, NEZHAD NA, 2013, Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019), the method of converting the FFLP
+\cite{bello-2019-fuzzy-activ}. In \cite{nasseri-2013-fully,bello-2019-fuzzy-activ}, the method of converting the FFLP
 into a crisp MILP is simply done by applying the ranking function to the objective function and breaking the constraints
 down into a set of crisp constraints as shown in \ref{eq:nasseri-solution}. The constraints are separated according to the
 definition of fuzzy set multiplication defined in \ref{eq:fuzzy-arithmetic}. The fuzzy number index is represented is the
@@ -263,14 +319,14 @@ To be more succinct, the FFLP can also equivalently be written as \ref{eq:nasser
 
 Where \(k\) has a max value equal to the cardinality to the type of fuzzy number being utilized. This can be further be
 elaborated on by rewriting the inequality constraints as equality constraints by introducing slack variables. This is
-useful as it represents the formulation in a standard form (Chen, Der-San and Batson, Robert G and Dang, Yu, 2010, Robert J. Vanderbei, 2020). It
+useful as it represents the formulation in a standard form \cite{chen-2010-applied,vanderbei-2020-linear-progr}. It
 also has the slightly less useful benefit of (mostly) providing the solver a set of equations called a hyperplane
-(Chen, Der-San and Batson, Robert G and Dang, Yu, 2010).
+\cite{chen-2010-applied}.
 
 The given method is called the Kumar and Kaurs method. Generally speaking, it is designed to solve FFLP problems with
 inequality constraints having LR flat fuzzy numbers. Given the FFLP \ref{eq:general-fflp} and assuming that
 \(\tilde{x}_j\) is an LR flat fuzzy number, the problem can be reformulated as \ref{eq:kumar-kaurs-fuzzy}
-(Jagdeep Kaur and Amit Kumar, 2016).
+\cite{kaur-2016-introd-fuzzy}.
 
 \begin{equation}
 \label{eq:kumar-kaurs-fuzzy}
@@ -285,7 +341,7 @@ inequality constraints having LR flat fuzzy numbers. Given the FFLP \ref{eq:gene
 \end{equation}
 
 Expanding the set of equation and using the condensed notation in \ref{eq:nasseri-solution-condensed} we find
-\ref{eq:kumar-kaurs-crisp} (Jagdeep Kaur and Amit Kumar, 2016).
+\ref{eq:kumar-kaurs-crisp} \cite{kaur-2016-introd-fuzzy}.
 
 \begin{equation}
 \label{eq:kumar-kaurs-crisp}
@@ -306,11 +362,12 @@ Expanding the set of equation and using the condensed notation in \ref{eq:nasser
 \section{The Crisp BAP and PAP}
 \label{sec:org2bae62c}
 \subsection{The Position Allocation Problem}
-\label{sec:positionallocationproblem}
+\label{sec:the-position-allocation-problem}
 This section provides a brief overview of the BAP and a detailed formulation of PAP as presented in
 \cite{qarebagh-2019-optim-sched}.
 
 \subsubsection{Overview of BAP}
+\label{sec:overview-of-bap}
 The BAP is a rectangle packing problem where a set of rectangles, \(\mathbb{O}\), are attempted to be optimally placed in
 a larger rectangle, \(O\), as shown in \autoref{fig:packexample}. The rectangle packing problem is an NP-hard problem that
 can be used to describe many real life problems \cite{bruin-2013-rectan-packin,murata-1995-rectan}. In some of these
@@ -332,6 +389,7 @@ time that the vessel arrives and is available to be berthed. ``Berthing Time'' i
 begins being serviced. ``Completion time'' represents the time at which the berthing space becomes available again.
 
 \subsubsection{The PAP Formulation}
+\label{sec:the-pap-formulation}
 The BAP forms the basis of the PAP; however, there are some differences in the way the variables are interpreted. For the
 \(i^{th}\) visit, starting service time, \(u_i\), is now the starting charge time, the berth location, \(v_i\), is now the
 charger queue for assignment, and the service time, \(s_i\), is now the elapsed charge time. There are also a few clarifying concepts
@@ -368,6 +426,7 @@ and shown here for completeness.
 	\label{eq:bapobjective}
 	\min\; \sum_{i=1}^N (d_i - a_i)
 \end{equation}
+
 Subject to:
 \begin{subequations}
 \label{eq:bapconstrs}
@@ -476,8 +535,8 @@ begin to be serviced to stay within the time horizon. \autoref{subeq:bapsdspace}
   \end{tabularx}
 \end{table}
 
-\subsection{A Rectangle Packing Formulation for BEB Charging}  \label{sec:problemformulation}
-
+\subsection{A Rectangle Packing Formulation for BEB Charging}
+\label{sec:problemformulation}
 Applying the PAP to BEB charging requires four fundamental changes. The first is that the time that a BEB spends
 charging is allowed to vary. Thus, \(s_i\) becomes a variable of optimization. Second, in the PAP each charging visit is
 assumed to be a different vehicle. For the BEB charging problem, each bus may make multiple visits to the station
@@ -494,8 +553,8 @@ addition of the bus charge management. This section ends with a brief discussion
 the statement of the full problem in \autoref{sec:BEB_MILP}. The notation is explained throughout and summarized in
 \autoref{tab:variables}.
 
-\subsubsection{Queuing Constraints} \label{sec:queuing}
-
+\subsubsection{Queuing Constraints}
+\label{sec:queuing}
 \noindent
 The queuing constraints ensure that the busses entering the queues for charging are assigned in a feasible manner as
 they come into the station. There are three sets to differentiate between different entities. \(\mathbb{B} = \{1, ...,
@@ -588,7 +647,7 @@ beginning of the visit, the upper bound constraint must also include the charge 
 
 Note that the term \(s_i w_{iq}\) is a bilinear term. A standard way of linearizing a bilinear term that contains an
 integer variable is by introducing a slack variable with an either/or constraint
-\cite{chen-2010-applied,rodriguez-2013-compar-asses}. Allowing the slack variable \(g_{iq}\) to be equal to \(s_i w_{iq}\),
+\cite[,rodriguez-2013-compar-asses]{chen-2010-applied}. Allowing the slack variable \(g_{iq}\) to be equal to \(s_i w_{iq}\),
 \(g_{iq}\) can be defined as
 
 \begin{equation}
@@ -618,7 +677,8 @@ where \(M\) is a large value. If \(w_{iq} = 1\) then \autoref{subeq:repgpgret} a
 g_{iq}\) and \(s_i \geq g_{iq}\), forcing \(s_i = g_{iq}\) with \autoref{subeq:repgwgret} being inactive. If \(w_{iq} = 0\),
 \autoref{subeq:repgpgret} is inactive and \autoref{subeq:repgwgret} and \autoref{subeq:repgwles} force \(g_{iq} = 0\).
 
-\subsubsection{The BEB Charging Problem} \label{sec:BEB_MILP}
+\subsubsection{The BEB Charging Problem}
+\label{sec:BEB_MILP}
 The goal of the MILP is to utilize chargers as little as possible to reduce energy costs with the fast charging being
 penalized more to reduce battery damage. Thus, an assignment cost \(m_q\) and usage cost \(\epsilon_q\) are associated with each
 charger, \(q\). These weights can be adjusted based on charger type or time of day that the visit occurs. The assignment
@@ -713,11 +773,11 @@ variable.
 \section{The Fuzzy BAP}
 \label{sec:org3142fcc}
 The following is a FFLP model to the continuous dynamical BAP that is able to allocate a quay to an incoming vessel
-(Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019). The model assumes that the arrival time, \(\tilde{a}\), berthing time, \(\tilde{u}\), and
+\cite{bello-2019-fuzzy-activ}. The model assumes that the arrival time, \(\tilde{a}\), berthing time, \(\tilde{u}\), and
 handling time, \(\tilde{s}\), are assumed to be imprecise. The objective of the model is to allocate all the vessels to
 different quays, according to several constraints minimizing the total waiting time for all the vessels. The model in
 its entirety is presented in \ref{eq:fuzzy-bap}. Note that a few modifications are made to the notation to accommodate the
-notation of (Marilyn Bello and Gonzalo N{\'a}poles and Ivett Fuentes and Isel Grau and Rafael Falcon and Rafael Bello and Koen Vanhoof, 2019) while attempting to remain as consistent as possible with the notation
+notation of \cite{bello-2019-fuzzy-activ} while attempting to remain as consistent as possible with the notation
 presented in this paper. In this section, \(Q\) refers to the set of quays. Furthermore, the model is defined over
 multiple quays, thus indexing for position shall be written as \(v_{iq}\). Similarly, because of the added degree of
 freedom, the spatiotemporal binary decision variables are represented as \(\sigma_{ijq}\) and \(\psi_{ijq}\).
@@ -850,5 +910,5 @@ converted into crisp constraints, the constraint validity is maintained (Ghanbar
 \end{multicols}
 
 \bibliographystyle{plain}
-\bibliography{citation-database/lit-ref.bib, citation-database/lib-ref.bib}
+\bibliography{/home/alex/Documents/docs/fuzzy-lp-paper/citation-database/lit-ref,/home/alex/Documents/docs/fuzzy-lp-paper/citation-database/lib-ref}
 \end{document}
