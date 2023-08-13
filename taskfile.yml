@@ -5,7 +5,7 @@ version: '3'
 
 env:
   TARGET : fuzzy-pap.pdf
-  DOC    : fuzzy-pap
+  FDOC    : fuzzy-pap
 
 includes:
   mpap:
@@ -81,7 +81,7 @@ tasks:
   relative-path-bibtex:
     desc: "Update the paths in the 'bibtex' command to be relative."
     cmds:
-      - sh scripts/relative-path-bibtex {{.DOC}}.tex
+      - sh scripts/relative-path-bibtex {{.FDOC}}.tex
 
 ##==============================================================================
 #
