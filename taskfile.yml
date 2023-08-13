@@ -7,11 +7,8 @@ env:
   TARGET : fuzzy-pap.pdf
   DOC    : main
   SCRIPTS: org-doc-scripts
+  MPAP_D : ./sup-doc/milp-pap-paper-frontiers
 
-includes:
-  mpap:
-    taskfile: ./sup-doc/milp-pap-paper-frontiers/taskfile.yml
-    dir: ./sup-doc/milp-pap-paper-frontiers
 
 ################################################################################
 # RECIPES
@@ -24,7 +21,6 @@ tasks:
   default:
     cmds:
       - task: precheck
-      - task: mpap:images
       - task: pdf
 
 ##==============================================================================
@@ -65,6 +61,8 @@ tasks:
     generates:
       - ./{{.DOC}}.pdf
     cmds:
+      - '{{if eq OS "windows"}} task -d {{.MPAP_D}} images{{end}}'
+      - '{{if eq OS "linux"}} go-task -d {{.MPAP_D}} images{{end}}'
       - task: relative-path-bibtex
       - sh {{.SCRIPTS}}/build-pdf {{.DOC}} {{.TARGET}}
     silent: false
