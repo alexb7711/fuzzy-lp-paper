@@ -1,4 +1,4 @@
-% Created 2023-08-10 Thu 08:19
+% Created 2023-08-12 Sat 20:02
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt,a4paper,final]{article}
 \usepackage[a4paper, total={7in, 10in}]{geometry}
@@ -86,7 +86,7 @@
  pdftitle={Fuzzy Bus Charging Schedule With MILP Constraints},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 28.2 (Org mode 9.6.7)}, 
+ pdfcreator={Emacs 29.1 (Org mode 9.6.7)}, 
  pdflang={English}}
 \begin{document}
 
@@ -96,11 +96,11 @@
 \let\ref\autoref                            % Redifine `\ref` as `\autoref` because lazy
 
 \section{Introduction}
-\label{sec:orgf6871b5}
+\label{sec:org19e9e8d}
 \section{Preliminaries}
-\label{sec:org0ea3f69}
+\label{sec:org082a9d5}
 \subsection{Mixed Integer Linear Program}
-\label{sec:org7445517}
+\label{sec:orgc0883bb}
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
 set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
 constraints \cite{chen-2010-applied}. Given a general objective function \(J\), decision variables (i.e. variables of
@@ -122,12 +122,12 @@ acts as an injective mapping to its number representation. In other words, every
 variable to value \cite{kaur-2016-introd-fuzzy}.
 
 \subsection{Fuzzy Sets Theory}
-\label{sec:org5aa91cd}
+\label{sec:orgcdd9198}
 This section introduces the notion of fuzzy numbers and some basic definitions. Concepts from this section are pulled
 from \cite{zimmermann-2001-fuzzy-set,das-2016-mathem-model,yaghobi-2014-compar-fuzzy,bello-2019-fuzzy-activ}.
 
 \subsubsection{Fuzzy Sets}
-\label{sec:org6547f4b}
+\label{sec:orgbc8b259}
 Let's begin with what a fuzzy number is not. A classical (crisp) set is defined as a collection of elements \(x \in X\).
 Crisp sets are binary, either an element belongs in the set, or it does not \cite{zimmermann-2001-fuzzy-set}. For a
 fuzzy set, what is known as the characteristic function applies various degrees of membership for elements of a given
@@ -224,7 +224,7 @@ if \(m - \alpha\) is a real number.
 \end{definition}
 
 \subsubsection{Fuzzy Arithmetic}
-\label{sec:orgd383bc5}
+\label{sec:orgd9af79a}
 If two triangular fuzzy numbers \(\tilde{a}_1 = \{a_1, a_2, a_3\}\) and \(\tilde{b}_1 = \{b_1, b_2, b_3\}\) are nonnegative
 then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 
@@ -238,7 +238,7 @@ then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 \end{equation}
 
 \subsubsection{Comparing Fuzzy Numbers}
-\label{sec:org2b7e68f}
+\label{sec:orga8cfec9}
 Fuzzy numbers do not directly provide a method of ordering nor do they always provide an ordered set like real numbers
 \cite{bello-2019-fuzzy-activ}. There are multiple methods for ordering fuzzy numbers, each coming with advantages and
 disadvantages. Different properties have been applied to justify comparison of fuzzy numbers, such as: preference,
@@ -257,7 +257,7 @@ where \(|\cdot|\) represents the cardinality of the fuzzy number. In words, \ref
 of the values in the fuzzy number.
 
 \subsection{Fully Fuzzy Linear Programming}
-\label{sec:org0e4d78d}
+\label{sec:orga26c177}
 Much like the MILP, Fully Fuzzy Linear Programs (FFLP), it is a class of constrained optimization in which one seeks to
 find a set of continuous variables that either maximizes or minimizes an objective function, \(J\), while satisfying a set
 of constraints. The key difference in FFLP is that it is designed to accommodate imprecise information
@@ -360,7 +360,7 @@ Expanding the set of equation and using the condensed notation in \ref{eq:nasser
 \end{equation}
 
 \section{The Crisp BAP and PAP}
-\label{sec:org173aa4b}
+\label{sec:org09e8ade}
 \subsection{The Position Allocation Problem}
 \label{sec:the-position-allocation-problem}
 This section provides a brief overview of the BAP and a detailed formulation of PAP as presented in
@@ -771,7 +771,7 @@ pairing. The last constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace}
 variable.
 
 \section{The Fuzzy BAP}
-\label{sec:org29bac1b}
+\label{sec:org8848825}
 The following is a FFLP model to the continuous dynamical BAP that is able to allocate a quay to an incoming vessel
 \cite{bello-2019-fuzzy-activ}. The model assumes that the arrival time, \(\tilde{a}\), berthing time, \(\tilde{u}\), and
 handling time, \(\tilde{s}\), are assumed to be imprecise. The objective of the model is to allocate all the vessels to
@@ -801,8 +801,8 @@ defined in a way useful for the purposes of this paper. The adaptation of the Fu
 is discussed next.
 
 \section{The Fuzzy PAP}
-\label{sec:orgf761db6}
+\label{sec:orgccc3fa0}
 
 \bibliographystyle{plain}
-\bibliography{c:/Users/1556048963C/AppData/Roaming/Documents/fuzzy-lp-paper/citation-database/lit-ref,c:/Users/1556048963C/AppData/Roaming/Documents/fuzzy-lp-paper/citation-database/lib-ref}
+\bibliography{/home/alex/Documents/docs/fuzzy-lp-paper/citation-database/lit-ref,/home/alex/Documents/docs/fuzzy-lp-paper/citation-database/lib-ref}
 \end{document}

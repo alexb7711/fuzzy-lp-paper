@@ -9,7 +9,7 @@ env:
 
 includes:
   mpap:
-    taskfile: ./sup-doc/milp-pap-paper-frontiers/Taskfile.yml
+    taskfile: ./sup-doc/milp-pap-paper-frontiers/taskfile.yml
     dir: ./sup-doc/milp-pap-paper-frontiers
 
 ################################################################################
