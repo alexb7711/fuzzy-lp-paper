@@ -17,6 +17,9 @@
 # =========================================================================================================================
 
 * Introduction
+# This paper assumes an average discharge over a period of in which an estimated discharge is calculated for each route,
+# $\Delta_i$.
+
 * Preliminaries
 ** Mixed Integer Linear Program
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
@@ -164,11 +167,15 @@ index of Yager [cite:@yager-1981-proced-order] is used ([[eq:first-index-yager]]
 \mathfrak{R}(\tilde{A}) = \frac{\sum_i a_i}{|\tilde{A}|}
 \end{equation}
 
-\noindent
-where $|\cdot|$ represents the cardinality of the fuzzy number. In words, [[eq:first-index-yager]] is merely the average
-of the values in the fuzzy number.
+\noindent where $|\cdot|$ represents the cardinality of the fuzzy number. In words, [[eq:first-index-yager]] is merely the
+average of the values in the fuzzy number. As a result, $A \le B$ when $\mathfrak{R}(\tilde{A}) \le \mathfrak{R}(\tilde{B})$
+[cite:@bello-2019-fuzzy-activ].
 
 ** Fully Fuzzy Linear Programming
+:properties:
+:custom_id: sec:fully-fuzzy-linear-programming
+:end:
+
 Much like the MILP, Fully Fuzzy Linear Programs (FFLP), it is a class of constrained optimization in which one seeks to
 find a set of continuous variables that either maximizes or minimizes an objective function, $J$, while satisfying a set
 of constraints. The key difference in FFLP is that it is designed to accommodate imprecise information
@@ -308,7 +315,7 @@ freedom, the spatiotemporal binary decision variables are represented as $\sigma
 #+name: eq:fuzzy-bap
 \begin{equation}
 \begin{array}{lll}
-                   & min \sum_{q \in Q}\sum_{i \in I} (\tilde{m}_{iq} - \tilde{a}_i)           &                                \\
+                   & min \sum_{q \in Q}\sum_{i \in I} (\tilde{u}_{iq} - \tilde{a}_i)           &                                \\
 \text{Subject to:} &                                                             &                                    \\
                    & \sum_{q \in Q} v_{iq} = 1                                          & \forall i \in I;\; \forall q \in Q               \\
                    & \tilde{u}_{iq} \ge \tilde{a}_i                                 & \forall i \in I;\; \forall q \in Q                \\
@@ -323,7 +330,117 @@ One may note the similarities to the previously presented BAB and PAP models in 
 defined in a way useful for the purposes of this paper. The adaptation of the Fuzzy BAP (FBAP) to the Fuzzy PAP (FPAP)
 is discussed next.
 
+#+begin_comment
+TODO: Add example results from the book and talk about what the results mean
+#+end_comment
+
 * The Fuzzy PAP
+This section derives the Fuzzy PAP (FPAP). It is separated into 3 parts to construct each component individually:
+objective function, queuing constraints, and charging constraints. Before deriving the FPAP, it is prudent to define the
+set of fuzzy variables. Similarly to the Fuzzy BAP, the arrival times, $\tilde{a}_i$, berthing time $\tilde{u}_i$, and
+detach time from the charger $\tilde{d}_i$ are assumed to be imprecise. Thus, indirectly, the service time,
+$\tilde{s}_i$, the linearization constraint in \ref{eq:slack_gain}, $\tilde{g}_{iq}$, and the initial charge for visit
+$i$, $\tilde{\eta}_i$ will also become fuzzy values.
+
+** Objective Function
+Begin by rewriting the crisp objective function with the fuzzy linearization term as shown in [[eq:fuzzy-objective]].
+
+#+name: eq:fuzzy-objective
+\begin{equation}
+\text{min } \sum_{i=1}^{n_I} \sum_{q=1}^{n_Q} \Big( w_{iq} m_q + \tilde{g}_{iq} \epsilon_{q} \Big)
+\end{equation}
+
+As shown in [[#sec:fully-fuzzy-linear-programming]], the method of handling the fuzzy values in the objective function is to
+simply apply a ranking function. Let $\mathfrak{R}$ be defined as the First Index of Yager as shown in [[eq:first-index-yager]].
+The resulting objective function is shown in [[eq:fuzzy-objective-yager]].
+
+#+name: eq:fuzzy-objective-yager
+\begin{equation}
+\text{min } \sum_{i=1}^{n_I} \sum_{q=1}^{n_Q} \Big( w_{iq} m_q + \mathfrak{R}(g_{iq}) \epsilon_{q} \Big)
+\end{equation}
+
+** Queuing Constraints
+To derive the queuing constraints, the set of crisp constraints that are of interest are rewritten in terms of the fuzzy
+variables that have been identified prior as shown in \ref{eq:fuzzy-packing-constrs}. \ref{subeq:fp_m_time} fuzzifies all the
+temporal terms. \ref{subeq:fp_m_valid_pos} and \ref{subeq:fp_m_sigma} duplicate the constraints $|\tilde{u}_i|$ times.
+Using triangular fuzzy numbers, that would imply constraints for the lower, middle, and upper bounds of the temporal
+impreciseness. Similarly, \ref{subeq:fp_m_detach}-\ref{subeq:fp_m_valid_depart} are equivalent to their crisp
+counterparts, but with fuzzified terms. \ref{subeq:fp_binaryspace} simply updates the binary decision term.
+
+#+begin_src latex
+\begin{multicols}{2}
+\begin{subequations}
+                                                     \label{eq:fuzzy-pack-constrs}
+\begin{equation}
+    \tilde{u}_i - \tilde{u}_j - \tilde{s}_j - (\sigma_{ij} - 1)T \geq 0 \label{subeq:fp_m_time}         \\
+\end{equation}
+\begin{equation}
+    \sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1                     \label{subeq:fp_m_valid_pos}    \\
+\end{equation}
+\begin{equation}
+    \sigma_{ij} + \sigma_{ji} \leq 1                                       \label{subeq:fp_m_sigma}        \\
+\end{equation}
+\begin{equation}
+    \tilde{s}_i + \tilde{u}_i = \tilde{d}_i                       \label{subeq:fp_m_detach}       \\
+\end{equation}
+\begin{equation}
+    \tilde{a}_i \leq \tilde{u}_i \leq (T - \tilde{s}_i)                 \label{subeq:fp_m_valid_starts} \\
+\end{equation}
+\begin{equation}
+    \tilde{d}_i \leq \tau_i                                             \label{subeq:fp_m_valid_depart} \\
+\end{equation}
+\begin{equation}
+   \sigma_{ij}, \psi_{ij} \in \{0,1\}\;                                   \label{subeq:fp_binaryspace}        \\
+\end{equation}
+\end{subequations}
+\end{multicols}
+#+end_src
+
+** Charging Constraints
+# TODO: Get info about partially fuzzy linear programs
+Similarly to the other derivations, the crisp constraints are rewritten with their equivalent fuzzy terms.
+\ref{subeq:fp_init_charge}-\ref{subeq:fp_final_charge} are equivalent to their crisp counterpart with the added lower
+and upper bounds for the battery charge for visit $i$. Note that the discharge amount, $\Delta_i$, is not fuzzy. It is
+assumed that the bus traveled the same distance during the route, thus the same amount of discharge, but can be early,
+on time, or late to the station. \ref{subeq:fp_gpgret}-\ref{subeq:fp_gwles} fuzzify the linearization terms in a similar
+manner, but the crisp spatial term, $w_{iq}$ is included. The inclusion of the crisp terms with the fuzzy values is
+allowed because although the time may be allowed to fluctuate, the specified queue, discharge amounts, or initial/final
+charges are the same for each element of the fuzzy temporal values. Thus, when the fuzzy constraints are converted into
+crisp constraints, the constraint validity is maintained [cite:@ghanbari-2019-fuzzy].
+
+#+begin_src latex
+\begin{multicols}{2}
+\begin{subequations}                                                       \label{eq:fuzzy-dyn-constrs}
+\begin{equation}
+    \tilde{\eta}_{\Gamma^0_i} = \alpha \kappa_{\Gamma^0_i}                                        \label{subeq:fp_init_charge}    \\
+\end{equation}
+\begin{equation}
+    \tilde{\eta}_i + \sum_{q=1}^{n_Q} \tilde{g}_{iq} r_q - \Delta_i = \tilde{\eta}_{\gamma_i} \label{subeq:fp_next_charge}    \\
+\end{equation}
+\begin{equation}
+    \tilde{\eta}_i + \sum_{q=1}^{n_Q} \tilde{g}_{iq} r_q - \Delta_i \geq \nu \kappa_{\Gamma_i}       \label{subeq:fp_min_charge}     \\
+\end{equation}
+\begin{equation}
+    \tilde{\eta}_i + \sum_{q=1}^{n_Q} \tilde{g}_{iq} r_q \leq \kappa_{\Gamma_i}               \label{subeq:fp_max_charge}     \\
+\end{equation}
+\begin{equation}
+    \tilde{\eta}_{\Gamma^f_i} \geq \beta \kappa_{\Gamma^f_i}                                        \label{subeq:fp_final_charge}   \\
+\end{equation}
+\begin{equation}
+    \tilde{s}_i - (1 - w_{iq})M \leq \tilde{g}_{iq}                           \label{subeq:fp_gpgret}         \\
+\end{equation}
+\begin{equation}
+    \tilde{s}_i \geq \tilde{g}_{iq}                                           \label{subeq:fp_gples}          \\
+\end{equation}
+\begin{equation}
+    Mw_{iq} \geq \tilde{g}_{iq}                                               \label{subeq:fp_gwgret}         \\
+\end{equation}
+\begin{equation}
+    0 \leq \tilde{g}_{iq}                                                     \label{subeq:fp_gwles}          \\
+\end{equation}
+\end{subequations}
+\end{multicols}
+#+end_src
 
 #+cite_export: bibtex plain
 #+bibliography:citation-database/lit-ref.bib
