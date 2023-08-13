@@ -5,12 +5,10 @@ version: '3'
 
 env:
   TARGET : fuzzy-pap.pdf
-  FDOC    : fuzzy-pap
+  DOC    : main
+  SCRIPTS: org-doc-scripts
+  MPAP_D : ./sup-doc/milp-pap-paper-frontiers
 
-includes:
-  mpap:
-    taskfile: ./sup-doc/milp-pap-paper-frontiers/taskfile.yml
-    dir: ./sup-doc/milp-pap-paper-frontiers
 
 ################################################################################
 # RECIPES
@@ -23,7 +21,6 @@ tasks:
   default:
     cmds:
       - task: precheck
-      - task: mpap:images
       - task: pdf
 
 ##==============================================================================
@@ -39,10 +36,7 @@ tasks:
   precheck:
     desc: "Make sure that all the dependencies are installed."
     cmds:
-      - |
-        echo "Checking the programs required for the build are installed..."
-        latexmk --version >/dev/null 2>&1 && (echo "latexmk installed!") || (echo "ERROR: latexmk is required."; exit 1)
-        pdflatex --version >/dev/null 2>&1 && (echo "pdflatex installed!") || (echo "ERROR: pdflatex is required."; exit 1)
+      - sh {{.SCRIPTS}}/check-packages
     silent: true
 
 ##==============================================================================
@@ -54,8 +48,7 @@ tasks:
       VERSION:
         sh: git describe --tags
     cmds:
-      - |
-        sed -i 's/\\date{\\today/\\date{\\today:{{.VERSION}}/' {{.MAIN}}
+      - sed -i 's/\\date{\\today/\\date{\\today:{{.VERSION}}/' {{.MAIN}}
     silent: true
 
 ##==============================================================================
@@ -63,17 +56,15 @@ tasks:
   pdf:
     desc: "Output {{.TARGET}} PDF."
     vars:
-      DOC_SRC: fuzzy-pap.tex
     sources:
-      - ./*.tex
+      - ./{{.DOC}}.tex
     generates:
-      - ./fuzzy-pap.pdf
+      - ./{{.DOC}}.pdf
     cmds:
+      - go-task --version >/dev/null 2>&1 && go-task -d {{.MPAP_D}} images || echo ""
+      - task --version >/dev/null 2>&1 && task -d {{.MPAP_D}} images || echo ""
       - task: relative-path-bibtex
-      - |
-        latexmk -f -interaction=nonstopmode \
-                   -pdf -pdflatex="pdflatex --shell-escape %O %S" \
-                   -bibtex {{.DOC_SRC}}
+      - sh {{.SCRIPTS}}/build-pdf {{.DOC}} {{.TARGET}}
     silent: false
 
 ##==============================================================================
@@ -81,7 +72,7 @@ tasks:
   relative-path-bibtex:
     desc: "Update the paths in the 'bibtex' command to be relative."
     cmds:
-      - sh scripts/relative-path-bibtex {{.FDOC}}.tex
+      - sh {{.SCRIPTS}}/relative-path-bibtex {{.DOC}}.tex
 
 ##==============================================================================
 #
@@ -100,12 +91,11 @@ tasks:
 #
   clean:
     desc: "Clean up the project."
-    vars:
-      DOC_SRC: fuzzy-pap.tex
     cmds:
-      - task: mpap:clean
+      - task --version >/dev/null 2>&1 && task -d {{.MPAP_D}} clean || echo ""
+      - go-task --version >/dev/null 2>&1 && go-task -d {{.MPAP_D}} clean || echo ""
       - |
         # Clean up the document files
         rm -f {{.TARGET}}
-        latexmk -silent -C {{.DOC_SRC}}
+        latexmk -silent -C {{.DOC}}.tex
     silent: true

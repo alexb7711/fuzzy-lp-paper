@@ -6,3 +6,6 @@
 	path = sup-doc/milp-pap-paper-frontiers
 	url = https://github.com/alexb7711/milp-pap-paper-frontiers.git
 	branch = fuzzy-edits
+[submodule "org-doc-scripts"]
+	path = org-doc-scripts
+	url = https://github.com/alexb7711/org-doc-scripts.git

@@ -1,0 +1,37 @@
+# ======================================================================================================================
+# Preamble
+
+#+TITLE: Fuzzy Bus Charging Schedule With MILP Constraints
+#+DATE: \today
+#+EMAIL: A01704744@usu.edu
+#+LANGUAGE: en
+
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+LATEX_HEADER: \usepackage{lmodern}
+#+include: sup-doc/milp-pap-paper-frontiers/sections/preamble.org
+
+# Theorems/Lemmas/Definition headers
+#+LATEX_HEADER: \newtheorem{definition}{Definition}[section]
+
+#+begin_export latex
+\let\ref\autoref                            % Redifine `\ref` as `\autoref` because lazy
+#+end_export
+
+# ======================================================================================================================
+# Document
+
+#+include: sections/introduction.org
+#+include: sections/preliminaries.org
+#+include: sections/the-crisp-bap-and-pap.org
+#+include: sections/the-fuzzy-bap.org
+#+include: sections/the-fuzzy-pap.org
+
+# ======================================================================================================================
+# Bibliography
+
+#+cite_export: bibtex plain
+#+bibliography:citation-database/lit-ref.bib
+#+bibliography:citation-database/lib-ref.bib
+#+print_bibliography:
+
+#  LocalWords:  Yager MILP FFLP hyperplane BAP
