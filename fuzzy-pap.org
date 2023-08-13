@@ -5,7 +5,7 @@
 
 #+LATEX_HEADER: \usepackage[T1]{fontenc}
 #+LATEX_HEADER: \usepackage{lmodern}
-#+LATEX_HEADER: \include{sup-doc/milp-pap-paper-frontiers/tex/preamble.tex}
+#+include: sup-doc/milp-pap-paper-frontiers/sections/preamble.org
 
 # Theorems/Lemmas/Definition headers
 #+LATEX_HEADER: \newtheorem{definition}{Definition}[section]
@@ -271,7 +271,7 @@ Expanding the set of equation and using the condensed notation in [[eq:nasseri-s
 \end{equation}
 
 * The Crisp BAP and PAP
-#+include: sup-doc/milp-pap-paper-frontiers/tex/pap-problem.tex
+#+include: sup-doc/milp-pap-paper-frontiers/sections/pap-problem.org
 
 #+caption: Example of rectangle packing problem.
 #+name: fig:packexample
@@ -288,9 +288,9 @@ Expanding the set of equation and using the condensed notation in [[eq:nasseri-s
 #+attr_latex: :scale 1
 [[./sup-doc/milp-pap-paper-frontiers/img/baprep.pdf]]
 
-#+include: sup-doc/milp-pap-paper-frontiers/tex/vartab.tex
+#+include: sup-doc/milp-pap-paper-frontiers/sections/vartab.org
 
-#+include: sup-doc/milp-pap-paper-frontiers/tex/rectangle-packing.tex
+#+include: sup-doc/milp-pap-paper-frontiers/sections/rectangle-packing.org
 
 * The Fuzzy BAP
 The following is a FFLP model to the continuous dynamical BAP that is able to allocate a quay to an incoming vessel
@@ -325,12 +325,9 @@ is discussed next.
 
 * The Fuzzy PAP
 
-#+bibliographystyle:plain
+#+cite_export: bibtex plain
 #+bibliography:citation-database/lit-ref.bib
 #+bibliography:citation-database/lib-ref.bib
-\bibliographystyle{plain}
-\bibliography{citation-database/lit-ref.bib, citation-database/lib-ref.bib}
-# print_bibliography:
-
+#+print_bibliography:
 
 #  LocalWords:  Yager MILP FFLP hyperplane BAP
