@@ -1,0 +1,21 @@
+* The Crisp BAP and PAP
+#+include: ../sup-doc/milp-pap-paper-frontiers/sections/pap-problem.org
+
+#+caption: Example of rectangle packing problem.
+#+name: fig:packexample
+#+attr_latex: :scale 1
+[[../sup-doc/milp-pap-paper-frontiers/img/spatiotemporal-packing.pdf]]
+
+#+caption: Example of position allocation. Vehicles are placed in queues to be charged and move in the direction indicated by the arrow.
+#+name: subfig:bapexample
+#+attr_latex: :scale 1
+[[../sup-doc/milp-pap-paper-frontiers/img/bap.pdf]]
+
+#+caption: The representation of the berth-time space
+#+name: fig:bap
+#+attr_latex: :scale 1
+[[../sup-doc/milp-pap-paper-frontiers/img/baprep.pdf]]
+
+#+include: ../sup-doc/milp-pap-paper-frontiers/sections/vartab.org
+
+#+include: ../sup-doc/milp-pap-paper-frontiers/sections/rectangle-packing.org

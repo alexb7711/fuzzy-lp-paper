@@ -1,5 +1,5 @@
 *.bbl
 ltximg/
-auto/fuzzy-pap.el
+auto/
 .task/
 *.pdf
