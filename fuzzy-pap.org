@@ -17,6 +17,9 @@
 # =========================================================================================================================
 
 * Introduction
+# This paper assumes an average discharge over a period of in which an estimated discharge is calculated for each route,
+# $\Delta_i$.
+
 * Preliminaries
 ** Mixed Integer Linear Program
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
@@ -164,9 +167,9 @@ index of Yager [cite:@yager-1981-proced-order] is used ([[eq:first-index-yager]]
 \mathfrak{R}(\tilde{A}) = \frac{\sum_i a_i}{|\tilde{A}|}
 \end{equation}
 
-\noindent
-where $|\cdot|$ represents the cardinality of the fuzzy number. In words, [[eq:first-index-yager]] is merely the average
-of the values in the fuzzy number.
+\noindent where $|\cdot|$ represents the cardinality of the fuzzy number. In words, [[eq:first-index-yager]] is merely the
+average of the values in the fuzzy number. As a result, $A \le B$ when $\mathfrak{R}(\tilde{A}) \le \mathfrak{R}(\tilde{B})$
+[cite:@bello-2019-fuzzy-activ].
 
 ** Fully Fuzzy Linear Programming
 :properties:
@@ -357,11 +360,9 @@ The resulting objective function is shown in [[eq:fuzzy-objective-yager]].
 \end{equation}
 
 ** Queuing Constraints
-To derive the queuing constraints, begin by rewriting the set of crisp constraints that are of interest as fuzzy
-variables as shown in \ref{eq:fuzzy-packing-constrs}. \ref{subeq:fp_m_time} fuzzifies all the temporal terms;
-however note that the binary decision variable, $\sigma_{ij}$, is now written as $\sigma^k_{ij}$, where $k \in
-\{1,..,|\tilde{u}_i|\} \in \mathbb{Z}$ is used to indicate the temporal binary decision for the $k^{\text{th}}$ fuzzy value in
-$\tilde{u}_i$. \ref{subeq:fp_m_valid_pos} and \ref{subeq:fp_m_sigma} duplicate the constraints $|\tilde{u}_i|$ times.
+To derive the queuing constraints, the set of crisp constraints that are of interest are rewritten in terms of the fuzzy
+variables that have been identified prior as shown in \ref{eq:fuzzy-packing-constrs}. \ref{subeq:fp_m_time} fuzzifies all the
+temporal terms. \ref{subeq:fp_m_valid_pos} and \ref{subeq:fp_m_sigma} duplicate the constraints $|\tilde{u}_i|$ times.
 Using triangular fuzzy numbers, that would imply constraints for the lower, middle, and upper bounds of the temporal
 impreciseness. Similarly, \ref{subeq:fp_m_detach}-\ref{subeq:fp_m_valid_depart} are equivalent to their crisp
 counterparts, but with fuzzified terms. \ref{subeq:fp_binaryspace} simply updates the binary decision term.
@@ -371,13 +372,13 @@ counterparts, but with fuzzified terms. \ref{subeq:fp_binaryspace} simply update
 \begin{subequations}
                                                      \label{eq:fuzzy-pack-constrs}
 \begin{equation}
-    \tilde{u}_i - \tilde{u}_j - \tilde{s}_j - (\sigma^k_{ij} - 1)T \geq 0 \label{subeq:fp_m_time}         \\
+    \tilde{u}_i - \tilde{u}_j - \tilde{s}_j - (\sigma_{ij} - 1)T \geq 0 \label{subeq:fp_m_time}         \\
 \end{equation}
 \begin{equation}
-    \sigma^k_{ij} + \sigma^k_{ji} + \psi_{ij} + \psi_{ji} \geq 1                     \label{subeq:fp_m_valid_pos}    \\
+    \sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1                     \label{subeq:fp_m_valid_pos}    \\
 \end{equation}
 \begin{equation}
-    \sigma^k_{ij} + \sigma^k_{ji} \leq 1                                       \label{subeq:fp_m_sigma}        \\
+    \sigma_{ij} + \sigma_{ji} \leq 1                                       \label{subeq:fp_m_sigma}        \\
 \end{equation}
 \begin{equation}
     \tilde{s}_i + \tilde{u}_i = \tilde{d}_i                       \label{subeq:fp_m_detach}       \\
@@ -389,7 +390,7 @@ counterparts, but with fuzzified terms. \ref{subeq:fp_binaryspace} simply update
     \tilde{d}_i \leq \tau_i                                             \label{subeq:fp_m_valid_depart} \\
 \end{equation}
 \begin{equation}
-   \sigma^k_{ij}, \psi_{ij} \in \{0,1\}\;                                   \label{subeq:fp_binaryspace}        \\
+   \sigma_{ij}, \psi_{ij} \in \{0,1\}\;                                   \label{subeq:fp_binaryspace}        \\
 \end{equation}
 \end{subequations}
 \end{multicols}
@@ -400,12 +401,12 @@ counterparts, but with fuzzified terms. \ref{subeq:fp_binaryspace} simply update
 Similarly to the other derivations, the crisp constraints are rewritten with their equivalent fuzzy terms.
 \ref{subeq:fp_init_charge}-\ref{subeq:fp_final_charge} are equivalent to their crisp counterpart with the added lower
 and upper bounds for the battery charge for visit $i$. Note that the discharge amount, $\Delta_i$, is not fuzzy. It is
-assumed that the bus traveled the same distance during the route, thus the same amount of discharge, but is either
-early, on time, or late to the station. \ref{subeq:fp_gpgret}-\ref{subeq:fp_gwles} fuzzify the linearization terms in a
-similar manner, but the crisp spatial term, $w_{iq}$ is included. The inclusion of the crisp terms with the fuzzy values
-is allowed because although the time may be allowed to fluctuate, the specified queue, discharge amounts, or
-initial/final charges are the same for each element of the fuzzy temporal values. Thus, when the fuzzy constraints are
-converted into crisp constraints, the constraint validity is maintained [cite:@ghanbari-2019-fuzzy].
+assumed that the bus traveled the same distance during the route, thus the same amount of discharge, but can be early,
+on time, or late to the station. \ref{subeq:fp_gpgret}-\ref{subeq:fp_gwles} fuzzify the linearization terms in a similar
+manner, but the crisp spatial term, $w_{iq}$ is included. The inclusion of the crisp terms with the fuzzy values is
+allowed because although the time may be allowed to fluctuate, the specified queue, discharge amounts, or initial/final
+charges are the same for each element of the fuzzy temporal values. Thus, when the fuzzy constraints are converted into
+crisp constraints, the constraint validity is maintained [cite:@ghanbari-2019-fuzzy].
 
 #+begin_src latex
 \begin{multicols}{2}

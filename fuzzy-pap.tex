@@ -1,4 +1,4 @@
-% Created 2023-08-12 Sat 21:20
+% Created 2023-08-13 Sun 10:40
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt,a4paper,final]{article}
 \usepackage[a4paper, total={7in, 10in}]{geometry}
@@ -96,11 +96,11 @@
 \let\ref\autoref                            % Redifine `\ref` as `\autoref` because lazy
 
 \section{Introduction}
-\label{sec:orgc1dc275}
+\label{sec:org57be1b8}
 \section{Preliminaries}
-\label{sec:org1e1ea7b}
+\label{sec:org3c000fe}
 \subsection{Mixed Integer Linear Program}
-\label{sec:org77f14c9}
+\label{sec:orga54a4fc}
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
 set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
 constraints \cite{chen-2010-applied}. Given a general objective function \(J\), decision variables (i.e. variables of
@@ -122,12 +122,12 @@ acts as an injective mapping to its number representation. In other words, every
 variable to value \cite{kaur-2016-introd-fuzzy}.
 
 \subsection{Fuzzy Sets Theory}
-\label{sec:org36f430b}
+\label{sec:org35fb318}
 This section introduces the notion of fuzzy numbers and some basic definitions. Concepts from this section are pulled
 from \cite{zimmermann-2001-fuzzy-set,das-2016-mathem-model,yaghobi-2014-compar-fuzzy,bello-2019-fuzzy-activ}.
 
 \subsubsection{Fuzzy Sets}
-\label{sec:orgdde44fb}
+\label{sec:org489b598}
 Let's begin with what a fuzzy number is not. A classical (crisp) set is defined as a collection of elements \(x \in X\).
 Crisp sets are binary, either an element belongs in the set, or it does not \cite{zimmermann-2001-fuzzy-set}. For a
 fuzzy set, what is known as the characteristic function applies various degrees of membership for elements of a given
@@ -224,7 +224,7 @@ if \(m - \alpha\) is a real number.
 \end{definition}
 
 \subsubsection{Fuzzy Arithmetic}
-\label{sec:orgab1374e}
+\label{sec:org7cbd5af}
 If two triangular fuzzy numbers \(\tilde{a}_1 = \{a_1, a_2, a_3\}\) and \(\tilde{b}_1 = \{b_1, b_2, b_3\}\) are nonnegative
 then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 
@@ -238,7 +238,7 @@ then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 \end{equation}
 
 \subsubsection{Comparing Fuzzy Numbers}
-\label{sec:org134d32e}
+\label{sec:orga4f6799}
 Fuzzy numbers do not directly provide a method of ordering nor do they always provide an ordered set like real numbers
 \cite{bello-2019-fuzzy-activ}. There are multiple methods for ordering fuzzy numbers, each coming with advantages and
 disadvantages. Different properties have been applied to justify comparison of fuzzy numbers, such as: preference,
@@ -252,9 +252,9 @@ index of Yager \cite{yager-1981-proced-order} is used (\ref{eq:first-index-yager
 \mathfrak{R}(\tilde{A}) = \frac{\sum_i a_i}{|\tilde{A}|}
 \end{equation}
 
-\noindent
-where \(|\cdot|\) represents the cardinality of the fuzzy number. In words, \ref{eq:first-index-yager} is merely the average
-of the values in the fuzzy number.
+\noindent where \(|\cdot|\) represents the cardinality of the fuzzy number. In words, \ref{eq:first-index-yager} is merely the
+average of the values in the fuzzy number. As a result, \(A \le B\) when \(\mathfrak{R}(\tilde{A}) \le \mathfrak{R}(\tilde{B})\)
+\cite{bello-2019-fuzzy-activ}.
 
 \subsection{Fully Fuzzy Linear Programming}
 \label{sec:fully-fuzzy-linear-programming}
@@ -360,7 +360,7 @@ Expanding the set of equation and using the condensed notation in \ref{eq:nasser
 \end{equation}
 
 \section{The Crisp BAP and PAP}
-\label{sec:org2d159d6}
+\label{sec:orge8ad087}
 \subsection{The Position Allocation Problem}
 \label{sec:the-position-allocation-problem}
 This section provides a brief overview of the BAP and a detailed formulation of PAP as presented in
@@ -771,7 +771,7 @@ pairing. The last constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace}
 variable.
 
 \section{The Fuzzy BAP}
-\label{sec:orgb63d7ec}
+\label{sec:orgfcfcad8}
 The following is a FFLP model to the continuous dynamical BAP that is able to allocate a quay to an incoming vessel
 \cite{bello-2019-fuzzy-activ}. The model assumes that the arrival time, \(\tilde{a}\), berthing time, \(\tilde{u}\), and
 handling time, \(\tilde{s}\), are assumed to be imprecise. The objective of the model is to allocate all the vessels to
@@ -801,7 +801,7 @@ defined in a way useful for the purposes of this paper. The adaptation of the Fu
 is discussed next.
 
 \section{The Fuzzy PAP}
-\label{sec:org87f8b4e}
+\label{sec:org1fd4ad3}
 This section derives the Fuzzy PAP (FPAP). It is separated into 3 parts to construct each component individually:
 objective function, queuing constraints, and charging constraints. Before deriving the FPAP, it is prudent to define the
 set of fuzzy variables. Similarly to the Fuzzy BAP, the arrival times, \(\tilde{a}_i\), berthing time \(\tilde{u}_i\), and
@@ -810,7 +810,7 @@ detach time from the charger \(\tilde{d}_i\) are assumed to be imprecise. Thus, 
 \(i\), \(\tilde{\eta}_i\) will also become fuzzy values.
 
 \subsection{Objective Function}
-\label{sec:org018396a}
+\label{sec:orgf1c6457}
 Begin by rewriting the crisp objective function with the fuzzy linearization term as shown in \ref{eq:fuzzy-objective}.
 
 \begin{equation}
@@ -828,27 +828,25 @@ The resulting objective function is shown in \ref{eq:fuzzy-objective-yager}.
 \end{equation}
 
 \subsection{Queuing Constraints}
-\label{sec:orgc33b7ff}
+\label{sec:orgadb597a}
 To derive the queuing constraints, begin by rewriting the set of crisp constraints that are of interest as fuzzy
-variables as shown in \ref{eq:fuzzy-packing-constrs}. \ref{subeq:fp_m_time} fuzzifies all the temporal terms;
-however note that the binary decision variable, \(\sigma_{ij}\), is now written as \(\sigma^k_{ij}\), where \(k \in
-\{1,..,|\tilde{u}_i|\} \in \mathbb{Z}\) is used to indicate the temporal binary decision for the \(k^{\text{th}}\) fuzzy value in
-\(\tilde{u}_i\). \ref{subeq:fp_m_valid_pos} and \ref{subeq:fp_m_sigma} duplicate the constraints \(|\tilde{u}_i|\) times.
-Using triangular fuzzy numbers, that would imply constraints for the lower, middle, and upper bounds of the temporal
-impreciseness. Similarly, \ref{subeq:fp_m_detach}-\ref{subeq:fp_m_valid_depart} are equivalent to their crisp
-counterparts, but with fuzzified terms. \ref{subeq:fp_binaryspace} simply updates the binary decision term.
+variables as shown in \ref{eq:fuzzy-packing-constrs}. \ref{subeq:fp_m_time} fuzzifies all the temporal terms.
+\ref{subeq:fp_m_valid_pos} and \ref{subeq:fp_m_sigma} duplicate the constraints \(|\tilde{u}_i|\) times. Using triangular
+fuzzy numbers, that would imply constraints for the lower, middle, and upper bounds of the temporal impreciseness.
+Similarly, \ref{subeq:fp_m_detach}-\ref{subeq:fp_m_valid_depart} are equivalent to their crisp counterparts, but with
+fuzzified terms. \ref{subeq:fp_binaryspace} simply updates the binary decision term.
 
 \begin{multicols}{2}
 \begin{subequations}
                                                      \label{eq:fuzzy-pack-constrs}
 \begin{equation}
-    \tilde{u}_i - \tilde{u}_j - \tilde{s}_j - (\sigma^k_{ij} - 1)T \geq 0 \label{subeq:fp_m_time}         \\
+    \tilde{u}_i - \tilde{u}_j - \tilde{s}_j - (\sigma_{ij} - 1)T \geq 0 \label{subeq:fp_m_time}         \\
 \end{equation}
 \begin{equation}
-    \sigma^k_{ij} + \sigma^k_{ji} + \psi_{ij} + \psi_{ji} \geq 1                     \label{subeq:fp_m_valid_pos}    \\
+    \sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1                     \label{subeq:fp_m_valid_pos}    \\
 \end{equation}
 \begin{equation}
-    \sigma^k_{ij} + \sigma^k_{ji} \leq 1                                       \label{subeq:fp_m_sigma}        \\
+    \sigma_{ij} + \sigma_{ji} \leq 1                                       \label{subeq:fp_m_sigma}        \\
 \end{equation}
 \begin{equation}
     \tilde{s}_i + \tilde{u}_i = \tilde{d}_i                       \label{subeq:fp_m_detach}       \\
@@ -860,13 +858,13 @@ counterparts, but with fuzzified terms. \ref{subeq:fp_binaryspace} simply update
     \tilde{d}_i \leq \tau_i                                             \label{subeq:fp_m_valid_depart} \\
 \end{equation}
 \begin{equation}
-   \sigma^k_{ij}, \psi_{ij} \in \{0,1\}\;                                   \label{subeq:fp_binaryspace}        \\
+   \sigma_{ij}, \psi_{ij} \in \{0,1\}\;                                   \label{subeq:fp_binaryspace}        \\
 \end{equation}
 \end{subequations}
 \end{multicols}
 
 \subsection{Charging Constraints}
-\label{sec:orgbd40a29}
+\label{sec:org8a21fae}
 Similarly to the other derivations, the crisp constraints are rewritten with their equivalent fuzzy terms.
 \ref{subeq:fp_init_charge}-\ref{subeq:fp_final_charge} are equivalent to their crisp counterpart with the added lower
 and upper bounds for the battery charge for visit \(i\). Note that the discharge amount, \(\Delta_i\), is not fuzzy. It is
