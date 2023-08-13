@@ -61,8 +61,8 @@ tasks:
     generates:
       - ./{{.DOC}}.pdf
     cmds:
-      - '{{if eq OS "windows"}} task -d {{.MPAP_D}} images{{end}}'
-      - '{{if eq OS "linux"}} go-task -d {{.MPAP_D}} images{{end}}'
+      - go-task --version >/dev/null 2>&1 && go-task -d {{.MPAP_D}} images || echo ""
+      - task --version >/dev/null 2>&1 && task -d {{.MPAP_D}} images || echo ""
       - task: relative-path-bibtex
       - sh {{.SCRIPTS}}/build-pdf {{.DOC}} {{.TARGET}}
     silent: false
@@ -92,8 +92,8 @@ tasks:
   clean:
     desc: "Clean up the project."
     cmds:
-      - '{{if eq OS "windows"}} task -d {{.MPAP_D}} clean{{end}}'
-      - '{{if eq OS "linux"}} go-task -d {{.MPAP_D}} clean{{end}}'
+      - task --version >/dev/null 2>&1 && task -d {{.MPAP_D}} clean || echo ""
+      - go-task --version >/dev/null 2>&1 && go-task -d {{.MPAP_D}} clean || echo ""
       - |
         # Clean up the document files
         rm -f {{.TARGET}}
