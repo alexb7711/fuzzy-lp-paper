@@ -69,11 +69,19 @@ tasks:
     generates:
       - ./fuzzy-pap.pdf
     cmds:
+      - task: relative-path-bibtex
       - |
         latexmk -f -interaction=nonstopmode \
                    -pdf -pdflatex="pdflatex --shell-escape %O %S" \
                    -bibtex {{.DOC_SRC}}
     silent: false
+
+##==============================================================================
+#
+  relative-path-bibtex:
+    desc: "Update the paths in the 'bibtex' command to be relative."
+    cmds:
+      - sh scripts/relative-path-bibtex {{.DOC}}.tex
 
 ##==============================================================================
 #
