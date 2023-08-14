@@ -1,4 +1,8 @@
 * The Fuzzy BAP
+:PROPERTIES:
+:CUSTOM_ID: sec:the-fuzzy-bap
+:END:
+
 The following is a FFLP model to the continuous dynamical BAP that is able to allocate a quay to an incoming vessel
 [cite:@bello-2019-fuzzy-activ]. The model assumes that the arrival time, $\tilde{a}$, berthing time, $\tilde{u}$, and
 handling time, $\tilde{s}$, are assumed to be known, but imprecise. The objective of the model is to allocate all the
