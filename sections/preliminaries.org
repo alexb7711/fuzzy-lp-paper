@@ -1,4 +1,7 @@
 * Preliminaries
+:PROPERTIES:
+:CUSTOM_ID: sec:preliminaries
+:END:
 ** Mixed Integer Linear Program
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
 set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
