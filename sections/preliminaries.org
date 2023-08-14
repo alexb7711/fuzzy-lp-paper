@@ -9,7 +9,7 @@ mathematical structure represented in [[eq:milp-structure]] [cite:@chen-2010-app
 #+name: eq:milp-structure
 \begin{equation}
 \begin{array}{lll}
-\text{Maximize}   & J = \sum_j c_j x_j + \sum_k d_k y_k            &                 \\
+\text{max}   & J = \sum_j c_j x_j + \sum_k d_k y_k            &                 \\
 \text{subject to} & \sum_j a_{ij} x_j + \sum_k g_{ik} y_k  \le b_i & (i = 1,2,...,m) \\
                   & x_j \ge 0                                      & (j = 1,2,...,n) \\
                   & y_k \in \mathbb{Z^+}0                          & (k = 1,2,...,n) \\
@@ -45,7 +45,8 @@ $\mu_{\tilde{A}}$ is called the membership function where $\mu_{\tilde{A}}$ is t
 membership of $x$ in $\tilde{A}$.
 #+end_definition
 
-This paper will use fuzzy sets defined on the real numbers $\mathbb{R}$. The membership function describes the shape of
+This paper will use fuzzy sets defined over the set of real numbers $\mathbb{R}$. There are multiple ways to represent fuzzy
+numbers over the set of real numbers. The representation is defined by membership function which describes the shape of
 the fuzzy number. As an example, consider the following definition.
 
 #+begin_definition
@@ -164,7 +165,7 @@ equality, less than, and greater than constraints, respectively.
 #+name: eq:general-fflp
 \begin{equation}
 \begin{array}{lll}
-\text{Maximize}   & J = \sum_j \tilde{C}_j \otimes \tilde{X}_j              &                 \\
+\text{max}   & J = \sum_j \tilde{C}_j \otimes \tilde{X}_j              &                 \\
 \text{subject to} & \sum_j \tilde{a}_{ej} \otimes \tilde{x}_j = \tilde{b}_e &  \forall e = 1,2,3,... \\
                   & \sum_j \tilde{a}_{lj} \otimes \tilde{x}_j \le \tilde{b}_l &  \forall l = 1,2,3,... \\
                   & \sum_j \tilde{a}_{gj} \otimes \tilde{x}_j \ge \tilde{b}_l &  \forall g = 1,2,3,...
@@ -180,31 +181,33 @@ down into a set of crisp constraints as shown in [[eq:nasseri-solution]]. The co
 definition of fuzzy set multiplication defined in [[eq:fuzzy-arithmetic]]. The fuzzy number index is represented is the
 exponent rather than the subscript to clearly distinguish between the indexed value in the fuzzy number and the
 constraint index (i.e. $\tilde{A} = (a^1,a^2,a^3)$). Furthermore, it is assumed that the fuzzy numbers are nonnegative.
+Although the following equation can be written in terms of general nonnegative LR fuzzy numbers, the parameters and
+decision variables are written in terms of nonnegative triangular fuzzy numbers.
 
 #+name: eq:nasseri-solution
 \begin{equation}
-\begin{array}{lll}
-\text{Maximize}   & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3)(x_j^1,x_j^2,x_j^3)\Big) &\\
-\text{subject to} & \sum_j a_{ej}^1 x_j^1 = b_e^1 &  \forall e = 1,2,3,... \\
-                  & \sum_j a_{lj}^1 x_j^1 \le b_l^1 &  \forall l = 1,2,3,... \\
-                  & \sum_j a_{gj}^1 x_j^1 \ge b_g^1  &  \forall g = 1,2,3,... \\
-                  & \sum_j a_{ej}^2 x_j^2 = b_e^2 &  \forall e = 1,2,3,... \\
-                  & \sum_j a_{lj}^2 x_j^2 \le b_l^2 &  \forall l = 1,2,3,... \\
-                  & \sum_j a_{gj}^2 x_j^2 \ge b_g^2  &  \forall g = 1,2,3,... \\
-                  & \sum_j a_{ej}^3 x_j^3 = b_e^3 &  \forall e = 1,2,3,... \\
-                  & \sum_j a_{lj}^3 x_j^3 \le b_l^3 &  \forall l = 1,2,3,... \\
-                  & \sum_j a_{gj}^3 x_j^3 \ge b_g^3  &  \forall g = 1,2,3,... \\
-                  & x_j^2 - x_j^1 \ge 0         & x_j^3 - x_j^2 \ge 0 \\
+\begin{array}{lclc}
+\text{max}   & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3)(x_j^1,x_j^2,x_j^3)\Big) &\\
+\text{subject to} & \sum_j a_{ej}^1 x_j^1 = b_e^1 & & \forall e = 1,2,3,... \\
+                  & \sum_j a_{lj}^1 x_j^1 \le b_l^1 & & \forall l = 1,2,3,... \\
+                  & \sum_j a_{gj}^1 x_j^1 \ge b_g^1  & & \forall g = 1,2,3,... \\
+                  & \sum_j a_{ej}^2 x_j^2 = b_e^2 & & \forall e = 1,2,3,... \\
+                  & \sum_j a_{lj}^2 x_j^2 \le b_l^2 & & \forall l = 1,2,3,... \\
+                  & \sum_j a_{gj}^2 x_j^2 \ge b_g^2  & & \forall g = 1,2,3,... \\
+                  & \sum_j a_{ej}^3 x_j^3 = b_e^3 & & \forall e = 1,2,3,... \\
+                  & \sum_j a_{lj}^3 x_j^3 \le b_l^3 & & \forall l = 1,2,3,... \\
+                  & \sum_j a_{gj}^3 x_j^3 \ge b_g^3  & & \forall g = 1,2,3,... \\
+                  & x_j^2 - x_j^1 \ge 0         & x_j^3 - x_j^2 \ge 0 & \\
 \end{array}
 \end{equation}
 
-\noindent
+\noindent Note the last constraint is defined to ensure the ordering of the triangular fuzzy number, $x_j^1 \le x_j^2 \le x_j^3$.
 To be more succinct, the FFLP can also equivalently be written as [[eq:nasseri-solution-condensed]].
 
 #+name: eq:nasseri-solution-condensed
 \begin{equation}
-\begin{array}{lll}
-\text{Maximize}   & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3) \otimes (x_j^1,x_j^2,x_j^3)\Big) &\\
+\begin{array}{llc}
+\text{max}   & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3) \otimes (x_j^1,x_j^2,x_j^3)\Big) &\\
 \text{subject to} & \sum_j a_{ej}^k x_j^k = b_e^k &  \forall e = 1,2,3,... \\
                   & \sum_j a_{lj}^k x_j^k \le b_l^k &  \forall l = 1,2,3,... \\
                   & \sum_j a_{gj}^k x_j^k \ge b_g^k  &  \forall g = 1,2,3,... \\
@@ -215,19 +218,18 @@ To be more succinct, the FFLP can also equivalently be written as [[eq:nasseri-s
 
 Where $k$ has a max value equal to the cardinality to the type of fuzzy number being utilized. This can be further be
 elaborated on by rewriting the inequality constraints as equality constraints by introducing slack variables. This is
-useful as it represents the formulation in a standard form [cite:@chen-2010-applied;@vanderbei-2020-linear-progr]. It
-also has the slightly less useful benefit of (mostly) providing the solver a set of equations called a hyperplane
-[cite:@chen-2010-applied].
+useful as it represents the formulation in a standard form [cite:@chen-2010-applied;@vanderbei-2020-linear-progr].
 
-The given method is called the Kumar and Kaurs method. Generally speaking, it is designed to solve FFLP problems with
-inequality constraints having LR flat fuzzy numbers. Given the FFLP [[eq:general-fflp]] and assuming that
+The given method is called the Kumar and Kaurs method [cite:@kaur-2016-introd-fuzzy] which is similar in presentation of
+the Nassiri method presented in [cite:@bello-2019-fuzzy-activ]. Generally speaking, it is designed to solve FFLP
+problems with inequality constraints having LR flat fuzzy numbers. Given the FFLP [[eq:general-fflp]] and assuming that
 $\tilde{x}_j$ is an LR flat fuzzy number, the problem can be reformulated as [[eq:kumar-kaurs-fuzzy]]
 [cite:@kaur-2016-introd-fuzzy].
 
 #+name: eq:kumar-kaurs-fuzzy
 \begin{equation}
 \begin{array}{lll}
-\text{Maximize}   & J = \sum_j \tilde{C}_j \otimes \tilde{X}_j              &                                              \\
+\text{max}   & J = \sum_j \tilde{C}_j \otimes \tilde{X}_j              &                                              \\
 \text{subject to} & \sum_j \tilde{a}_{ej} \otimes \tilde{x}_j               = \tilde{b}_e & \forall e = 1,2,3,...                \\
                   & \sum_j \tilde{a}_{lj} \otimes \tilde{x}_j \oplus \tilde{S}_l = \tilde{b}_l \oplus \tilde{S'}_l & \forall l = 1,2,3,... \\
                   & \sum_j \tilde{a}_{gj} \otimes \tilde{x}_j \oplus \tilde{S}_g = \tilde{b}_g \oplus \tilde{S'}_g & \forall g = 1,2,3,... \\
@@ -236,21 +238,21 @@ $\tilde{x}_j$ is an LR flat fuzzy number, the problem can be reformulated as [[e
 \end{array}
 \end{equation}
 
-Expanding the set of equation and using the condensed notation in [[eq:nasseri-solution-condensed]] we find
+Expanding the set of equations and using the condensed notation in [[eq:nasseri-solution-condensed]] we find
 [[eq:kumar-kaurs-crisp]] [cite:@kaur-2016-introd-fuzzy].
 
 #+name: eq:kumar-kaurs-crisp
 \begin{equation}
-\begin{array}{lll}
-\text{Maximize}    & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3) \otimes (x_j^1,x_j^2,x_j^3)\Big) &                       \\
-\text{subject to}  & \sum_j a_{ej}^k x_j^k = b_e^k                                   &  \forall e = 1,2,3,...      \\
-                   & \sum_j a_{lj}^k x_j^k s_l^k \le s_l^{'k} b_l^k                    &  \forall l = 1,2,3,...      \\
-                   & \sum_j a_{gj}^k x_j^k s_g^k \ge s_l^{'k} b_l^k                    &  \forall g = 1,2,3,...      \\
-                   & \mathfrak{R}(\tilde{S_l}) - \mathfrak{R}(\tilde{S_l'}) = 0                         & \forall l = 1,2,3,...       \\
-                   & \mathfrak{R}(\tilde{S_g}) - \mathfrak{R}(\tilde{S_g'}) = 0                         & \forall g = 1,2,3,...       \\
-                   & x_j^2 - x_j^1 \ge 0                                            & x_j^3 - x_j^2 \ge 0     \\
-                   & s_j^2 - s_j^1 \ge 0                                            & s_j^3 - s_j^2 \ge 0     \\
-                   & s_j^{'2} - s_j^{'1} \ge 0                                      & s_j^{'3} - s_j^{'2} \ge 0 \\
-                   & \forall k \in \{1,2,...\}                                            &                       \\
+\begin{array}{lllc}
+\text{max}    & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3) \otimes (x_j^1,x_j^2,x_j^3)\Big) &                             &                                          \\
+\text{subject to}  & \sum_j a_{ej}^k x_j^k = b_e^k                                &                                &   \forall e = 1,2,3,...        \\
+                   & \sum_j a_{lj}^k x_j^k s_l^k \le s_l^{'k} b_l^k                 &                                &   \forall l = 1,2,3,...       \\
+                   & \sum_j a_{gj}^k x_j^k s_g^k \ge s_l^{'k} b_l^k                 &                                &   \forall g = 1,2,3,...      \\
+                   & \mathfrak{R}(\tilde{S_l}) - \mathfrak{R}(\tilde{S_l'}) = 0                      &                                &  \forall l = 1,2,3,...          \\
+                   & \mathfrak{R}(\tilde{S_g}) - \mathfrak{R}(\tilde{S_g'}) = 0                      &                                &  \forall g = 1,2,3,...          \\
+                   & x_j^2 - x_j^1 \ge 0                                              &x_j^3 - x_j^2 \ge 0 &         \\
+                   & s_j^2 - s_j^1 \ge 0                                              &s_j^3 - s_j^2 \ge 0 &         \\
+                   & s_j^{'2} - s_j^{'1} \ge 0                                        &s_j^{'3} - s_j^{'2} \ge 0 & \\
+                   & \forall k \in \{1,2,...\}                                            &                            &                       \\
 \end{array}
 \end{equation}

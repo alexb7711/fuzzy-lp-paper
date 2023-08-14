@@ -1,5 +1,8 @@
 * The Fuzzy PAP
-This section derives the Fuzzy PAP (FPAP). It is separated into 3 parts to construct each component individually:
+:PROPERTIES:
+:CUSTOM_ID: sec:the-fuzzy-pap
+:END:
+This section derives the Fuzzy PAP (FPAP). It is separated into three parts to construct each component individually:
 objective function, queuing constraints, and charging constraints. Before deriving the FPAP, it is prudent to define the
 set of fuzzy variables. Similarly to the Fuzzy BAP, the arrival times, $\tilde{a}_i$, berthing time $\tilde{u}_i$, and
 detach time from the charger $\tilde{d}_i$ are assumed to be imprecise. Thus, indirectly, the service time,
@@ -33,8 +36,7 @@ counterparts, but with fuzzified terms. \ref{subeq:fp_binaryspace} simply update
 
 #+begin_src latex
 \begin{multicols}{2}
-\begin{subequations}
-                                                     \label{eq:fuzzy-pack-constrs}
+\begin{subequations} \label{eq:fuzzy-packing-constrs}
 \begin{equation}
     \tilde{u}_i - \tilde{u}_j - \tilde{s}_j - (\sigma_{ij} - 1)T \geq 0 \label{subeq:fp_m_time}         \\
 \end{equation}
