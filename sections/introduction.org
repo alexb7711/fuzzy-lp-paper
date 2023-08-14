@@ -1,3 +1,15 @@
 * Introduction
-# This paper assumes an average discharge over a period of in which an estimated discharge is calculated for each route,
-# $\Delta_i$.
+This document outlines a fuzzy model of the Position Allocation Problem (PAP). The model utilizes Mixed Integer Linear
+Programming (MILP) constraints to determine feasible charging schedules. The problem involves generating an optimal
+charging schedule for a fleet of Battery Electric Buses (BEBs) based on a set of routes and a mix of fast and slow
+chargers. The objective is to reduce the number of total chargers and reduce the amount of time spent charging. The bus
+routes utilized are sampled from UTA bus routes from which the route times and times at the station are derived. This
+paper assumes an average discharge over a period from which an estimated discharge is calculated for each route, $\Delta_i$.
+
+The FPAP expands upon the MILP-PAP by adding a layer of robustness to the model's solutions. By introducing fuzziness to
+the model, that allows a sense of uncertainty to some of the parameters. In a realistic scenario, multiple factors such
+as technical problems, weather conditions, road detours, among others, buses may arrive earlier or later than
+anticipated to the station/depot. For crisp models, there is no sense of lateness or earliness, thus the model's
+solutions lose validity at the moment that any bus does not adhere to the route time perfectly. Fuzzifying the models in
+turn produces a fuzzy solution that encodes ranges of times that buses may arrive while still remaining a valid
+solution.
