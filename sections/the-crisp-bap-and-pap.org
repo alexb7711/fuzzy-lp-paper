@@ -2,6 +2,7 @@
 :PROPERTIES:
 :CUSTOM_ID: sec:the-crisp-bap-and-pap
 :END:
+
 #+include: ../sup-doc/milp-pap-paper-frontiers/sections/pap-problem.org
 
 #+caption: Example of rectangle packing problem.
