@@ -1,34 +1,43 @@
 * The Fuzzy BAP
 The following is a FFLP model to the continuous dynamical BAP that is able to allocate a quay to an incoming vessel
 [cite:@bello-2019-fuzzy-activ]. The model assumes that the arrival time, $\tilde{a}$, berthing time, $\tilde{u}$, and
-handling time, $\tilde{s}$, are assumed to be imprecise. The objective of the model is to allocate all the vessels to
-different quays, according to several constraints minimizing the total waiting time for all the vessels. The model in
-its entirety is presented in [[eq:fuzzy-bap]]. Note that a few modifications are made to the notation to accommodate the
-notation of [cite:@bello-2019-fuzzy-activ] while attempting to remain as consistent as possible with the notation
-presented in this paper. In this section, $Q$ refers to the set of quays. Furthermore, the model is defined over
-multiple quays, thus indexing for position shall be written as $v_{iq}$. Similarly, because of the added degree of
-freedom, the spatiotemporal binary decision variables are represented as $\sigma_{ijq}$ and $\psi_{ijq}$.
-
-# TODO: Verify \sigma and \psi in these equations
+handling time, $\tilde{s}$, are assumed to be known, but imprecise. The objective of the model is to allocate all the
+vessels to different quays, according to several constraints minimizing the total waiting time for all the vessels. The
+model in its entirety is presented in [[eq:fuzzy-bap]]. Note that a few modifications are made to the notation to
+accommodate the notation of [cite:@bello-2019-fuzzy-activ] while attempting to remain as consistent as possible with the
+notation presented in this paper. In this section, $Q$ refers to the set of quays. Furthermore, the model is defined
+over multiple quays, thus indexing for position shall be written as $v_{iq}$. Similarly, because of the added degree of
+freedom, the spatiotemporal binary decision variables are represented as $\sigma^q_{ij}$ and $\psi^q_{ij}$. The $\cdot^q$ term
+represents the quay of interest.
 
 #+name: eq:fuzzy-bap
 \begin{equation}
 \begin{array}{lll}
-                   & min \sum_{q \in Q}\sum_{i \in I} (\tilde{u}_{iq} - \tilde{a}_i)           &                                \\
+                   & \text{min} \sum_{q \in Q}\sum_{i \in I} (\tilde{u}_{iq} - \tilde{a}_i)           &                                \\
 \text{Subject to:} &                                                             &                                    \\
                    & \sum_{q \in Q} v_{iq} = 1                                          & \forall i \in I;\; \forall q \in Q               \\
                    & \tilde{u}_{iq} \ge \tilde{a}_i                                 & \forall i \in I;\; \forall q \in Q                \\
                    & v_{iq} + l_i \le L_q                                           & \forall i \in I;\; \forall q \in Q                \\
-                   & v_{iq} + l_i \le v_{jq} + M(1-\sigma_{ijq})                           & \forall i,j \in I;\; i \ne j;\; \forall q \in Q   \\
+                   & v_{iq} + l_i \le v_{jq} + M(1-\sigma^q_{ij})                           & \forall i,j \in I;\; i \ne j;\; \forall q \in Q   \\
                    & \tilde{u}_{iq} + \tilde{s}_i \le T                             & \forall i \in I;\; \forall q \in Q                \\
-                   & \tilde{u}_{iq} + \tilde{s}_i \le \tilde{u}_{iq} + M(1-\psi_{ijq})   & \forall i,j \in I;\; i \ne j;\; \forall q \in Q \\
+                   & \tilde{u}_{iq} + \tilde{s}_i \le \tilde{u}_{iq} + M(1-\psi^q_{ij})   & \forall i,j \in I;\; i \ne j;\; \forall q \in Q \\
 \end{array}
 \end{equation}
 
 One may note the similarities to the previously presented BAB and PAP models in [[eq:fuzzy-bap]]. It is, however, not
-defined in a way useful for the purposes of this paper. The adaptation of the Fuzzy BAP (FBAP) to the Fuzzy PAP (FPAP)
-is discussed next.
+defined in a way useful for the purposes of this paper yet. The adaptation of the Fuzzy BAP (FBAP) to the Fuzzy PAP
+(FPAP) is discussed next in [[#sec:the-fuzzy-pap]]. An example solution of [[eq:fuzzy-bap]] for 2 quays, provided by
+[cite:@bello-2019-fuzzy-activ], is shown in [[fig:bap-example-solution]]. The figure represents the robustness of the fuzzy
+berthing plan.
 
-#+begin_comment
-TODO: Add example results from the book and talk about what the results mean
-#+end_comment
+The lines below the small triangle represent the possible early berthing time. Similarly, the lines above the triangle
+represent the possible late berthing of the vessel. The point where the small point resides is the optimum berthing
+time. In [[fig:bap-example-solution]] it appears that there are conflicts between some of the departures and arrivals of the
+vessels due to the overlapping lines (e.g. V8 and V2). These overlapping arrivals and departures merely represent the
+relationship of the fuzzy departure/arrival times of the vessels. For example, if V8 were to depart late, V2 has slack
+to allow a late berthing and servicing. On the graph, that would represent a berthing time located somewhere above the
+small triangle.
+
+#+name: fig:bap-example-solution
+#+caption: Example solution of a fuzzy BAP model over multiple quays. The parallelograms represent the fuzzy solution visually by depicting the lower and upper bounds for the arrival and departure times with the vertial sloped lines. The yellow filled squares represent the average crisp solution.
+[[file:../img/bap-example-fuzzy-solution.png]]

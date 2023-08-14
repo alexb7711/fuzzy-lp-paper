@@ -1,4 +1,7 @@
 * The Fuzzy PAP
+:PROPERTIES:
+:CUSTOM_ID: sec:the-fuzzy-pap
+:END:
 This section derives the Fuzzy PAP (FPAP). It is separated into 3 parts to construct each component individually:
 objective function, queuing constraints, and charging constraints. Before deriving the FPAP, it is prudent to define the
 set of fuzzy variables. Similarly to the Fuzzy BAP, the arrival times, $\tilde{a}_i$, berthing time $\tilde{u}_i$, and
