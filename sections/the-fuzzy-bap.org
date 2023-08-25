@@ -44,4 +44,4 @@ small triangle.
 
 #+name: fig:bap-example-solution
 #+caption: Example solution of a fuzzy BAP model over multiple quays. The parallelograms represent the fuzzy solution visually by depicting the lower and upper bounds for the arrival and departure times with the vertial sloped lines. The yellow filled squares represent the average crisp solution.
-[[file:../img/bap-example-fuzzy-solution.png]]
+[[file:img/bap-example-fuzzy-solution.png]]
