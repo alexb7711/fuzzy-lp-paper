@@ -29,10 +29,14 @@ This section introduces the notion of fuzzy numbers and some basic definitions. 
 from [cite:@zimmermann-2001-fuzzy-set;@das-2016-mathem-model;@yaghobi-2014-compar-fuzzy;@bello-2019-fuzzy-activ].
 
 *** Fuzzy Sets
-Let's begin with what a fuzzy number is not. A classical (crisp) set is defined as a collection of elements $x \in X$.
-Crisp sets are binary, either an element belongs in the set, or it does not [cite:@zimmermann-2001-fuzzy-set]. For a
-fuzzy set, what is known as the characteristic function applies various degrees of membership for elements of a given
-set [cite:@zimmermann-2001-fuzzy-set].
+A sensible method of introducing fuzzy sets is to begin by describing the familiar classic set. A classical (crisp) set
+is defined as a collection of elements $x \in X$. Crisp sets are binary, either an element belongs in the set, or it does
+not [cite:@zimmermann-2001-fuzzy-set]. For a fuzzy set, what is known as the characteristic function applies various
+degrees of membership for elements of a given set [cite:@zimmermann-2001-fuzzy-set]. TODO: Read up on membership
+functions
+
+#+name: fig:characteristic-plot
+[[../img/characteristic-plot.pdf]]
 
 #+begin_definition
 Let $X$ be a collection of objects (often called the universe of discourse [cite:@bello-2019-fuzzy-activ]). If $X$ is denoted
