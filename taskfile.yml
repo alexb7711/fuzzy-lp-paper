@@ -7,6 +7,7 @@ env:
   TARGET : fuzzy-pap.pdf
   DOC    : main
   SCRIPTS: org-doc-scripts
+  IMG_DIR: ./img
   MPAP_D : ./sup-doc/milp-pap-paper-frontiers
 
 
@@ -21,6 +22,7 @@ tasks:
   default:
     cmds:
       - task: precheck
+      - task: images
       - task: pdf
 
 ##==============================================================================
@@ -28,6 +30,7 @@ tasks:
   pipeline:
     cmds:
       - task: precheck
+      - task: images
       - task: set-version
       - task: pdf
 
@@ -38,6 +41,23 @@ tasks:
     cmds:
       - sh {{.SCRIPTS}}/check-packages
     silent: true
+
+##==============================================================================
+#
+  images:
+    desc: "Creates a PDF of all the files in {{.IMGDIR}}."
+    vars:
+      IMG_SRC:
+        sh: ls {{.IMG_DIR}} | grep ".tex$"
+    cmds:
+      - go-task --version >/dev/null 2>&1 && go-task -d {{.MPAP_D}} images
+      - task --version >/dev/null 2>&1 && task -d {{.MPAP_D}} images || echo ""
+      - |
+        for i in {{.IMG_SRC | catLines}}
+        do
+          pdflatex -shell-escape -interaction=nonstopmode -output-directory {{.IMG_DIR}} ${i}
+        done
+    silent: false
 
 ##==============================================================================
 #
@@ -55,17 +75,14 @@ tasks:
 #
   pdf:
     desc: "Output {{.TARGET}} PDF."
-    vars:
     sources:
       - ./{{.DOC}}.tex
     generates:
       - ./{{.DOC}}.pdf
     cmds:
-      - go-task --version >/dev/null 2>&1 && go-task -d {{.MPAP_D}} images || echo ""
-      - task --version >/dev/null 2>&1 && task -d {{.MPAP_D}} images || echo ""
       - task: relative-path-bibtex
       - sh {{.SCRIPTS}}/build-pdf {{.DOC}} {{.TARGET}}
-    silent: false
+    silent: true
 
 ##==============================================================================
 #

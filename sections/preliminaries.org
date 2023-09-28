@@ -32,10 +32,13 @@ from [cite:@zimmermann-2001-fuzzy-set;@das-2016-mathem-model;@yaghobi-2014-compa
 A sensible method of introducing fuzzy sets is to begin by describing the familiar classic set. A classical (crisp) set
 is defined as a collection of elements $x \in X$. Crisp sets are binary, either an element belongs in the set, or it does
 not [cite:@zimmermann-2001-fuzzy-set]. For a fuzzy set, what is known as the characteristic function applies various
-degrees of membership for elements of a given set [cite:@zimmermann-2001-fuzzy-set]. TODO: Read up on membership
-functions
+degrees of membership for elements of a given set [cite:@zimmermann-2001-fuzzy-set]. The membership of a value in a
+fuzzy set may vary from 0 to 1 which is used to indicate the degree that a value belongs to the set. As an example,
+[[fig:characteristic-plot]] demonstrates a membership function of a triangular fuzzy number. As a formal definition,
+consider the following:
 
 #+name: fig:characteristic-plot
+#+caption: Example plot of a characteristic function for a triangular fuzzy number.
 [[../img/characteristic-plot.pdf]]
 
 #+begin_definition
@@ -53,47 +56,9 @@ $\mu_{\tilde{A}}$ is called the membership function where $\mu_{\tilde{A}}$ is t
 membership of $x$ in $\tilde{A}$.
 #+end_definition
 
-This paper will use fuzzy sets defined over the set of real numbers $\mathbb{R}$. There are multiple ways to represent fuzzy
-numbers over the set of real numbers. The representation is defined by membership function which describes the shape of
-the fuzzy number. As an example, consider the following definition.
-
-#+begin_definition
-A fuzzy number that is represented by $\tilde{A} = (a,b,c)$ is said to be triangular if its membership function is
-defined as [[eq:triangular-fuzzy-number]].
-
-#+name: eq:triangular-fuzzy-number
-\begin{equation}
-  \mu_{\tilde{A}}(x) =
-  \begin{cases}
-    \frac{(x-a)}{(b-a)} & a \le x \le b \\
-    \frac{(d-x)}{(d-b)} & c \le x \le d \\
-    0                   & \text{otherwise}
-  \end{cases}
-\end{equation}
-#+end_definition
-
-#+begin_definition
-The fuzzy set $\tilde{A}$ in $\mathbb{R}$ is normal if $\text{max}_x \mu_{\tilde{A}}(x) = 1$.
-#+end_definition
-
-#+begin_definition
-A fuzzy set $\tilde{A}$ in $\mathbb{R}$ is convex if and only if the membership function of $\tilde{A}$ satisfies the inequality
-
-\begin{equation*}
-\mu_{\tilde{A}}[\beta x_1 + (1-\beta)x_2] \ge \text{min}[\mu_{\tilde{A}}(x_1), \mu_{\tilde{A}}(x_2)]\; \forall x_1, x_2 \in \mathbb{R}\; \beta \in [0,1]
-\end{equation*}
-#+end_definition
-
-#+begin_definition
-A fuzzy number is a normal convex fuzzy set in $\mathbb{R}$.
-#+end_definition
-
-#+begin_definition
-The triangular fuzzy number $\tilde{A}$ is nonnegative $\iff\; a \ge 0$.
-#+end_definition
-
-A more general definition of fuzzy numbers is known as LR fuzzy numbers
-[cite:@kaur-2016-introd-fuzzy;@zimmermann-2001-fuzzy-set].
+The membership function is not necessarily limited to the range $[0,1]$, but is normalized if $\text{sup}_x
+\mu_{\tilde{A}}(x) = 1$. The shape of a fuzzy number type is defined by membership function. The general definition of
+fuzzy numbers is known as LR fuzzy numbers [cite:@kaur-2016-introd-fuzzy;@zimmermann-2001-fuzzy-set].
 
 #+begin_definition
 A function $L:[0,\infty] \rightarrow [0,1]$ (or $R:[0,\infty] \rightarrow [0,1]$) is said to be reference a function of the fuzzy number if and only
@@ -103,7 +68,10 @@ if
 2. $L$ (or $R$) is non-increasing on $[0,\infty)$
 #+end_definition
 
+A common representation of the LR fuzzy number is represented by \ref{def:lr-flat}.
+
 #+begin_definition
+\label{def:lr-flat}
 A fuzzy number $\tilde{A}$ defined on the set of real numbers, $\mathbb{R}$, denoted as $(m,n,\alpha,\beta)_{LR}$, is said to be an $LR$
 flat fuzzy number if its membership function $\mu_{\tilde{A}}(x)$ is defined as
 
@@ -125,6 +93,43 @@ if $m-\alpha \ge 0$ and is said to be non-positive $LR$ flat fuzzy number if and
 #+begin_definition
 An $LR$ flat fuzzy number $\tilde{A} = (m,n,\alpha,\beta)_{LR}$ is said to be an unrestricted $LR$ flat fuzzy number if and only
 if $m - \alpha$ is a real number.
+#+end_definition
+
+A simplification to the LR flat fuzzy number is the triangular fuzzy number, which is what will be utilized in this
+work. The triangular fuzzy numbers shall also be defined over the set of real numbers $\mathbb{R}$. Consider
+\ref{def:triangular-fuzzy-number} - \ref{def:triangular-nonnegative}
+
+#+begin_definition
+\label{def:triangular-fuzzy-number}
+A fuzzy number that is represented by $\tilde{A} = (a,b,c)$ is said to be triangular if its membership function is
+defined as [[eq:triangular-fuzzy-number]].
+
+#+name: eq:triangular-fuzzy-number
+\begin{equation}
+  \mu_{\tilde{A}}(x) =
+  \begin{cases}
+    \frac{(x-a)}{(b-a)} & a \le x \le b \\
+    \frac{(c-x)}{(c-b)} & c \le x \le d \\
+    0                   & \text{otherwise}
+  \end{cases}
+\end{equation}
+#+end_definition
+
+#+begin_definition
+A fuzzy set $\tilde{A}$ in $\mathbb{R}$ is convex if and only if the membership function of $\tilde{A}$ satisfies the inequality
+
+\begin{equation*}
+\mu_{\tilde{A}}[\beta x_1 + (1-\beta)x_2] \ge \text{min}[\mu_{\tilde{A}}(x_1), \mu_{\tilde{A}}(x_2)]\; \forall x_1, x_2 \in \mathbb{R}\; \beta \in [0,1]
+\end{equation*}
+#+end_definition
+
+#+begin_definition
+A fuzzy number is a normal convex fuzzy set in $\mathbb{R}$.
+#+end_definition
+
+#+begin_definition
+\label{def:triangular-nonnegative}
+The triangular fuzzy number $\tilde{A}$ is nonnegative $\iff\; a \ge 0$.
 #+end_definition
 
 *** Fuzzy Arithmetic
