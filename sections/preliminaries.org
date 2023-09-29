@@ -25,8 +25,9 @@ acts as an injective mapping to its number representation. In other words, every
 variable to value [cite:@kaur-2016-introd-fuzzy].
 
 ** Fuzzy Sets Theory
-This section introduces the notion of fuzzy numbers and some basic definitions. Concepts from this section are pulled
-from [cite:@zimmermann-2001-fuzzy-set;@das-2016-mathem-model;@yaghobi-2014-compar-fuzzy;@bello-2019-fuzzy-activ].
+This section introduces the notion of fuzzy numbers and some basic definitions. Concepts from this section are
+referenced from
+[cite:@zimmermann-2001-fuzzy-set;@das-2016-mathem-model;@yaghobi-2014-compar-fuzzy;@bello-2019-fuzzy-activ].
 
 *** Fuzzy Sets
 A sensible method of introducing fuzzy sets is to begin by describing the familiar classic set. A classical (crisp) set
@@ -39,6 +40,7 @@ consider the following:
 
 #+name: fig:characteristic-plot
 #+caption: Example plot of a characteristic function for a triangular fuzzy number.
+#+ATTR_LATEX: :width 0.5\textwidth
 [[../img/characteristic-plot.pdf]]
 
 #+begin_definition
