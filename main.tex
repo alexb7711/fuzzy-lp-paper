@@ -1,4 +1,4 @@
-% Created 2023-09-29 Fri 02:59
+% Created 2023-09-30 Sat 04:09
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt,a4paper,final]{article}
 \usepackage[a4paper, total={7in, 10in}]{geometry}
@@ -97,7 +97,7 @@
 \let\ref\autoref                            % Redifine `\ref` as `\autoref` because lazy
 
 \section{Introduction}
-\label{sec:orgf7a7aa2}
+\label{sec:org524ed0d}
 This document outlines a fuzzy model of the Position Allocation Problem (PAP). The model utilizes Mixed Integer Linear
 Programming (MILP) constraints to determine feasible charging schedules. The problem involves generating an optimal
 charging schedule for a fleet of Battery Electric Buses (BEBs) based on a set of routes and a mix of fast and slow
@@ -123,7 +123,7 @@ the FPAP by utilizing the results from the previous sections.
 \section{Preliminaries}
 \label{sec:preliminaries}
 \subsection{Mixed Integer Linear Program}
-\label{sec:orga15e920}
+\label{sec:orgc6fdc20}
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
 set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
 constraints \cite{chen-2010-applied}. Given a general objective function \(J\), decision variables (i.e. variables of
@@ -145,20 +145,21 @@ acts as an injective mapping to its number representation. In other words, every
 variable to value \cite{kaur-2016-introd-fuzzy}.
 
 \subsection{Fuzzy Sets Theory}
-\label{sec:org2888eac}
+\label{sec:org5832a20}
 This section introduces the notion of fuzzy numbers and some basic definitions. Concepts from this section are
 referenced from
 \cite{zimmermann-2001-fuzzy-set,das-2016-mathem-model,yaghobi-2014-compar-fuzzy,bello-2019-fuzzy-activ}.
 
 \subsubsection{Fuzzy Sets}
-\label{sec:org2a360fd}
+\label{sec:orge28e8dd}
 A sensible method of introducing fuzzy sets is to begin by describing the familiar classic set. A classical (crisp) set
 is defined as a collection of elements \(x \in X\). Crisp sets are binary, either an element belongs in the set, or it does
 not \cite{zimmermann-2001-fuzzy-set}. For a fuzzy set, what is known as the characteristic function applies various
 degrees of membership for elements of a given set \cite{zimmermann-2001-fuzzy-set}. The membership of a value in a
-fuzzy set may vary from 0 to 1 which is used to indicate the degree that a value belongs to the set. As an example,
-\ref{fig:characteristic-plot} demonstrates a membership function of a triangular fuzzy number. As a formal definition,
-consider the following:
+fuzzy set may vary may differ among other characteristic functions, but their intended purpose remains the same. The
+membership function is said to be normalized if \(\text{sup}_x \mu_{\tilde{A}}(x) = 1\). As an example,
+\ref{fig:characteristic-plot} demonstrates a membership function of a triangular fuzzy number. For a formal definition,
+consider the \ref{def:membership-function}:
 
 \begin{figure}[htbp]
 \centering
@@ -167,6 +168,7 @@ consider the following:
 \end{figure}
 
 \begin{definition}
+\label{def:membership-function}
 Let \(X\) be a collection of objects (often called the universe of discourse \cite{bello-2019-fuzzy-activ}). If \(X\) is denoted
 generically by \(x\), then a fuzzy set \(\tilde{A}\) in \(X\) is a set of ordered pairs as shown in \ref{eq:membership-function}.
 
@@ -181,11 +183,12 @@ generically by \(x\), then a fuzzy set \(\tilde{A}\) in \(X\) is a set of ordere
 membership of \(x\) in \(\tilde{A}\).
 \end{definition}
 
-The membership function is not necessarily limited to the range \([0,1]\), but is normalized if \(\text{sup}_x
-\mu_{\tilde{A}}(x) = 1\). The shape of a fuzzy number type is defined by membership function. The general definition of
-fuzzy numbers is known as LR fuzzy numbers \cite{kaur-2016-introd-fuzzy,zimmermann-2001-fuzzy-set}.
+The shape of a fuzzy number type is defined by membership function. The general definition of fuzzy numbers is known as
+LR fuzzy numbers \cite{kaur-2016-introd-fuzzy,zimmermann-2001-fuzzy-set}. \ref{def:reference-function} describes the
+property that an \(L\) or \(R\) function must have.
 
 \begin{definition}
+\label{def:reference-function}
 A function \(L:[0,\infty] \rightarrow [0,1]\) (or \(R:[0,\infty] \rightarrow [0,1]\)) is said to be reference a function of the fuzzy number if and only
 if
 
@@ -195,7 +198,8 @@ if
 \end{enumerate}
 \end{definition}
 
-A common representation of the LR fuzzy number is represented by \ref{def:lr-flat}.
+The definition of a LR fuzzy number may now be developed given the basis of what properties an \(L\) (or \(R\)) function
+must have. Consider \ref{def:lr-flat}-\ref{def:lr-non-negative}.
 
 \begin{definition}
 \label{def:lr-flat}
@@ -213,23 +217,19 @@ R(\frac{m-n}{\beta}) & x \ge m, \beta > 0 \\
 \end{definition}
 
 \begin{definition}
+\label{def:lr-non-negative}
 An \(LR\) flat fuzzy number \(\tilde{A} = (m,n,\alpha,\beta)_{LR}\) is said to be a non-negative \(LR\) flat fuzzy number if and only
 if \(m-\alpha \ge 0\) and is said to be non-positive \(LR\) flat fuzzy number if and only if \(m - \alpha \le 0\) is a real number.
 \end{definition}
 
-\begin{definition}
-An \(LR\) flat fuzzy number \(\tilde{A} = (m,n,\alpha,\beta)_{LR}\) is said to be an unrestricted \(LR\) flat fuzzy number if and only
-if \(m - \alpha\) is a real number.
-\end{definition}
-
-A simplification to the LR flat fuzzy number is the triangular fuzzy number, which is what will be utilized in this
-work. The triangular fuzzy numbers shall also be defined over the set of real numbers \(\mathbb{R}\). Consider
+A simplification to the LR flat fuzzy number is the triangular fuzzy number, which is what will be utilized in this work
+(\ref{fig:characteristic-plot}). The triangular fuzzy numbers shall also be defined over the set of real numbers \(\mathbb{R}\). Consider
 \ref{def:triangular-fuzzy-number} - \ref{def:triangular-nonnegative}
 
 \begin{definition}
-\label{def:triangular-fuzzy-number}
-A fuzzy number that is represented by \(\tilde{A} = (a,b,c)\) is said to be triangular if its membership function is
-defined as \ref{eq:triangular-fuzzy-number}.
+\label{def:triangular-fuzzy-number} A fuzzy number that is represented by \(\tilde{A} = (a,b,c)\) is said to be triangular
+if its membership function is defined as \ref{eq:triangular-fuzzy-number}. \ref{fig:characteristic-plot} depicts a visual
+representation of a triangular fuzzy number.
 
 \begin{equation}
 \label{eq:triangular-fuzzy-number}
@@ -251,7 +251,7 @@ A fuzzy set \(\tilde{A}\) in \(\mathbb{R}\) is convex if and only if the members
 \end{definition}
 
 \begin{definition}
-A fuzzy number is a normal convex fuzzy set in \(\mathbb{R}\).
+A fuzzy number is a normal and convex fuzzy set in \(\mathbb{R}\).
 \end{definition}
 
 \begin{definition}
@@ -260,7 +260,7 @@ The triangular fuzzy number \(\tilde{A}\) is nonnegative \(\iff\; a \ge 0\).
 \end{definition}
 
 \subsubsection{Fuzzy Arithmetic}
-\label{sec:org23d7d95}
+\label{sec:orgc56749b}
 If two triangular fuzzy numbers \(\tilde{a}_1 = \{a_1, a_2, a_3\}\) and \(\tilde{b}_1 = \{b_1, b_2, b_3\}\) are nonnegative
 then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 
@@ -274,7 +274,7 @@ then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 \end{equation}
 
 \subsubsection{Comparing Fuzzy Numbers}
-\label{sec:orgd966d30}
+\label{sec:org850cddc}
 Fuzzy numbers do not directly provide a method of ordering nor do they always provide an ordered set like real numbers
 \cite{bello-2019-fuzzy-activ}. There are multiple methods for ordering fuzzy numbers, each coming with advantages and
 disadvantages. Different properties have been applied to justify comparison of fuzzy numbers, such as: preference,
@@ -879,7 +879,7 @@ detach time from the charger \(\tilde{d}_i\) are assumed to be imprecise. Thus, 
 \(i\), \(\tilde{\eta}_i\) will also become fuzzy values.
 
 \subsection{Objective Function}
-\label{sec:org8c928ae}
+\label{sec:orgd816db9}
 Begin by rewriting the crisp objective function with the fuzzy linearization term as shown in \ref{eq:fuzzy-objective}.
 
 \begin{equation}
@@ -897,7 +897,7 @@ The resulting objective function is shown in \ref{eq:fuzzy-objective-yager}.
 \end{equation}
 
 \subsection{Queuing Constraints}
-\label{sec:orgfb4b398}
+\label{sec:org6c21f14}
 To derive the queuing constraints, the set of crisp constraints that are of interest are rewritten in terms of the fuzzy
 variables that have been identified prior as shown in \ref{eq:fuzzy-packing-constrs}. \ref{subeq:fp_m_time} fuzzifies all the
 temporal terms. \ref{subeq:fp_m_valid_pos} and \ref{subeq:fp_m_sigma} duplicate the constraints \(|\tilde{u}_i|\) times.
@@ -932,7 +932,7 @@ counterparts, but with fuzzified terms. \ref{subeq:fp_binaryspace} simply update
 \end{multicols}
 
 \subsection{Charging Constraints}
-\label{sec:org8ec494d}
+\label{sec:orgc0736b8}
 Similarly to the other derivations, the crisp constraints are rewritten with their equivalent fuzzy terms.
 \ref{subeq:fp_init_charge}-\ref{subeq:fp_final_charge} are equivalent to their crisp counterpart with the added lower
 and upper bounds for the battery charge for visit \(i\). Note that the discharge amount, \(\Delta_i\), is not fuzzy. It is
