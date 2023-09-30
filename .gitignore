@@ -3,3 +3,4 @@ ltximg/
 auto/
 .task/
 *.pdf
+!img/characteristic-plot.tex
