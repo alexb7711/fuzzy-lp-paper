@@ -62,18 +62,19 @@ membership of $x$ in $\tilde{A}$.
 
 The shape of a fuzzy number type is defined by membership function. The general definition of fuzzy numbers is known as
 LR fuzzy numbers [cite:@kaur-2016-introd-fuzzy;@zimmermann-2001-fuzzy-set]. \ref{def:reference-function} describes the
-property that an $L$ or $R$ function must have.
+property that an $L$ and $R$ functions must have. The $L$ function describes the properties that the left portion of the
+fuzzy number has, and the $R$ function describes the properties of the right.
 
 #+begin_definition
 \label{def:reference-function}
-A function $L:[0,\infty] \rightarrow [0,1]$ (or $R:[0,\infty] \rightarrow [0,1]$) is said to be reference a function of the fuzzy number if and only
+A function $L:[0,\infty) \rightarrow [0,1]$ (or $R:[0,\infty) \rightarrow [0,1]$) is said to be reference a function of the fuzzy number if and only
 if
 
 1. $L(0) = 1$ (or $R(0) = 1$)
 2. $L$ (or $R$) is non-increasing on $[0,\infty)$
 #+end_definition
 
-The definition of a LR fuzzy number may now be developed given the basis of what properties an $L$ (or $R$) function
+The definition of an LR fuzzy number may now be developed given the basis of what properties an $L$ (or $R$) function
 must have. Consider \ref{def:lr-flat}-\ref{def:lr-non-negative}.
 
 #+begin_definition
