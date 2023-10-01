@@ -195,20 +195,22 @@ average of the values in the fuzzy number. As a result, $A \le B$ when $\mathfra
 :custom_id: sec:fully-fuzzy-linear-programming
 :end:
 
-Much like the MILP, Fully Fuzzy Linear Programs (FFLP), it is a class of constrained optimization in which one seeks to
-find a set of continuous variables that either maximizes or minimizes an objective function, $J$, while satisfying a set
-of constraints. The key difference in FFLP is that it is designed to accommodate imprecise information
-[cite:@bello-2019-fuzzy-activ;@kaur-2016-introd-fuzzy]. In FFLP, the parameters and decision variables are fuzzy and
-linear. A general FFLP is represented as shown in [[eq:general-fflp]]. The subscripts $\cdot_e$, $\cdot_l$, and $\cdot_g$ indicate to
-equality, less than, and greater than constraints, respectively.
+Much like the Linear Programs (LP), Fully Fuzzy Linear Programs (FFLP), it is a class of constrained optimization in
+which one seeks to find a set of continuous variables that either maximizes or minimizes an objective function, $J$,
+while satisfying a set of constraints. The key difference in FFLP is that it is designed to accommodate imprecise
+information [cite:@bello-2019-fuzzy-activ;@kaur-2016-introd-fuzzy]. In FFLP, the parameters and decision variables are
+fuzzy and linear. A general FFLP is represented as shown in [[eq:general-fflp]]. The subscripts $\cdot_e$, $\cdot_l$, and $\cdot_g$
+indicate to equality, less than, and greater than constraints, respectively. As an example, the notation
+$\tilde{a}_{ej}$ is read as the $e^{\text{th}}$ equality constraint for the $j^{\text{th}}$ value in the fuzzy number
+tuple for the fuzzy number $\tilde{a}$. All variables besides $\tilde{X} = (x_1, x_2, ...)$ are input variables.
 
 #+name: eq:general-fflp
 \begin{equation}
 \begin{array}{lll}
-\text{max}   & J = \sum_j \tilde{C}_j \otimes \tilde{X}_j              &                 \\
-\text{subject to} & \sum_j \tilde{a}_{ej} \otimes \tilde{x}_j = \tilde{b}_e &  \forall e = 1,2,3,... \\
-                  & \sum_j \tilde{a}_{lj} \otimes \tilde{x}_j \le \tilde{b}_l &  \forall l = 1,2,3,... \\
-                  & \sum_j \tilde{a}_{gj} \otimes \tilde{x}_j \ge \tilde{b}_l &  \forall g = 1,2,3,...
+\underset{{\tilde{x}}}{\text{max}} & J = \sum_j \tilde{C}_j \otimes \tilde{X}_j              &                 \\
+\text{subject to}                  & \sum_j \tilde{a}_{ej} \otimes \tilde{x}_j = \tilde{b}_e &  \forall e = 1,2,3,... \\
+                                   & \sum_j \tilde{a}_{lj} \otimes \tilde{x}_j \le \tilde{b}_l &  \forall l = 1,2,3,... \\
+                                   & \sum_j \tilde{a}_{gj} \otimes \tilde{x}_j \ge \tilde{b}_l &  \forall g = 1,2,3,...
 \end{array}
 \end{equation}
 
@@ -222,12 +224,14 @@ definition of fuzzy set multiplication defined in [[eq:fuzzy-arithmetic]]. The f
 exponent rather than the subscript to clearly distinguish between the indexed value in the fuzzy number and the
 constraint index (i.e. $\tilde{A} = (a^1,a^2,a^3)$). Furthermore, it is assumed that the fuzzy numbers are nonnegative.
 Although the following equation can be written in terms of general nonnegative LR fuzzy numbers, the parameters and
-decision variables are written in terms of nonnegative triangular fuzzy numbers.
+decision variables are written in terms of nonnegative triangular fuzzy numbers. Consider the equality constraint in
+[[eq:general-fflp]]. For each equality constraint there will be a lower, middle, and upper bound to the constraint. That
+constitutes three equality constraints. [[eq:nasseri-solution]] expands each constraint.
 
 #+name: eq:nasseri-solution
 \begin{equation}
 \begin{array}{lclc}
-\text{max}   & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3)(x_j^1,x_j^2,x_j^3)\Big) &\\
+\underset{{\tilde{x}}}{\text{max}}   & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3)(x_j^1,x_j^2,x_j^3)\Big) &\\
 \text{subject to} & \sum_j a_{ej}^1 x_j^1 = b_e^1 & & \forall e = 1,2,3,... \\
                   & \sum_j a_{lj}^1 x_j^1 \le b_l^1 & & \forall l = 1,2,3,... \\
                   & \sum_j a_{gj}^1 x_j^1 \ge b_g^1  & & \forall g = 1,2,3,... \\
@@ -247,7 +251,7 @@ To be more succinct, the FFLP can also equivalently be written as [[eq:nasseri-s
 #+name: eq:nasseri-solution-condensed
 \begin{equation}
 \begin{array}{llc}
-\text{max}   & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3) \otimes (x_j^1,x_j^2,x_j^3)\Big) &\\
+\underset{{\tilde{x}}}{\text{max}} & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3) \otimes (x_j^1,x_j^2,x_j^3)\Big) &\\
 \text{subject to} & \sum_j a_{ej}^k x_j^k = b_e^k &  \forall e = 1,2,3,... \\
                   & \sum_j a_{lj}^k x_j^k \le b_l^k &  \forall l = 1,2,3,... \\
                   & \sum_j a_{gj}^k x_j^k \ge b_g^k  &  \forall g = 1,2,3,... \\
@@ -269,7 +273,7 @@ $\tilde{x}_j$ is an LR flat fuzzy number, the problem can be reformulated as [[e
 #+name: eq:kumar-kaurs-fuzzy
 \begin{equation}
 \begin{array}{lll}
-\text{max}   & J = \sum_j \tilde{C}_j \otimes \tilde{X}_j              &                                              \\
+\underset{{\tilde{x}}}{\text{max}} & J = \sum_j \tilde{C}_j \otimes \tilde{X}_j              &                                              \\
 \text{subject to} & \sum_j \tilde{a}_{ej} \otimes \tilde{x}_j               = \tilde{b}_e & \forall e = 1,2,3,...                \\
                   & \sum_j \tilde{a}_{lj} \otimes \tilde{x}_j \oplus \tilde{S}_l = \tilde{b}_l \oplus \tilde{S'}_l & \forall l = 1,2,3,... \\
                   & \sum_j \tilde{a}_{gj} \otimes \tilde{x}_j \oplus \tilde{S}_g = \tilde{b}_g \oplus \tilde{S'}_g & \forall g = 1,2,3,... \\
@@ -284,7 +288,7 @@ Expanding the set of equations and using the condensed notation in [[eq:nasseri-
 #+name: eq:kumar-kaurs-crisp
 \begin{equation}
 \begin{array}{lllc}
-\text{max}    & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3) \otimes (x_j^1,x_j^2,x_j^3)\Big) &                             &                                          \\
+\underset{{\tilde{x}}}{\text{max}} & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3) \otimes (x_j^1,x_j^2,x_j^3)\Big) &                             &                                          \\
 \text{subject to}  & \sum_j a_{ej}^k x_j^k = b_e^k                                &                                &   \forall e = 1,2,3,...        \\
                    & \sum_j a_{lj}^k x_j^k s_l^k \le s_l^{'k} b_l^k                 &                                &   \forall l = 1,2,3,...       \\
                    & \sum_j a_{gj}^k x_j^k s_g^k \ge s_l^{'k} b_l^k                 &                                &   \forall g = 1,2,3,...      \\
