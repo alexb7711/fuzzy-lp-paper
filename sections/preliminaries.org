@@ -36,8 +36,8 @@ not [cite:@zimmermann-2001-fuzzy-set]. For a fuzzy set, what is known as the cha
 degrees of membership for elements of a given set [cite:@zimmermann-2001-fuzzy-set]. The membership of a value in a
 fuzzy set may vary may differ among other characteristic functions, but their intended purpose remains the same. The
 membership function is said to be normalized if $\text{sup}_x \mu_{\tilde{A}}(x) = 1$. As an example,
-\ref{fig:triang-characteristic} demonstrates a membership function of a triangular fuzzy number. For a formal definition,
-consider the \ref{def:membership-function}:
+\ref{fig:lr-fuzzy-characteristic} demonstrates a membership function of an LR flat fuzzy number. For a formal definition, consider
+the \ref{def:membership-function}:
 
 #+caption:
 #+ATTR_LATEX: :width 0.5\textwidth

@@ -50,7 +50,7 @@ tasks:
       IMG_SRC:
         sh: ls {{.IMG_DIR}} | grep ".tex$"
     cmds:
-      - go-task --version >/dev/null 2>&1 && go-task -d {{.MPAP_D}} images
+      - go-task --version >/dev/null 2>&1 && go-task -d {{.MPAP_D}} images || echo ""
       - task --version >/dev/null 2>&1 && task -d {{.MPAP_D}} images || echo ""
       - |
         for i in {{.IMG_SRC | catLines}}
