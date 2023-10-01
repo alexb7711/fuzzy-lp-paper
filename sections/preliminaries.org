@@ -36,13 +36,34 @@ not [cite:@zimmermann-2001-fuzzy-set]. For a fuzzy set, what is known as the cha
 degrees of membership for elements of a given set [cite:@zimmermann-2001-fuzzy-set]. The membership of a value in a
 fuzzy set may vary may differ among other characteristic functions, but their intended purpose remains the same. The
 membership function is said to be normalized if $\text{sup}_x \mu_{\tilde{A}}(x) = 1$. As an example,
-[[fig:characteristic-plot]] demonstrates a membership function of a triangular fuzzy number. For a formal definition,
+\ref{fig:triang-characteristic} demonstrates a membership function of a triangular fuzzy number. For a formal definition,
 consider the \ref{def:membership-function}:
 
-#+name: fig:characteristic-plot
-#+caption: Example plot of a characteristic function for a triangular fuzzy number.
+#+caption:
 #+ATTR_LATEX: :width 0.5\textwidth
-[[./img/characteristic-plot.pdf]]
+#+begin_src latex
+  \begin{subfigures}
+      %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      % LR Characteristic
+      \begin{figure}[htpb]
+      \centering
+          \includestandalone{sections/img/lr-flat-fuzzy}
+          \caption{Example of a characteristic function for an LR flat fuzzy number. The line segments $[a,b)$ and $(c,d]$
+            may be any function that satisfies \ref{def:reference-function}.}
+          \label{fig:lr-fuzzy-characteristic}
+      \end{figure}
+      \hfill
+
+      %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      % Triangular characteristic
+      \begin{figure}[htpb]
+      \centering
+          \includestandalone{sections/img/trang-characteristic}
+          \caption{Example plot of a characteristic function for a triangular fuzzy number.}
+          \label{fig:triang-characteristic}
+      \end{figure}
+  \end{subfigures}
+#+end_src
 
 #+begin_definition
 \label{def:membership-function}
@@ -78,10 +99,12 @@ The definition of an LR fuzzy number may now be developed given the basis of wha
 must have. Consider \ref{def:lr-flat}-\ref{def:lr-non-negative}.
 
 #+begin_definition
-\label{def:lr-flat}
-A fuzzy number $\tilde{A}$ defined on the set of real numbers, $\mathbb{R}$, denoted as $(m,n,\alpha,\beta)_{LR}$, is said to be an $LR$
-flat fuzzy number if its membership function $\mu_{\tilde{A}}(x)$ is defined as
+\label{def:lr-flat} A fuzzy number $\tilde{A}$ defined on the set of real numbers, $\mathbb{R}$, denoted as the tuple
+$(m,n,\alpha,\beta)_{LR}$, is said to be an $LR$ flat fuzzy number if its membership function $\mu_{\tilde{A}}(x)$ is defined as
+shown in [[eq:lr-flat-fuzzy]]. Note that the underscore in the tuple, $(\cdot)_{LR}$ is used to indicate that the tuple is for
+an LR fuzzy number.
 
+#+name: eq:lr-flat-fuzzy
 \begin{equation}
 \mu_{\tilde{A}}(x) =
 \begin{cases}
@@ -99,12 +122,12 @@ if $m-\alpha \ge 0$ and is said to be non-positive $LR$ flat fuzzy number if and
 #+end_definition
 
 A simplification to the LR flat fuzzy number is the triangular fuzzy number, which is what will be utilized in this work
-([[fig:characteristic-plot]]). The triangular fuzzy numbers shall also be defined over the set of real numbers $\mathbb{R}$. Consider
+(\ref{fig:triang-characteristic}). The triangular fuzzy numbers shall also be defined over the set of real numbers $\mathbb{R}$. Consider
 \ref{def:triangular-fuzzy-number} - \ref{def:triangular-nonnegative}
 
 #+begin_definition
 \label{def:triangular-fuzzy-number} A fuzzy number that is represented by $\tilde{A} = (a,b,c)$ is said to be triangular
-if its membership function is defined as [[eq:triangular-fuzzy-number]]. [[fig:characteristic-plot]] depicts a visual
+if its membership function is defined as [[eq:triangular-fuzzy-number]]. \ref{fig:triang-characteristic} depicts a visual
 representation of a triangular fuzzy number.
 
 #+name: eq:triangular-fuzzy-number
@@ -136,7 +159,7 @@ The triangular fuzzy number $\tilde{A}$ is nonnegative $\iff\; a \ge 0$.
 #+end_definition
 
 *** Fuzzy Arithmetic
-If two triangular fuzzy numbers $\tilde{a}_1 = \{a_1, a_2, a_3\}$ and $\tilde{b}_1 = \{b_1, b_2, b_3\}$ are nonnegative
+If two triangular fuzzy numbers $\tilde{a}_1 = (a_1, a_2, a_3)$ and $\tilde{b}_1 = (b_1, b_2, b_3)$ are nonnegative
 then the following operations are defined in [[eq:fuzzy-arithmetic]].
 
 #+name: eq:fuzzy-arithmetic
@@ -154,8 +177,9 @@ Fuzzy numbers do not directly provide a method of ordering nor do they always pr
 disadvantages. Different properties have been applied to justify comparison of fuzzy numbers, such as: preference,
 rationality, and robustness [cite:@jimenez-2007-linear-progr;@bello-2019-fuzzy-activ;@kaur-2016-introd-fuzzy]. These
 methods are commonly known as ranking functions or ordering functions
-[cite:@bello-2019-fuzzy-activ;@das-2016-mathem-model;@kaur-2016-introd-fuzzy]. Commonly, including in this work, the First
-index of Yager [cite:@yager-1981-proced-order] is used ([[eq:first-index-yager]]).
+[cite:@bello-2019-fuzzy-activ;@das-2016-mathem-model;@kaur-2016-introd-fuzzy]. Commonly, including in this work, the
+First index of Yager [cite:@yager-1981-proced-order] is used. Let a fuzzy number be represented as $\tilde{A} =
+(a_1,a_2,...)$, then the First index of Yager is defined as [[eq:first-index-yager]].
 
 #+name: eq:first-index-yager
 \begin{equation}
