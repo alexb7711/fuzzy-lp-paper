@@ -3,4 +3,5 @@ ltximg/
 auto/
 .task/
 *.pdf
-sections/img/characteristic-plot.*
+sections/img/*.aux
+sections/img/*.log
