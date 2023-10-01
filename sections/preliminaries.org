@@ -42,7 +42,7 @@ consider the \ref{def:membership-function}:
 #+name: fig:characteristic-plot
 #+caption: Example plot of a characteristic function for a triangular fuzzy number.
 #+ATTR_LATEX: :width 0.5\textwidth
-[[../img/characteristic-plot.pdf]]
+[[./img/characteristic-plot.pdf]]
 
 #+begin_definition
 \label{def:membership-function}

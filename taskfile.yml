@@ -7,7 +7,7 @@ env:
   TARGET : fuzzy-pap.pdf
   DOC    : main
   SCRIPTS: org-doc-scripts
-  IMG_DIR: ./img
+  IMG_DIR: ./sections/img
   MPAP_D : ./sup-doc/milp-pap-paper-frontiers
 
 
