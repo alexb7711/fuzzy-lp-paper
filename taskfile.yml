@@ -22,6 +22,7 @@ tasks:
   default:
     cmds:
       - task: precheck
+      - task: sup-images
       - task: images
       - task: pdf
 
@@ -31,6 +32,7 @@ tasks:
     cmds:
       - task: precheck
       - task: images
+      - task: sup-images
       - task: set-version
       - task: pdf
 
@@ -50,13 +52,23 @@ tasks:
       IMG_SRC:
         sh: ls {{.IMG_DIR}} | grep ".tex$"
     cmds:
-      - go-task --version >/dev/null 2>&1 && go-task -d {{.MPAP_D}} images || echo ""
-      - task --version >/dev/null 2>&1 && task -d {{.MPAP_D}} images || echo ""
       - |
         for i in {{.IMG_SRC | catLines}}
         do
           pdflatex -shell-escape -interaction=nonstopmode -output-directory {{.IMG_DIR}} ${i}
         done
+    silent: false
+
+##==============================================================================
+#
+  sup-images:
+    desc: "Creates a PDF of all the files in {{.IMGDIR}}."
+    vars:
+      IMG_SRC:
+        sh: ls {{.IMG_DIR}} | grep ".tex$"
+    cmds:
+      - go-task --version >/dev/null 2>&1 && go-task -d {{.MPAP_D}} images || echo ""
+      - task --version >/dev/null 2>&1 && task -d {{.MPAP_D}} images || echo ""
     silent: false
 
 ##==============================================================================
