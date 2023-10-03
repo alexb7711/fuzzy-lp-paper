@@ -1,4 +1,4 @@
-% Created 2023-10-01 Sun 02:40
+% Created 2023-10-02 Mon 01:31
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt,a4paper,final]{article}
 \usepackage[a4paper, total={7in, 10in}]{geometry}
@@ -97,7 +97,7 @@
 \let\ref\autoref                            % Redifine `\ref` as `\autoref` because lazy
 
 \section{Introduction}
-\label{sec:org09f4ed6}
+\label{sec:orgeff59dc}
 This document outlines a fuzzy model of the Position Allocation Problem (PAP). The model utilizes Mixed Integer Linear
 Programming (MILP) constraints to determine feasible charging schedules. The problem involves generating an optimal
 charging schedule for a fleet of Battery Electric Buses (BEBs) based on a set of routes and a mix of fast and slow
@@ -123,7 +123,7 @@ the FPAP by utilizing the results from the previous sections.
 \section{Preliminaries}
 \label{sec:preliminaries}
 \subsection{Mixed Integer Linear Program}
-\label{sec:org5c869cf}
+\label{sec:orgfe44692}
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
 set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
 constraints \cite{chen-2010-applied}. Given a general objective function \(J\), decision variables (i.e. variables of
@@ -145,13 +145,13 @@ acts as an injective mapping to its number representation. In other words, every
 variable to value \cite{kaur-2016-introd-fuzzy}.
 
 \subsection{Fuzzy Sets Theory}
-\label{sec:orged2ee3b}
+\label{sec:orgc11b122}
 This section introduces the notion of fuzzy numbers and some basic definitions. Concepts from this section are
 referenced from
 \cite{zimmermann-2001-fuzzy-set,das-2016-mathem-model,yaghobi-2014-compar-fuzzy,bello-2019-fuzzy-activ}.
 
 \subsubsection{Fuzzy Sets}
-\label{sec:orgf442fff}
+\label{sec:orgc2a4b53}
 A sensible method of introducing fuzzy sets is to begin by describing the familiar classic set. A classical (crisp) set
 is defined as a collection of elements \(x \in X\). Crisp sets are binary, either an element belongs in the set, or it does
 not \cite{zimmermann-2001-fuzzy-set}. For a fuzzy set, what is known as the characteristic function applies various
@@ -166,7 +166,7 @@ the \ref{def:membership-function}:
     % LR Characteristic
     \begin{figure}[htpb]
     \centering
-        \includestandalone{sections/img/lr-flat-fuzzy}
+        \includestandalone{img/lr-flat-fuzzy}
         \caption{Example of a characteristic function for an LR flat fuzzy number. The line segments $[a,b)$ and $(c,d]$
           may be any function that satisfies \ref{def:reference-function}.}
         \label{fig:lr-fuzzy-characteristic}
@@ -177,7 +177,7 @@ the \ref{def:membership-function}:
     % Triangular characteristic
     \begin{figure}[htpb]
     \centering
-        \includestandalone{sections/img/trang-characteristic}
+        \includestandalone{img/trang-characteristic}
         \caption{Example plot of a characteristic function for a triangular fuzzy number.}
         \label{fig:triang-characteristic}
     \end{figure}
@@ -279,7 +279,7 @@ The triangular fuzzy number \(\tilde{A}\) is nonnegative \(\iff\; a \ge 0\).
 \end{definition}
 
 \subsubsection{Fuzzy Arithmetic}
-\label{sec:org324f80e}
+\label{sec:orgb9ec47d}
 If two triangular fuzzy numbers \(\tilde{a}_1 = (a_1, a_2, a_3)\) and \(\tilde{b}_1 = (b_1, b_2, b_3)\) are nonnegative
 then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 
@@ -293,7 +293,7 @@ then the following operations are defined in \ref{eq:fuzzy-arithmetic}.
 \end{equation}
 
 \subsubsection{Comparing Fuzzy Numbers}
-\label{sec:org46a7b1f}
+\label{sec:org0cbf3cd}
 Fuzzy numbers do not directly provide a method of ordering nor do they always provide an ordered set like real numbers
 \cite{bello-2019-fuzzy-activ}. There are multiple methods for ordering fuzzy numbers, each coming with advantages and
 disadvantages. Different properties have been applied to justify comparison of fuzzy numbers, such as: preference,
@@ -874,9 +874,9 @@ represents the quay of interest.
 \end{array}
 \end{equation}
 
-One may note the similarities to the previously presented BAB and PAP models in \ref{eq:fuzzy-bap}. It is, however, not
-defined in a way useful for the purposes of this paper yet. The adaptation of the Fuzzy BAP (FBAP) to the Fuzzy PAP
-(FPAP) is discussed next in \ref{sec:the-fuzzy-pap}. An example solution of \ref{eq:fuzzy-bap} for 2 quays, provided by
+One may note the similarities to the previously presented BAB and PAP models in \ref{eq:fuzzy-bap}. It has yet been defined
+in a way useful for the purposes for this work. The adaptation of the Fuzzy BAP (FBAP) to the Fuzzy PAP (FPAP) is
+discussed next in \ref{sec:the-fuzzy-pap}. An example solution of \ref{eq:fuzzy-bap} for 2 quays, provided by
 \cite{bello-2019-fuzzy-activ}, is shown in \ref{fig:bap-example-solution}. The figure represents the robustness of the fuzzy
 berthing plan.
 
@@ -890,7 +890,7 @@ small triangle.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=.9\linewidth]{sections/img/bap-example-fuzzy-solution.png}
+\includegraphics[width=.9\linewidth]{img/bap-example-fuzzy-solution.png}
 \caption{\label{fig:bap-example-solution}Example solution of a fuzzy BAP model over multiple quays. The parallelograms represent the fuzzy solution visually by depicting the lower and upper bounds for the arrival and departure times with the vertial sloped lines. The yellow filled squares represent the average crisp solution.}
 \end{figure}
 \section{The Fuzzy PAP}
@@ -903,7 +903,7 @@ detach time from the charger \(\tilde{d}_i\) are assumed to be imprecise. Thus, 
 \(i\), \(\tilde{\eta}_i\) will also become fuzzy values.
 
 \subsection{Objective Function}
-\label{sec:org20ea5a6}
+\label{sec:orgfae2c97}
 Begin by rewriting the crisp objective function with the fuzzy linearization term as shown in \ref{eq:fuzzy-objective}.
 
 \begin{equation}
@@ -921,7 +921,7 @@ The resulting objective function is shown in \ref{eq:fuzzy-objective-yager}.
 \end{equation}
 
 \subsection{Queuing Constraints}
-\label{sec:orgfb5f13f}
+\label{sec:orgf2c0867}
 To derive the queuing constraints, the set of crisp constraints that are of interest are rewritten in terms of the fuzzy
 variables that have been identified prior as shown in \ref{eq:fuzzy-packing-constrs}. \ref{subeq:fp_m_time} fuzzifies all the
 temporal terms. \ref{subeq:fp_m_valid_pos} and \ref{subeq:fp_m_sigma} duplicate the constraints \(|\tilde{u}_i|\) times.
@@ -956,7 +956,7 @@ counterparts, but with fuzzified terms. \ref{subeq:fp_binaryspace} simply update
 \end{multicols}
 
 \subsection{Charging Constraints}
-\label{sec:org1633b97}
+\label{sec:org20c832c}
 Similarly to the other derivations, the crisp constraints are rewritten with their equivalent fuzzy terms.
 \ref{subeq:fp_init_charge}-\ref{subeq:fp_final_charge} are equivalent to their crisp counterpart with the added lower
 and upper bounds for the battery charge for visit \(i\). Note that the discharge amount, \(\Delta_i\), is not fuzzy. It is
@@ -1000,5 +1000,5 @@ crisp constraints, the constraint validity is maintained \cite{ghanbari-2019-fuz
 \end{multicols}
 
 \bibliographystyle{plain}
-\bibliography{ citation-database/lit-ref,citation-database/lib-ref,citation-database/lit-ref,citation-database/lib-ref }
+\bibliography{/home/alex/Nextcloud/Documents/docs/fuzzy-lp-paper/citation-database/lit-ref,/home/alex/Nextcloud/Documents/docs/fuzzy-lp-paper/citation-database/lib-ref,~/Documents/citation-database/lit-ref,~/Documents/citation-database/lib-ref}
 \end{document}

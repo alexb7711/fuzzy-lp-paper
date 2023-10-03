@@ -3,5 +3,5 @@ ltximg/
 auto/
 .task/
 *.pdf
-sections/img/*.aux
-sections/img/*.log
+img/*.aux
+img/*.log

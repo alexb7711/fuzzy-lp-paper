@@ -47,7 +47,7 @@ the \ref{def:membership-function}:
       % LR Characteristic
       \begin{figure}[htpb]
       \centering
-          \includestandalone{sections/img/lr-flat-fuzzy}
+          \includestandalone{img/lr-flat-fuzzy}
           \caption{Example of a characteristic function for an LR flat fuzzy number. The line segments $[a,b)$ and $(c,d]$
             may be any function that satisfies \ref{def:reference-function}.}
           \label{fig:lr-fuzzy-characteristic}
@@ -58,7 +58,7 @@ the \ref{def:membership-function}:
       % Triangular characteristic
       \begin{figure}[htpb]
       \centering
-          \includestandalone{sections/img/trang-characteristic}
+          \includestandalone{img/trang-characteristic}
           \caption{Example plot of a characteristic function for a triangular fuzzy number.}
           \label{fig:triang-characteristic}
       \end{figure}
