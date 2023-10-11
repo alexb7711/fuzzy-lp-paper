@@ -16,7 +16,7 @@ crisp models, there is no sense of lateness or earliness, thus the model's solut
 any buses do not adhere to the route time perfectly. Fuzzifying the models in turn produces a fuzzy solution that
 encodes ranges of times that buses may arrive while still remaining a valid solution.
 
-The paper proceeds as follows. [[#sec:preliminaries]] introduces some of the basic concepts of Mixed Integer Linear
+The paper proceeds as follows. [[#sec:fuzzy-preliminaries]] introduces some of the basic concepts of Mixed Integer Linear
 Programming (MILP), fuzzy set theory, and Fully Fuzzy Linear Programming (FFLP). [[#sec:the-crisp-bap-and-pap]] introduces
 the Berth Allocation Problem (BAP) from which the PAP and MILP-PAP are derived from. The MILP-PAP is also derived in
 full. [[#sec:the-fuzzy-bap]] introduces and derives a Fuzzy BAP (FBAP) model. [[#sec:the-fuzzy-pap]] then adapts the PAP into
