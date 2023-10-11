@@ -1,6 +1,6 @@
 * Preliminaries
 :PROPERTIES:
-:CUSTOM_ID: sec:preliminaries
+:CUSTOM_ID: sec:fuzzy-preliminaries
 :END:
 
 ** Mixed Integer Linear Program

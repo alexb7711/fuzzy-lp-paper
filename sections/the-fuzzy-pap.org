@@ -7,7 +7,9 @@ objective function, queuing constraints, and charging constraints. Before derivi
 set of fuzzy variables. Similarly to the Fuzzy BAP, the arrival times, $\tilde{a}_i$, berthing time $\tilde{u}_i$, and
 detach time from the charger $\tilde{d}_i$ are assumed to be imprecise. Thus, indirectly, the service time,
 $\tilde{s}_i$, the linearization constraint in \ref{eq:slack_gain}, $\tilde{g}_{iq}$, and the initial charge for visit
-$i$, $\tilde{\eta}_i$ will also become fuzzy values.
+$i$, $\tilde{\eta}_i$ will also become fuzzy values. Note for the sake space, constraints and objective functions shall be
+written in their fuzzy form; however, in practice the equations will be expanded as described in
+[[#sec:fuzzy-preliminaries]].
 
 ** Objective Function
 Begin by rewriting the crisp objective function with the fuzzy linearization term as shown in [[eq:fuzzy-objective]].
@@ -67,12 +69,13 @@ counterparts, but with fuzzified terms. \ref{subeq:fp_binaryspace} simply update
 Similarly to the other derivations, the crisp constraints are rewritten with their equivalent fuzzy terms.
 \ref{subeq:fp_init_charge}-\ref{subeq:fp_final_charge} are equivalent to their crisp counterpart with the added lower
 and upper bounds for the battery charge for visit $i$. Note that the discharge amount, $\Delta_i$, is not fuzzy. It is
-assumed that the bus traveled the same distance during the route, thus the same amount of discharge, but can be early,
-on time, or late to the station. \ref{subeq:fp_gpgret}-\ref{subeq:fp_gwles} fuzzify the linearization terms in a similar
-manner, but the crisp spatial term, $w_{iq}$ is included. The inclusion of the crisp terms with the fuzzy values is
-allowed because although the time may be allowed to fluctuate, the specified queue, discharge amounts, or initial/final
-charges are the same for each element of the fuzzy temporal values. Thus, when the fuzzy constraints are converted into
-crisp constraints, the constraint validity is maintained [cite:@ghanbari-2019-fuzzy].
+assumed that the bus traveled the same distance during the route, thus the same amount of discharge. This is done as a
+simplification to the estimation of the discharge of a BEB over its given route.
+\ref{subeq:fp_gpgret}-\ref{subeq:fp_gwles} fuzzify the linearization terms in a similar manner, but the crisp spatial
+term, $w_{iq}$ is included. The inclusion of the crisp terms with the fuzzy values are allowed because although the time
+may be allowed to fluctuate, the specified queue, discharge amounts, or initial/final charge times are the same for each
+element of the fuzzy temporal values. Thus, when the fuzzy constraints are converted into crisp constraints, the
+constraint validity is maintained [cite:@ghanbari-2019-fuzzy].
 
 #+begin_src latex
 \begin{multicols}{2}
