@@ -6,19 +6,31 @@
 ** Mixed Integer Linear Program
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
 set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
-constraints [cite:@chen-2010-applied]. Given a general objective function $J$, decision variables (i.e. variables of
-optimization) $x_j \in \mathbb{R}$ and $y_k \in \mathbb{Z}^+$, and input parameters $c_j, d_k, a_{ij}, g_{ik}, b_i \in \mathbb{R}$, a MILP has the
-mathematical structure represented in [[eq:milp-structure]] [cite:@chen-2010-applied].
+constraints [cite:@chen-2010-applied]. Given a objective function $J$, decision variables (i.e. variables of
+optimization) $x_j \in \mathbb{R}$ and $y_k \in \mathbb{Z}^+$, and input parameters $c_j, d_k, a_{ij}, g_{ik}, b_i \in \mathbb{R}$, a MILP has a
+mathematical structure as represented in \ref{eq:milp-structure} [cite:@chen-2010-applied]. The objective function in
+\ref{eq:fuzzy-milp-objective} is comprised of two parts, the continuous part, $\sum_j c_j x_j$, and integer part, $\sum_k d_k
+y_k$. The decision variable of the first part, $x_j$, is continuous whereas the decision variable of the second, $y_j$,
+is integer. Their respective input parameters may be integer or continuous, in the case of this example they are modeled
+as continuous. The objective function's utility is to provide a numerical score to a system (provided that a set of
+decision variables and input parameters are defined). While an individual score may not have any intrinsic meaning, it
+provides a method of ranking different solutions of the same model. The constraint equations
+(\ref{eq:fuzzy-milp-constraint} - \ref{eq:fuzzy-milp-integer}) must all be satisfied for the output of an objective
+function to have any meaning. Thus the constraint equations limit the solution space of the decision variables.
+\ref{eq:fuzzy-milp-constraint} states that the summation of the products of the respective continuous and integer
+decision variables and input parameters must be less than or equal to some value $b_i$. \ref{eq:fuzzy-milp-continuous}
+and \ref{eq:fuzzy-milp-integer} state that the decision variables $x_j$ and $y_k$, must be greater than or equal to 0,
+respectively.
 
-#+name: eq:milp-structure
-\begin{equation}
-\begin{array}{lll}
-\text{max}   & J = \sum_j c_j x_j + \sum_k d_k y_k            &                 \\
-\text{subject to} & \sum_j a_{ij} x_j + \sum_k g_{ik} y_k  \le b_i & (i = 1,2,...,m) \\
-                  & x_j \ge 0                                      & (j = 1,2,...,n) \\
-                  & y_k \in \mathbb{Z^+}0                          & (k = 1,2,...,n) \\
-\end{array}
-\end{equation}
+\begin{subequations}
+\label{eq:milp-structure}
+\begin{align}
+&\text{max}        &J = \sum_j c_j x_j + \sum_k d_k y_k&         &               &\label{eq:fuzzy-milp-objective}\\
+&\text{subject to} &\sum_j a_{ij} x_j + \sum_k g_{ik} y_k \le b_i&  &(i = 1,2,...,m)& \label{eq:fuzzy-milp-constraint}\\
+&                  &x_j \ge 0&                              &(j = 1,2,...,n)& \label{eq:fuzzy-milp-continuous}\\
+&                  &y_k \in \mathbb{Z^+}&                   &(k = 1,2,...,n)& \label{eq:fuzzy-milp-integer}\\
+&\end{align}
+\end{subequations}
 
 This formulation of the MILP is also referred to as "crisp". By this it is meant that each variable in the formulation
 acts as an injective mapping to its number representation. In other words, every variable has a one-to-one mapping from
