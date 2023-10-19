@@ -302,13 +302,52 @@ Expanding the set of equations and using the condensed notation in [[eq:nasseri-
 \begin{array}{lllc}
 \underset{{\tilde{x}}}{\text{max}} & J = \mathfrak{R}\Big(\sum_j (c_j^1,c_j^2,c_j^3) \otimes (x_j^1,x_j^2,x_j^3)\Big) &                             &                                          \\
 \text{subject to}  & \sum_j a_{ej}^k x_j^k = b_e^k                                &                                &   \forall e = 1,2,3,...        \\
-                   & \sum_j a_{lj}^k x_j^k s_l^k \le s_l^{'k} b_l^k                 &                                &   \forall l = 1,2,3,...       \\
-                   & \sum_j a_{gj}^k x_j^k s_g^k \ge s_l^{'k} b_l^k                 &                                &   \forall g = 1,2,3,...      \\
-                   & \mathfrak{R}(\tilde{S_l}) - \mathfrak{R}(\tilde{S_l'}) = 0                      &                                &  \forall l = 1,2,3,...          \\
-                   & \mathfrak{R}(\tilde{S_g}) - \mathfrak{R}(\tilde{S_g'}) = 0                      &                                &  \forall g = 1,2,3,...          \\
-                   & x_j^2 - x_j^1 \ge 0                                              &x_j^3 - x_j^2 \ge 0 &         \\
-                   & s_j^2 - s_j^1 \ge 0                                              &s_j^3 - s_j^2 \ge 0 &         \\
-                   & s_j^{'2} - s_j^{'1} \ge 0                                        &s_j^{'3} - s_j^{'2} \ge 0 & \\
+                   & \sum_j a_{lj}^k x_j^k s_l^k = s_l^{'k} + b_l^k                 &                                &   \forall l = 1,2,3,...       \\
+                   & \sum_j a_{gj}^k x_j^k s_g^k = s_l^{'k} + b_l^k                 &                                &   \forall g = 1,2,3,...      \\
+                   & \mathfrak{R}(\tilde{S_l}) - \mathfrak{R}(\tilde{S_l'}) \ge 0                      &                                &  \forall l = 1,2,3,...          \\
+                   & \mathfrak{R}(\tilde{S_g}) - \mathfrak{R}(\tilde{S_g'}) \le 0                      &                                &  \forall g = 1,2,3,...          \\
+                   & x_j^2 - x_j^1 \ge 0                                         & x_j^3 - x_j^2 \ge 0              &         \\
                    & \forall k \in \{1,2,...\}                                            &                            &                       \\
+\end{array}
+\end{equation}
+
+*** Example
+:properties:
+:custom_id: sec:fully-fuzzy-linear-programming-example
+:end:
+To demonstrate the process of decomposing an FFLP into its crisp counterpart, a simple example is to be provided.
+Consider the following non-negative triangular fuzzy FFLP show in [[eq:fflp-example]].
+
+#+name: eq:fflp-example
+\begin{equation}
+\begin{array}{ll}
+\underset{{\tilde{x}}}{\text{max}} & (1,1,1) \otimes \tilde{x}_1 \oplus (2,1,2) \otimes \tilde{x}_2 \\
+\text{subject to}                  & (4,1,0) \otimes \tilde{x}_1 \oplus (3,2,1) \otimes \tilde{x}_2 \ge (2,1,2) \\
+                                   & (3,1,2) \otimes \tilde{x}_1 \oplus (2,1,1) \otimes \tilde{x}_2 \ge (2,1,2) \\
+                                   & \tilde{x}_1 \ge \tilde{x}_2 \ge 0
+\end{array}
+\end{equation}
+
+Using the method described in [[#sec:fully-fuzzy-linear-programming]], the FFLP can be expanded into the following form
+described in [[eq:fflp-example-crisp]]. The objective function is expanded using the First Index of Yager. Each of the
+constraints are decomposed into three constraints with slack variables appended to the left hand side and right hand
+side of their respective equation. The constraints for the slack variables are then included as well as the constraints
+to ensure the triangular fuzzy numbers are valid. [[eq:fflp-example-crisp]] is now said to be a crisp representation of
+[[eq:fflp-example]]. Solving the FFLP utilizing the Octave LP module, the example problem has a solution of TODO: SOLUTION
+HERE.
+
+#+name: eq:fflp-example-crisp
+\begin{equation}
+\begin{array}{ll}
+\underset{x}{\text{max}} & J = (\frac{1+1+1}{3})  (\frac{x_1^1 + x_1^2 + x_1^3}{3}) + (\frac{2,1,2}{3})  (\frac{x_2^1 + x_2^2 + x_2^3}{3}) \\
+\text{subject to}        &  4x_1^1 - 3x_2^1 + s_1^1 = 2 + s_1^{1'}                                                                  \\
+                         &  1x_1^2 - 2x_2^2 + s_1^2 = 1 + s_1^{2'}                                                                  \\
+                         &  0x_1^3 - 1x_2^3 + s_1^3 = 2 + s_1^{3'}                                                                  \\
+                         & -3x_1^1 + 2x_2^1 + s_2^1 = 1 + s_2^{1'}                                                                  \\
+                         &  1x_1^2 - 1x_2^2 + s_2^2 = 0 + s_2^{2'}                                                                  \\
+                         &  2x_1^3 - 1x_2^3 + s_2^3 = 1 + s_2^{3'}                                                                  \\
+                         & (\frac{s_1^1 + s_1^2 + s_1^3}{3}) - (\frac{s_1^{1'} + s_1^{2'} + s_1^{3'}}{3}) \le 0                       \\
+                         & (\frac{s_2^1 + s_2^2 + s_2^3}{3}) - (\frac{s_2^{1'} + s_2^{2'} + s_2^{3'}}{3}) \le 0                       \\
+                         &  (\frac{x_1^1 + x_1^2 + x_1^3}{3}) \ge 0; (\frac{x_2^1 + x_2^2 + x_2^3}{3}) \ge 0                            \\
 \end{array}
 \end{equation}
