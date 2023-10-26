@@ -323,8 +323,8 @@ Consider the following convex non-negative triangular fuzzy FFLP show in [[eq:ff
 \begin{equation}
 \begin{array}{ll}
 \underset{{\tilde{x}}}{\text{max}} & (1,2,3) \otimes \tilde{x}_1 \oplus (2,3,4) \otimes \tilde{x}_2 \\
-\text{subject to}                  & (0,1,2) \otimes \tilde{x}_1 \oplus (1,2,3) \otimes \tilde{x}_2 \ge (1,10,27) \\
-                                   & (1,2,3) \otimes \tilde{x}_1 \oplus (0,1,2) \otimes \tilde{x}_2 \ge (2,11,28)
+\text{subject to}                  & (0,1,2) \otimes \tilde{x}_1 \oplus (1,2,3) \otimes \tilde{x}_2 \le (1,10,27) \\
+                                   & (1,2,3) \otimes \tilde{x}_1 \oplus (0,1,2) \otimes \tilde{x}_2 \le (2,11,28)
 \end{array}
 \end{equation}
 
@@ -347,6 +347,10 @@ Nasseri and Kumar methods to verify the results), the example problem has a solu
                          &  1x_1^1 + 0x_2^1 + s_1^1 = 2 + s_1^{1'}                                                                  \\
                          &  2x_1^2 + 1x_2^2 + s_1^2 = 11 + s_1^{2'}                                                                  \\
                          &  3x_1^3 + 2x_2^3 + s_1^3 = 28 + s_1^{3'}                                                                  \\
+                         & \mathfrak{R}(\tilde{S_1}) - \mathfrak{R}(\tilde{S_1'}) \ge 0                                                                    \\
+                         & \mathfrak{R}(\tilde{S_2}) - \mathfrak{R}(\tilde{S_2'}) \ge 0                                                                    \\
+                         & x_j^2 - x_j^1 \ge 0                                                                                        \\
+                         & x_j^3 - x_j^2 \ge 0                                                                                        \\
 \end{array}
 \end{equation}
 
