@@ -47,7 +47,7 @@ A sensible method of introducing fuzzy sets is to begin by describing the famili
 is defined as a collection of elements $x \in X$. Crisp sets are binary, either an element belongs in the set, or it does
 not [cite:@zimmermann-2001-fuzzy-set]. For a fuzzy set, what is known as the characteristic function applies various
 degrees of membership for elements of a given set [cite:@zimmermann-2001-fuzzy-set]. The membership of a value in a
-fuzzy set may vary may differ among other characteristic functions, but their intended purpose remains the same. The
+fuzzy set may differ among other characteristic functions, but their intended purpose remains the same. The
 membership function is said to be normalized if $\text{sup}_x \mu_{\tilde{A}}(x) = 1$. As an example,
 \ref{fig:lr-fuzzy-characteristic} demonstrates a membership function of an LR flat fuzzy number. For a formal definition, consider
 the \ref{def:membership-function}:
@@ -101,7 +101,7 @@ fuzzy number has, and the $R$ function describes the properties of the right.
 
 #+begin_definition
 \label{def:reference-function}
-A function $L:[0,\infty) \rightarrow [0,1]$ (or $R:[0,\infty) \rightarrow [0,1]$) is said to be reference a function of the fuzzy number if and only
+A function $L:[0,\infty) \rightarrow [0,1]$ (or $R:[0,\infty) \rightarrow [0,1]$) is said to be a reference function of the fuzzy number if and only
 if
 
 1. $L(0) = 1$ (or $R(0) = 1$)
