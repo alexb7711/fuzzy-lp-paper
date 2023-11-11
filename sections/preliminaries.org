@@ -233,7 +233,7 @@ common strategy is to convert the fuzzy model into a crisp model that can be sol
 [cite:@bello-2019-fuzzy-activ]. In [cite:@nasseri-2013-fully;@bello-2019-fuzzy-activ], the method of converting the FFLP
 into a crisp MILP is simply done by applying the ranking function to the objective function and breaking the constraints
 down into a set of crisp constraints as shown in [[eq:nasseri-solution]]. The constraints are separated according to the
-definition of fuzzy set multiplication defined in [[eq:fuzzy-arithmetic]]. The fuzzy number index is represented is the
+definition of fuzzy set multiplication defined in [[eq:fuzzy-arithmetic]]. The fuzzy number index is represented in the
 exponent rather than the subscript to clearly distinguish between the indexed value in the fuzzy number and the
 constraint index (i.e. $\tilde{A} = (a^1,a^2,a^3)$). Furthermore, it is assumed that the fuzzy numbers are nonnegative.
 Although the following equation can be written in terms of general nonnegative LR fuzzy numbers, the parameters and
