@@ -7,8 +7,8 @@ objective function, queuing constraints, and charging constraints. Before derivi
 set of fuzzy variables. Similarly to the Fuzzy BAP, the arrival times, $\tilde{a}_i$, berthing time $\tilde{u}_i$, and
 detach time from the charger $\tilde{d}_i$ are assumed to be imprecise. Thus, indirectly, the service time,
 $\tilde{s}_i$, the linearization constraint in \ref{eq:slack_gain}, $\tilde{g}_{iq}$, and the initial charge for visit
-$i$, $\tilde{\eta}_i$ will also become fuzzy values. Note for the sake space, constraints and objective functions shall be
-written in their fuzzy form; however, in practice the equations will be expanded as described in
+$i$, $\tilde{\eta}_i$ will also become fuzzy values. Note for the sake of brevity, constraints and objective functions
+shall be written in their fuzzy form; however, in practice, the equations will be expanded as described in
 [[#sec:fuzzy-preliminaries]].
 
 ** Objective Function
