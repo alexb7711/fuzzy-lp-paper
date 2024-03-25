@@ -38,6 +38,10 @@ variable in the formulation acts as an injective mapping to its number represent
 has a one-to-one mapping from variable to value [cite:@kaur-2016-introd-fuzzy].
 
 ** Fuzzy Sets Theory
+:PROPERTIES:
+:CUSTOM_ID: sec:fuzzy-set-theory
+:END:
+
 This section introduces the notion of fuzzy numbers and some basic definitions. Concepts from this section are
 referenced from
 [cite:@zimmermann-2001-fuzzy-set;@das-2016-mathem-model;@yaghobi-2014-compar-fuzzy;@bello-2019-fuzzy-activ;@kaur-2016-introd-fuzzy].
