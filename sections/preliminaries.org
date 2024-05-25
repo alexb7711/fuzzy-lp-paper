@@ -7,8 +7,9 @@
 A mixed integer linear programming (MILP) problem is a class of constrained optimization in which one seeks to find a
 set of continuous or integer values that maximizes or minimizes an objective function while satisfying a set of
 constraints [cite:@chen-2010-applied]. Given an objective function $J$, decision variables (i.e. variables of
-optimization) $x_j \in \mathbb{R}$ and $y_k \in \mathbb{Z}^+$, and input parameters $c_j, d_k, a_{ij}, g_{ik}, b_i \in \mathbb{R}$, a MILP has a
-mathematical structure represented as shown in \ref{eq:milp-structure} [cite:@chen-2010-applied]
+optimization) $x_j \in \mathbb{R}$ and $y_k \in \mathbb{Z}^+$ where $\mathbb{Z}^+$ denotes the set of nonnegative integers, and input parameters $c_j,
+d_k, a_{ij}, g_{ik}, b_i \in \mathbb{R}$, a MILP has a mathematical structure represented as shown in \ref{eq:milp-structure}
+[cite:@chen-2010-applied]
 
 \begin{subequations}
 \label{eq:milp-structure}
@@ -16,7 +17,7 @@ mathematical structure represented as shown in \ref{eq:milp-structure} [cite:@ch
 &\text{max}        &J = \sum_j c_j x_j + \sum_k d_k y_k&         &               &\label{eq:fuzzy-milp-objective}\\
 &\text{subject to} &\sum_j a_{ij} x_j + \sum_k g_{ik} y_k \le b_i&  &(i = 1,2,...,m)& \label{eq:fuzzy-milp-constraint}\\
 &                  &x_j \ge 0&                              &(j = 1,2,...,n)& \label{eq:fuzzy-milp-continuous}\\
-&                  &y_k \in \mathbb{Z^+}&                   &(k = 1,2,...,n)& \label{eq:fuzzy-milp-integer}\\
+&                  &y_k \in \mathbb{Z^+}&                   &(k = 1,2,...,n)\text{.}& \label{eq:fuzzy-milp-integer}
 &\end{align}
 \end{subequations}
 
